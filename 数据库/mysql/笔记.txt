@@ -1,0 +1,6 @@
+
+
+
+mysqldump -uroot -p123456 -A > g:/desktop/all.sql
+
+mysql -uroot -p123456 <g:/desktop/all.sql
