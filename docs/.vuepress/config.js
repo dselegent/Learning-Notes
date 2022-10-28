@@ -3,7 +3,6 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics' // 做google收录&上报分析用
 import { nprogressPlugin } from '@vuepress/plugin-nprogress'
-import { searchPlugin } from '@vuepress/plugin-search'
 import sidebar from './config/sidebar'
 
 export default defineUserConfig({
