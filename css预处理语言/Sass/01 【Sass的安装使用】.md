@@ -1,8 +1,8 @@
 # Sass的安装使用
 
-# 1.介绍
+## 1.介绍
 
-## 1.1 CSS预处理技术，及种类介绍
+### 1.1 CSS预处理技术，及种类介绍
 
 什么是css预处理技术
 
@@ -23,7 +23,7 @@ css预处理技术的种类
 
 到目前为止，在众多优秀的 CSS 预处理器语言中就属 `Sass`、`LESS` 和 `Stylus` 最优秀。
 
-## 1.2 什么是sass
+### 1.2 什么是sass
 
 Sass(Syntactically Awesome StyleSheets)是一种CSS预处理器(`preprocessor`)， 是一款强化 CSS 的辅助工具。可以高效的编写样式，同时实现变量、嵌套、组合、继承等编程语言功能。
 
@@ -38,7 +38,7 @@ CSS 预处理器定义了一种新的语言，其基本思想是，用一种专�
 
 > “用一种专门的编程语言，进行 Web 页面样式设计，再通过编译器转化为正常的 CSS 文件，以供项目使用。”
 
-# 2.关于scss和sass
+## 2.关于scss和sass
 
 sass是最早出现的css预处理语言，有着比less更强大的功能。采用Ruby语言编写。
 
@@ -50,7 +50,7 @@ sass是最早出现的css预处理语言，有着比less更强大的功能。采
 
 对现代编程来说，sass就是scss，也因此，sass现在的扩展名为`.scss`（如果是旧版本的sass，可能扩展名会为`.sass`）。
 
-# 3.安装和命令行编译
+## 3.安装和命令行编译
 
 cmd打开本地命令控制窗口，输入下面字符串然后回车就装好了。
 
@@ -102,7 +102,7 @@ Sass使用.scss作为文件后缀名，不能直接在< link >标签里使用，
 空格和冒号对应生成css的两中模式，如果是一对一模式（一个scss生成一个css），使用空格即可；如果是多对多模式，比如一个文件夹生成到另一个文件夹，同时一次性有多个scss文件生成css文件等。
 
 ```bash
-# 编译 light.scss 和 dark.scss 到 light.css 和 dark.css.
+## 编译 light.scss 和 dark.scss 到 light.css 和 dark.css.
 > sass light.scss:light.css dark.scss:dark.css
 
 sass  --watch  fileFolder:outputFolder/css
@@ -110,15 +110,15 @@ sass  --watch  fileFolder:outputFolder/css
 
 当名字为`fileFolder`这个文件夹里任意一个.scss后缀的文件变化时，就将其编译到名字`outputFolder/css`这个文件夹里面（会自动生成相应的.css文件）
 
-# 4.Sass文件编译快览
+## 4.Sass文件编译快览
 
-## 4.1 命令行编译配置选项
+### 4.1 命令行编译配置选项
 
 可以通过 `sass -h` 或 `sass --help` 查看详细配置项。
 
 配置选项可以指定编译后的css的排版、是否生成调试map、开启debug等，最常用的是 `--style` 和 `--sourcemap`。
 
-## 4.2 `--watch`监听文件变化
+### 4.2 `--watch`监听文件变化
 
 sass使用`--watch`选项，用于监听scss文件的变化。这样，当scss文件内容有改动时，会自动编译为css。
 
@@ -146,7 +146,7 @@ sass --watch app/sass:public/stylesheets --style=compressed
 
 > **使用压缩（compressed）的样式（style）输出 css 文件**
 
-## 4.3 `--style`指定css的样式
+### 4.3 `--style`指定css的样式
 
 `--style` 的css格式有两种：`expanded`（默认）、`compressed`。
 
@@ -181,7 +181,7 @@ sass input.scss:output.css --style=expanded
 ```sh
 sass styletest.scss styletest.css --style=expanded
 
-# 或 sass styletest.scss styletest.css
+## 或 sass styletest.scss styletest.css
 ```
 
 expanded编译过后的样式，是标准的没有经过任何压缩，全部字符展开的css格式：
@@ -209,9 +209,9 @@ sass --style=compressed styletest.scss
 .box{width:300px;height:400px}.box-title{height:30px;line-height:30px}
 ```
 
-# 5.使用VSCode插件编译
+## 5.使用VSCode插件编译
 
-## 5.1 基本使用
+### 5.1 基本使用
 
 **live sass compiler是VSCode扩展，可以实时地将SASS / SCSS文件编译/转换为CSS文件。**
 
@@ -225,7 +225,7 @@ sass --style=compressed styletest.scss
 
 ![image-20220823173100339](https://i0.hdslb.com/bfs/album/f18b5afe44e8a50d00093d9683a9c6965272617b.png)
 
-## 5.2 自定义设置
+### 5.2 自定义设置
 
 在使用live sass compiler插件时，并不是所有的默认设置都如我们所愿，那么，我们来看一下如何自定义设置。
 
@@ -327,7 +327,7 @@ live sass compiler可以在编译时自动添加CSS兼容性前缀（-webkit-，
 
 > 感觉总体作用不大，还是结合webpack等工具，实时更新页面内容时，实时编译scss，而不需要单独使用该工具。
 
-# 6.使用webpack编译
+## 6.使用webpack编译
 
 在目前主流的前端项目中，一般是使用 [Webpack](https://www.webpackjs.com/loaders/sass-loader/) 来构建我们的前端项目，并且大多数都跑在 Node 环境下。
 

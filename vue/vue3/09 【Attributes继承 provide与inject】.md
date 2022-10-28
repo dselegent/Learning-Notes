@@ -1,8 +1,8 @@
-# 17.继承 Attributes
+## 1.继承 Attributes
 
-## 17.1 Attributes 继承
+### 1.1 Attributes 继承
 
-### 17.1.1 Attributes 继承的基本概念
+#### 1.1.1 Attributes 继承的基本概念
 
 “透传 attribute”指的是传递给一个组件，却没有被该组件声明为 [props](https://staging-cn.vuejs.org/guide/components/props.html) 或 [emits](https://staging-cn.vuejs.org/guide/components/events.html#defining-custom-events) 的 attribute 或者 `v-on` 事件监听器。最常见的例子就是 `class`、`style` 和 `id`。
 
@@ -27,7 +27,7 @@
 
 这里，`<MyButton>` 并没有将 `class` 声明为一个它所接受的 prop，所以 `class` 被视作`透传 attribute`，自动透传到了 `<MyButton>` 的根元素上。
 
-#### 17.1.2 对 `class` 和 `style` 的合并
+#### 1.1.2 对 `class` 和 `style` 的合并
 
 如果一个子组件的根元素已经有了 `class` 或 `style` attribute，它会和从父组件上继承的值合并。如果我们将之前的 `<MyButton>` 组件的模板改成这样：
 
@@ -48,7 +48,7 @@
 <button class="btn large">click me</button>
 ```
 
-### 17.1.3 `v-on` 监听器继承
+#### 1.1.3 `v-on` 监听器继承
 
 同样的规则也适用于 `v-on` 事件监听器：
 
@@ -58,7 +58,7 @@
 
 `click` 监听器会被添加到 `<MyButton>` 的根元素，即那个原生的 `<button>` 元素之上。当原生的 `<button>` 被点击，会触发父组件的 `onClick` 方法。同样的，如果原生 `button` 元素自身也通过 `v-on` 绑定了一个事件监听器，则这个监听器和从父组件继承的监听器都会被触发。
 
-### 17.1.4 深层组件继承
+#### 1.1.4 深层组件继承
 
 有些情况下一个组件会在根节点上渲染另一个组件。例如，我们重构一下 `<MyButton>`，让它在根节点上渲染 `<BaseButton>`：
 
@@ -78,7 +78,7 @@
 1. 透传的 attribute 不会包含 `<MyButton>` 上声明过的 props 或是针对 `emits` 声明事件的 `v-on` 侦听函数，换句话说，声明过的 props 和侦听函数被 `<MyButton>`“消费”了。
 2. 透传的 attribute 若符合声明，也可以作为 props 传入 `<BaseButton>`。
 
-## 17.2 禁用 Attributes 继承
+### 1.2 禁用 Attributes 继承
 
 如果你**不想要**一个组件自动地继承 attribute，你可以在组件选项中设置 `inheritAttrs: false`。
 
@@ -178,7 +178,7 @@ export default {
 
 ![image-20220808231521594](https://i0.hdslb.com/bfs/album/733219e50d6f149ddec431eca8b24c48f359e36c.png)
 
-## 17.3 多根节点的 Attributes 继承
+### 1.3 多根节点的 Attributes 继承
 
 和单根节点组件有所不同，有着多个根节点的组件没有自动 attribute 透传行为。如果 `$attrs` 没有被显式绑定，将会抛出一个运行时警告。
 
@@ -218,7 +218,7 @@ export default {
 
 ![image-20220808232242645](https://i0.hdslb.com/bfs/album/868f6a56087bf52386b73dfcd668a5df7618a9df.png)
 
-## 17.4 在 js 中访问透传 Attributes
+### 1.4 在 js 中访问透传 Attributes
 
 如果需要，你可以在 `<script setup>` 中使用 `useAttrs()` API 来访问一个组件的所有透传 attribute：
 
@@ -246,9 +246,9 @@ export default {
 
 需要注意的是，虽然这里的 `attrs` 对象总是反映为最新的透传 attribute，但它并不是响应式的 (考虑到性能因素)。你不能通过侦听器去监听它的变化。如果你需要响应性，可以使用 prop。或者你也可以使用 `onUpdated()` 使得在每次更新时结合最新的 `attrs` 执行副作用。
 
-# 18.提供注入（provide 与 inject）
+## 2.提供注入（provide 与 inject）
 
-## 18.1 Prop 逐级透传问题
+### 2.1 Prop 逐级透传问题
 
 通常情况下，当我们需要从父组件向子组件传递数据时，会使用 [props](https://staging-cn.vuejs.org/guide/components/props.html)。想象一下这样的结构：有一些多层级嵌套的组件，形成了一颗巨大的组件树，而某个深层的子组件需要一个较远的祖先组件中的部分数据。在这种情况下，如果仅使用 props 则必须将其沿着组件链逐级传递下去，这会非常麻烦：
 
@@ -263,7 +263,7 @@ export default {
 - 作用：实现<strong style="color:#DD5145">祖与后代组件间</strong>通信
 - 套路：父组件有一个 `provide` 选项来提供数据，后代组件有一个 `inject` 选项来开始使用这些数据
 
-## 18.2 Provide (提供)
+### 2.2 Provide (提供)
 
 要为组件后代提供数据，需要使用到 [`provide()`](https://staging-cn.vuejs.org/api/composition-api-dependency-injection.html#provide) 函数：
 
@@ -316,7 +316,7 @@ provide('key', count)
 
 提供的响应式状态使后代组件可以由此和提供者建立响应式的联系。
 
-## 18.3 应用层使用Provide
+### 2.3 应用层使用Provide
 
 除了在一个组件中提供依赖，我们还可以在整个应用层面提供依赖：
 
@@ -330,7 +330,7 @@ app.provide(/* 注入名 */ 'message', /* 值 */ 'hello!')
 
 在应用级别提供的数据在该应用内的所有组件中都可以注入。这在你编写[插件](https://staging-cn.vuejs.org/guide/reusability/plugins.html)时会特别有用，因为插件一般都不会使用组件形式来提供值。
 
-## 18.4 Inject (注入)
+### 2.4 Inject (注入)
 
 要注入上层组件提供的数据，需使用 [`inject()`](https://staging-cn.vuejs.org/api/composition-api-dependency-injection.html#inject) 函数：
 
@@ -370,7 +370,7 @@ export default {
 }
 ```
 
-## 18.5 注入默认值[#](https://staging-cn.vuejs.org/guide/components/provide-inject.html#injection-default-values)
+### 2.5 注入默认值[#](https://staging-cn.vuejs.org/guide/components/provide-inject.html#injection-default-values)
 
 默认情况下，`inject` 假设传入的注入名会被某个祖先链上的组件提供。如果该注入名的确没有任何组件提供，则会抛出一个运行时警告。
 
@@ -400,7 +400,7 @@ const fn = inject('function', () => {}, false)
 </script>
 ```
 
-## 18.6 和响应式数据配合使用
+### 2.6 和响应式数据配合使用
 
 当提供 / 注入响应式的数据时，**建议尽可能将任何对响应式状态的变更都保持在供给方组件中**。这样可以确保所提供状态的声明和变更操作都内聚在同一个组件内，使其更容易维护。
 
@@ -452,7 +452,7 @@ provide('read-only-count', readonly(count))
 </script>
 ```
 
-## 18.7 综合使用
+### 2.7 综合使用
 
 父组件：
 

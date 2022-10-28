@@ -1,6 +1,8 @@
-# 3.拉开序幕的setup
+# 02 【setup reactive ref】
 
-## 3.1 为什么使用 setup ？
+## 1.拉开序幕的setup
+
+### 1.1 为什么使用 setup ？
 
 - 大型组件中选项的分离掩盖了潜在的逻辑问题。此外，在处理单个逻辑关注点时，我们必须不断地“跳转”相关代码的选项块。 如果能够将同一个逻辑关注点相关代码收集在一起会更好。而这正是组合式 API 使我们能够做到的。
 
@@ -18,11 +20,11 @@
 >
 > **有些人写setup，以为是将vue2的写法，挪到setup内声明、return出去，导致setup内代码特别长，并且比options api写法更难以阅读！（当然代码量少的情况下，不影响阅读 也可不拆分）**
 
-## 3.2 基本使用
+### 1.2 基本使用
 
 
 
-1. 理解：Vue3.0中一个新的配置项，值为一个函数。
+1. 理解：Vue1.0中一个新的配置项，值为一个函数。
 2. setup 函数是一个新的组件选项。它是组件内部使用组合式 API 的入口点。
 3. 组件中所用到的：数据、方法等等，均要配置在setup中。
 4. 调用时间：在创建组件实例时，在初始 prop 解析之后立即调用 setup。在生命周期方面，它是在 beforeCreate 钩子之前调用的。
@@ -132,7 +134,7 @@
 >
 > - 但是，请不要解构 props 对象，因为它会失去响应式；
 
-## 3.3`<script setup>` 语法糖
+### 1.3`<script setup>` 语法糖
 
 - `<script setup>`是在单文件组件 (SFC) 中使用组合式 API 的编译时语法糖。相比于普通的 `<script>` 语法，它具有更多优势：
   - 更少的样板内容，更简洁的代码。
@@ -150,7 +152,7 @@
     - 变量名为模板 ref 值
   - 组件通信的部分选项API 如 props emits expose ，在 setup 中由 编译器宏 (setup语法糖的内置方法) 提供。
 
-# 4.reactive函数
+## 2.reactive函数
 
 - 作用: 定义一个<strong style="color:#DD5145">对象类型</strong>的响应式数据（基本类型不要用它，要用```ref```函数）
 - 语法：```const 代理对象= reactive(源对象)```接收一个对象（或数组），返回一个<strong style="color:#DD5145">代理对象（Proxy的实例对象，简称proxy对象）</strong>
@@ -188,15 +190,15 @@ rea2.newObj = {data1:'同样是响应式的'}
     console.log(person);
 ```
 
-![image-20220704224406322](https://i0.hdslb.com/bfs/album/d5880fb08e961eaaf099fb4e40caa2ca0fd057d5.png)
+![image-20220704224406322](https://img-blog.csdnimg.cn/img_convert/2f9f2f715d352a0c449201c640958c10.png)
 
 > 通过reactive创建的其实就是ref创建的value属性内容
 
 > 注意：比如reactive中的数据是个对象，我们正常情况只能把整个对象导出去，如果只是想用某个属性，直接导出去的话不是响应式的，后面可以用toRef或者toRefs解决这种需求。
 
-#  5.ref函数
+##  3.ref函数
 
-## 5.1 基本使用
+### 3.1 基本使用
 
 `reactive()` 的种种限制归根结底是因为 JavaScript 没有可以作用于所有值类型的 “引用” 机制。为此，Vue 提供了一个 [`ref()`](https://staging-cn.vuejs.org/api/reactivity-core.html#ref) 方法来允许我们创建可以使用任何值类型的响应式 **ref**
 
@@ -210,7 +212,7 @@ rea2.newObj = {data1:'同样是响应式的'}
 - 备注：
   - 接收的数据可以是：基本类型、也可以是对象类型。
   - 基本类型的数据：响应式依然是靠``Object.defineProperty()``的```get```与```set```完成的。
-  - 对象类型的数据：内部 <i style="color:gray;font-weight:bold">“ 求助 ”</i> 了Vue3.0中的一个新函数—— ```reactive```函数。
+  - 对象类型的数据：内部 <i style="color:gray;font-weight:bold">“ 求助 ”</i> 了Vue1.0中的一个新函数—— ```reactive```函数。
 
 ```js
 import { ref } from 'vue'
@@ -294,7 +296,7 @@ export default {
 
 ![image-20220704224110322](https://i0.hdslb.com/bfs/album/a2f588db0d130c522a91497b02db073c8875a5cd.png)
 
-## 5.2 ref的响应式
+### 3.2 ref的响应式
 
 一个包含对象类型值的 ref 可以响应式地替换整个对象：
 
@@ -324,7 +326,7 @@ const { foo, bar } = obj
 
 简言之，`ref()` 让我们能创造一种对任意值的 “引用”，并能够在不丢失响应性的前提下传递这些引用。这个功能很重要，因为它经常用于将逻辑提取到 [组合函数](https://staging-cn.vuejs.org/guide/reusability/composables.html) 中。
 
-## 5.3ref 在模板中的解包[#](https://staging-cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#ref-unwrapping-in-templates)
+### 3.3ref 在模板中的解包[#](https://staging-cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#ref-unwrapping-in-templates)
 
 当 ref 在模板中作为顶层属性被访问时，它们会被自动“解包”，所以不需要使用 `.value`。下面是之前的计数器例子，用 `ref()` 代替：
 
@@ -379,9 +381,9 @@ const { foo } = object
 
 这只是文本插值的一个方便功能，相当于 `{{ object.foo.value }}`。
 
-## 5.4 ref的解包
+### 3.4 ref的解包
 
-### 5.4.1 ref 在响应式对象中的解包
+#### 3.4.1 ref 在响应式对象中的解包
 
 当一个 `ref` 被嵌套在一个响应式对象中，作为属性被访问或更改时，它会自动解包，因此会表现得和一般的属性一样：
 
@@ -410,7 +412,7 @@ console.log(count.value) // 1
 
 只有当嵌套在一个深层响应式对象内时，才会发生 ref 解包。当其作为[浅层响应式对象](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowreactive)的属性被访问时不会解包。
 
-### 5.4.2 数组和集合类型的 ref 解包[#](https://staging-cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#ref-unwrapping-in-arrays-and-collections)
+#### 3.4.2 数组和集合类型的 ref 解包[#](https://staging-cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#ref-unwrapping-in-arrays-and-collections)
 
 跟响应式对象不同，当 ref 作为响应式数组或像 `Map` 这种原生集合类型的元素被访问时，不会进行解包。
 
@@ -424,7 +426,7 @@ const map = reactive(new Map([['count', ref(0)]]))
 console.log(map.get('count').value)
 ```
 
-## 5.5 响应性语法糖 (实验性功能)
+### 3.5 响应性语法糖 (实验性功能)
 
 > 响应性语法糖目前是一个实验性功能，默认是禁用的，需要[显式选择使用](https://staging-cn.vuejs.org/guide/extras/reactivity-transform.html#explicit-opt-in)。
 

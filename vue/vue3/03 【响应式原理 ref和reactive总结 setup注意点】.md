@@ -1,6 +1,8 @@
-# 6.Vue3.0中的响应式原理
+# 03 【响应式原理 ref和reactive总结 setup注意点】
 
-## 6.1 vue2.x的响应式
+## 1.Vue3.0中的响应式原理
+
+### 1.1 vue2.x的响应式
 
 - 实现原理：
 
@@ -40,7 +42,7 @@
       }); 
 ```
 
-## 6.2 Vue3.0的响应式
+### 1.2 Vue3.0的响应式
 
 - 实现原理: 
 
@@ -114,9 +116,9 @@
 
 > 通过Reflect操作的属性，报错时会返回false，这样就不要try-catch捕获异常了。
 
-# 7.ref和reactive总结
+## 2.ref和reactive总结
 
-## 7.1 reactive对比ref
+### 2.1 reactive对比ref
 
 -  从定义数据角度对比：
    -  ref用来定义：<strong style="color:#DD5145">基本类型数据</strong>。
@@ -129,7 +131,7 @@
    -  ref定义的数据：操作数据<strong style="color:#DD5145">需要</strong>```.value```，读取数据时模板中直接读取<strong style="color:#DD5145">不需要</strong>```.value```。
    -  reactive定义的数据：操作数据与读取数据：<strong style="color:#DD5145">均不需要</strong>```.value```。
 
-## 7.2 ref
+### 2.2 ref
 
 1.`ref`通常用于声明**基础类型响应式数据**。
 
@@ -153,7 +155,7 @@ age.value=21
 
 4.当`ref`数据作为`props`传递给子组件的时候，**在子组件里需要使用`toRef`或者`toRefs`建立引用，否则数据不是响应式的**。且需要注意，如果在子组件中直接操作了这个引用之后，则和父组件不在具有联系。
 
-## 7.3 reactive
+### 2.3 reactive
 
 1.`reactive`用于声明**复杂类型响应式数据**。
 
@@ -184,9 +186,9 @@ man.weight = '50kg' //weight具有响应性
 
 5.将`reactive`声明的响应式数据传递给子组件时，在子组件可以直接使用。
 
-6.当`ref`的值是数组时，我们可以通过索引来修改数组值是响应式的。
+1.当`ref`的值是数组时，我们可以通过索引来修改数组值是响应式的。
 
-## 7.4 注意事项
+### 2.4 注意事项
 
 1.注意当`ref`用于在模板中作为真值判断时，直接使用`ref`恒为`true`, 需要使用`.value`才能正确显示
 
@@ -203,7 +205,7 @@ man.weight = '50kg' //weight具有响应性
 
 5.同`vue2`，当将`ref`和`reactive`作为`props`传递给组件时，原则上不应该在子组件上修改`props`的值。
 
-# 8.setup的两个注意点
+## 3.setup的两个注意点
 
 - setup执行的时机
   - 在beforeCreate之前执行一次，this是undefined。

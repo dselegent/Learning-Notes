@@ -1,6 +1,8 @@
-# 13.Vue数据监视
+# 06 【Vue数据监视 v-model双向绑定】
 
-## 13.1问题演示
+## 1.Vue数据监视
+
+### 1.1问题演示
 
 先来个案例引入一下：
 
@@ -45,15 +47,13 @@
 
 点击更新马冬梅的信息，马冬梅的数据并没有发生改变。
 
-![image-20220628130108394](https://i0.hdslb.com/bfs/album/816e9bcb4a25358c22ece4b010161d61191d5014.png)
-
-我们来看看控制台：
+![image-20220628130108394](https://img-blog.csdnimg.cn/img_convert/c17a4b812cb530f0e6b2761becebdfce.png)我们来看看控制台：
 
 ![image-20220628130253077](https://i0.hdslb.com/bfs/album/87ee84e1545374da657a5046f4040ccd17de15f4.png)
 
 控制台上的数据发生了改变，说明，这个更改的数据并没有被 vue 监测到。
 
-## 13.2模拟一个数据监测
+### 1.2模拟一个数据监测
 
 > 代码
 
@@ -89,7 +89,7 @@ let vm = {}
 vm._data = data = obs
 ```
 
-## 13.3Vue.set 的使用
+### 1.3Vue.set 的使用
 
 `Vue.set(target，propertyName/index，value) `或
 
@@ -136,7 +136,7 @@ vm._data = data = obs
 
 ![image-20220629113903480](https://i0.hdslb.com/bfs/album/da7f37aafd2dc99d321163067f9ca642f4068593.png)
 
-## 13.4监测数组
+### 1.4监测数组
 
 看完了 vue 监测对象中的数据，再来看看 vue 如何监测 数组里的数据
 
@@ -199,7 +199,7 @@ vue官网的解释：
 
 ![image-20220629114924545](https://i0.hdslb.com/bfs/album/bd3b872ea663df9a7d6d5d5d77ade8fc7a0dea7b.png)
 
-## 13.5练习
+### 1.5练习
 
 > 代码
 
@@ -275,7 +275,7 @@ vue官网的解释：
 
 ![image-20220629115039898](https://i0.hdslb.com/bfs/album/e6207d82681ef4aaa4b15ce445a07de9ccf65ebf.png)
 
-## 13.6总结
+### 1.6总结
 
 Vue监视数据的原理：
 
@@ -308,9 +308,9 @@ Vue监视数据的原理：
 > 特别注意：`Vue.set()` 和 `vm.$set() `不能给vm 或 vm的根数据对象 添加属性！！！
 > 例:`Vue.set(this,…,…)`或`this.$set(this,…,…)`
 
-# 14.v-model双向绑定
+## 2.v-model双向绑定
 
-## 14.1收集表单数据
+### 2.1收集表单数据
 
 若：`<input type="text"/>`，则`v-model`收集的是`value`值，用户输入的就是`value值`。
 
@@ -443,7 +443,7 @@ Vue监视数据的原理：
 >
 > 例：`v-model.number=“phone” `就算是number类型的input框，`vue`收集的还是字符串，可以使用这个修饰符
 
-## 14.2模拟实现v-model
+### 2.2模拟实现v-model
 
 ```vue
     <h2>v-model实现原理(vue2)</h2>

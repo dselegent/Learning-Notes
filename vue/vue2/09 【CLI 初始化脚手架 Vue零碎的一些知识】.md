@@ -1,6 +1,8 @@
-# 19.Vue CLI 初始化脚手架
+# 09 【CLI 初始化脚手架 Vue零碎的一些知识】	
 
-## 19.1具体步骤
+## 1.Vue CLI 初始化脚手架
+
+### 1.1具体步骤
 
 1如果下载缓慢请配置npm淘宝镜像npm config set registry http://registry.npm.taobao.org
 2全局安装 @vue/cli npm install -g @vue/cli
@@ -12,7 +14,7 @@
 
 > Vue脚手架隐藏了所有webpack相关的配置，若想查看具体的webpack配置，请执行vue inspect > output.js
 
-## 19.2脚手架文件结构
+### 1.2脚手架文件结构
 
 ```markdown
 .文件目录
@@ -118,7 +120,7 @@ new Vue({
 </html>
 ```
 
-## 19.3render函数
+### 1.3render函数
 
 > 插入一个小知识：
 
@@ -185,7 +187,7 @@ new Vue({
 
 ```
 
-## 19.4关于不同版本的函数
+### 1.4关于不同版本的函数
 
 来个不同版本 vue 的区别
 
@@ -194,7 +196,7 @@ new Vue({
   * vue.runtime.xxx.js是运行版的Vue，只包含：核心功能；没有模板解析器。`esm` 就是` ES6 module`
 * 因为`vue.runtime.xxx.js`没有模板解析器，所以不能使用template配置项，需要使用`render`函数接收到的`createElement`函数去指定具体内容。
 
-## 19.5vue.config.js 配置文件
+### 1.5vue.config.js 配置文件
 
 `vue inspect > output.js`可以查看到Vue脚手架的默认配置
 
@@ -213,9 +215,9 @@ module.exports = {
 }
 ```
 
-# 20. vue 零碎的一些知识
+## 2. vue 零碎的一些知识
 
-## 20.1ref属性
+### 2.1ref属性
 
 * 被用来给元素或子组件注册引用信息（id的替代者）
 * 应用在`html`标签上获取的是真实`DOM元素`，应用在组件标签上是组件实例对象`vc`
@@ -256,7 +258,7 @@ module.exports = {
 
 ![image-20220630222636601](https://i0.hdslb.com/bfs/album/98ef4a412c648de1c877e6debdaa397068bd0129.png)
 
-## 20.2 props 配置项
+### 2.2 props 配置项
 
 1. 功能：让组件接收外部传过来的数据
 
@@ -398,7 +400,7 @@ export default {
 
 ![image-20220630223040994](https://i0.hdslb.com/bfs/album/0dd586c66c23a9eb46f1ef040cc037033a877916.png)
 
-## 20.3mixin混入
+### 2.3mixin混入
 
 `混入 (mixin) `提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。
 
@@ -569,7 +571,7 @@ new Vue({
 // => "组件钩子被调用"
 ```
 
-## 20.4plugin 插件
+### 2.4plugin 插件
 
 1.功能：用于增强Vue
 2.本质：包含install方法的一个对象，install的第一个参数是Vue构造函数，第二个以后的参数是插件使用者传递的数据
@@ -678,7 +680,7 @@ new Vue({
 
 ![image-20220630224604261](https://i0.hdslb.com/bfs/album/020d6bc9eff609b06cae202dd568fd913b06902c.png)
 
-## 20.5scoped
+### 2.5scoped
 
 **scoped样式**
 

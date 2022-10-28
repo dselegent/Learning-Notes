@@ -1,12 +1,12 @@
-# 23.其它组合式API
+# 12 【其它组合式API】
 
 ref、unref、toRef、toRefs、isRef、customRef、shallowRef、triggerRef
 
 refs api中的重点为：ref、toRefs、shallowRef、customRef，其次是 isRef 等。
 
-## 23.1 toRef 与 toRefs
+## 1.toRef 与 toRefs
 
-### 23.1.1 toRef
+### 1.1 toRef
 
 - 作用：可以用来为源响应式对象上的某个 property 新创建一个 ref。然后，ref 可以被传递，它会保持对其源 property 的响应式连接。
 
@@ -59,7 +59,7 @@ refs api中的重点为：ref、toRefs、shallowRef、customRef，其次是 isRe
 
   即使源属性当前不存在，`toRef()` 也会返回一个可用的 ref。这让它在处理可选 props 的时候格外实用，相比之下 [`toRefs`](https://staging-cn.vuejs.org/api/reactivity-utilities.html#torefs) 就不会为可选 props 创建对应的 refs。
 
-### 23.1.2 toRefs
+### 1.2 toRefs
 
 - 作用：
 
@@ -111,7 +111,7 @@ refs api中的重点为：ref、toRefs、shallowRef、customRef，其次是 isRe
 
   `toRefs` 在调用时只会为源对象上可以枚举的属性创建 ref。如果要为可能还不存在的属性创建 ref，请改用 [`toRef`](https://staging-cn.vuejs.org/api/reactivity-utilities.html#toref) 。
 
-### 23.1.3 总结
+### 1.3 总结
 
 ```vue
 <template>
@@ -160,7 +160,7 @@ console.log(person1);
 
 > 这两个函数主要是为了简便我们使用对象内部数据的步骤。
 
-## 23.2 shallowReactive 与 shallowRef
+## 2.shallowReactive 与 shallowRef
 
 - shallowReactive：只处理对象最外层属性的响应式（浅响应式）。
   和 `reactive()` 不同，这里没有深层级的转换：一个浅层响应式对象里只有根级别的属性是响应式的。属性的值会被原样存储和暴露，这也意味着值为 ref 的属性 **不会**被自动解包了。
@@ -228,7 +228,7 @@ setup() {
 
 > 备注: `<script setup>`语法糖时，动态组件最好就是用 shallowRef
 
-## 23.3 readonly 与 shallowReadonly
+## 3.readonly 与 shallowReadonly
 
 - readonly: 让一个响应式数据变为只读的（深只读）。
 
@@ -321,7 +321,7 @@ setup() {
 
 ![image-20220808122216340](https://i0.hdslb.com/bfs/album/df9d0294661e3a28de513102ac4889083b2beabe.png)
 
-## 23.4 toRaw 与 markRaw
+## 4.toRaw 与 markRaw
 
 - toRaw：
 
@@ -460,7 +460,7 @@ let as2 = markRaw(asx) // 原始 asx; as2 === asx > true
 >
 > 识别风险一般是很罕见的。然而，要正确使用这些 API，同时安全地避免这样的风险，需要你对响应性系统的工作方式有充分的了解。
 
-## 23.5 customRef
+## 5.customRef
 
 - 作用：创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 track 和 trigger 函数作为参数，并且应该返回一个带有 get 和 set 的对象。  
 
@@ -492,7 +492,7 @@ let a23 = useDebouncedRef('hello')
 </script>
 ```
 
-## 23.6 unref
+## 6.unref
 
 1. 如果参数是 ref，则返回内部值，否则返回参数本身。这是 `val = isRef(val) ? val.value : val` 计算的一个语法糖。
 2. 基于 ref 一个 {} ， {} 会被 reactive 二次处理，unref(ref({})) 返回的是响应式的 {}
@@ -507,7 +507,7 @@ let un3 = unref(ref({})) // un3 > proxy {}
 </script>
 ```
 
-## 23.6 triggerRef
+## 7.triggerRef
 
 1. 手强制触发依赖于一个[浅层 ref](https://staging-cn.vuejs.org/api/reactivity-advanced.html#shallowref) 的副作用，这通常在对浅引用的内部值进行深度变更后使用。
 2. 简单讲就是配合 shallowRef 用的，并且 shallowRef 传入的是个引用类型。
@@ -531,7 +531,7 @@ triggerRef(shallow)
 </script>
 ```
 
-## 23.7 响应式数据的判断
+## 8.响应式数据的判断
 
 - isRef: 检查一个值是否为一个 ref 对象
   ```js

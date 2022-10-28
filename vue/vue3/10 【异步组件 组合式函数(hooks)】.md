@@ -1,6 +1,8 @@
-# 19.异步组件
+# 10 【异步组件 组合式函数(hooks)】
 
-## 19.1 为什么要有异步组件
+## 1.异步组件
+
+### 1.1 为什么要有异步组件
 
 首先来看这样一段代码
 
@@ -52,7 +54,7 @@ let sum = $ref(1);
 
 所以引出了异步组件，他可以无需让父组件等待子组件。
 
-## 19.2 基础用法
+### 1.2 基础用法
 
 在大型项目中，我们可能需要拆分应用为更小的块，并仅在需要时再从服务器加载相关组件。Vue 提供了 [`defineAsyncComponent`](https://staging-cn.vuejs.org/api/general.html#defineasynccomponent) 方法来实现此功能
 
@@ -83,7 +85,7 @@ const Child = defineAsyncComponent(() => import('./components/Child.vue'));
 
 子组件是占用了父组件的空间的，闪一下突然加载出来很不友好，所以引出了内置组件`Suspense `。
 
-## 19.3 加载与错误状态
+### 1.3 加载与错误状态
 
 异步操作不可避免地会涉及到加载和错误状态，因此 `defineAsyncComponent()` 也支持在高级选项中处理这些状态：
 
@@ -109,13 +111,13 @@ const AsyncComp = defineAsyncComponent({
 
 如果提供了一个报错组件，则它会在加载器函数返回的 Promise 抛错时被渲染。你还可以指定一个超时时间，在请求耗时超过指定时间时也会渲染报错组件。
 
-## 19.4 搭配 Suspense 使用（实验性）
+### 1.4 搭配 Suspense 使用（实验性）
 
 异步组件可以搭配内置的 `<Suspense>` 组件一起使用，若想了解 `<Suspense>` 和异步组件之间交互，请参阅 [``](https://staging-cn.vuejs.org/guide/built-ins/suspense.html) 章节。
 
 `<Suspense>` 是一个内置组件，用来在组件树中协调对异步依赖的处理。它让我们可以在组件树上层等待下层的多个嵌套异步依赖项解析完成，并可以在等待时渲染一个加载状态。
 
-### 19.4.1 异步依赖
+#### 1.4.1 异步依赖
 
 要了解 `<Suspense>` 所解决的问题和它是如何与异步依赖进行交互的，我们需要想象这样一种组件层级结构：
 
@@ -173,7 +175,7 @@ const posts = await res.json()
 >
 > 异步组件也可以通过在选项中指定 `suspensible: false` 表明不用 `Suspense` 控制，并让组件始终自己控制其加载状态。
 
-### 19.4.2 加载中状态
+#### 1.4.2 加载中状态
 
 `<Suspense>` 组件有两个插槽：`#default` 和 `#fallback`。两个插槽都只允许**一个**直接子节点。在可能的时候都将显示默认槽中的节点。否则将显示后备槽中的节点。
 
@@ -197,7 +199,7 @@ const posts = await res.json()
 
 发生回退时，后备内容不会立即展示出来。相反，`<Suspense>` 在等待新内容和异步依赖完成时，会展示之前 `#default` 插槽的内容。这个行为可以通过一个 `timeout` prop 进行配置：在等待渲染新内容耗时超过 `timeout` 之后，`<Suspense>` 将会切换为展示后备内容。若 `timeout` 值为 `0` 将导致在替换默认内容时立即显示后备内容。
 
-### 19.4.3 解决上面遗留的问题
+#### 1.4.3 解决上面遗留的问题
 
 父组件`App.vue`
 
@@ -264,9 +266,9 @@ let sum = $ref(
 
 ![image-20220809180430412](https://i0.hdslb.com/bfs/album/94478819d69f20e253caa6437c11d377ac669ad0.png)
 
-# 20.组合式函数(hooks)
+## 2.组合式函数(hooks)
 
-## 20.1 什么是“组合式函数”？
+### 2.1 什么是“组合式函数”？
 
 在 Vue 应用的概念中，“组合式函数” (Composables) 是一个利用 Vue 组合式 API 来封装和复用**有状态逻辑**的函数。
 
@@ -274,7 +276,7 @@ let sum = $ref(
 
 相比之下，有状态逻辑负责管理会随时间而变化的状态。一个简单的例子是跟踪当前鼠标在页面中的位置。在实际应用中，也可能是像触摸手势或与数据库的连接状态这样的更复杂的逻辑。
 
-## 20.2 鼠标跟踪器示例
+### 2.2 鼠标跟踪器示例
 
 如果我们要直接在组件中使用组合式 API 实现鼠标跟踪功能，它会是这样的：
 
@@ -385,17 +387,17 @@ export function useMouse() {
 >
 > 每一个调用 `useMouse()` 的组件实例会创建其独有的 `x`、`y` 状态拷贝，因此他们不会互相影响。如果你想要在组件之间共享状态，请阅读[状态管理](https://staging-cn.vuejs.org/guide/scaling-up/state-management.html)这一章。
 
-## 20.3 异步状态示例
+### 2.3 异步状态示例
 
 以后用到再补充
 
-## 20.4 约定和最佳实践
+### 2.4 约定和最佳实践
 
-### 20.4.1 命名[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#naming)
+#### 2.4.1 命名[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#naming)
 
 组合式函数约定用驼峰命名法命名，并以“use”作为开头。
 
-### 20.4.2 输入参数[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#input-arguments)
+#### 2.4.2 输入参数[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#input-arguments)
 
 尽管其响应性不依赖 ref，组合式函数仍可接收 ref 参数。如果编写的组合式函数会被其他开发者使用，你最好在处理输入参数时兼容 ref 而不只是原始的值。[`unref()`](https://staging-cn.vuejs.org/api/reactivity-utilities.html#unref) 工具函数会对此非常有帮助：
 
@@ -411,7 +413,7 @@ function useFeature(maybeRef) {
 
 如果你的组合式函数在接收 ref 为参数时会产生响应式 effect，请确保使用 `watch()` 显式地监听此 ref，或者在 `watchEffect()` 中调用 `unref()` 来进行正确的追踪。
 
-### 20.4.3 返回值[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#return-values)
+#### 2.4.3 返回值[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#return-values)
 
 你可能已经注意到了，我们一直在组合式函数中使用 `ref()` 而不是 `reactive()`。我们推荐的约定是组合式函数始终返回一个包含多个 ref 的普通的非响应式对象，这样该对象在组件中被解构为 ref 之后仍可以保持响应性：
 
@@ -431,14 +433,14 @@ console.log(mouse.x)
 Mouse position is at: {{ mouse.x }}, {{ mouse.y }}
 ```
 
-### 20.4.4 副作用[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#side-effects)
+#### 2.4.4 副作用[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#side-effects)
 
 在组合式函数中的确可以执行副作用 (例如：添加 DOM 事件监听器或者请求数据)，但请注意以下规则：
 
 - 如果你的应用用到了[服务端渲染](https://staging-cn.vuejs.org/guide/scaling-up/ssr.html) (SSR)，请确保在组件挂载后才调用的生命周期钩子中执行 DOM 相关的副作用，例如：`onMounted()`。这些钩子仅会在浏览器中被调用，因此可以确保能访问到 DOM。
 - 确保在 `onUnmounted()` 时清理副作用。举例来说，如果一个组合式函数设置了一个事件监听器，它就应该在 `onUnmounted()` 中被移除 (就像我们在 `useMouse()` 示例中看到的一样)。当然也可以像之前的 `useEventListener()` 示例那样，使用一个组合式函数来自动帮你做这些事。
 
-### 20.4.5 使用限制[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#usage-restrictions)
+#### 2.4.5 使用限制[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#usage-restrictions)
 
 组合式函数在 `<script setup>` 或 `setup()` 钩子中，应始终被**同步地**调用。在某些场景下，你也可以在像 `onMounted()` 这样的生命周期钩子中使用他们。
 
@@ -451,7 +453,7 @@ Mouse position is at: {{ mouse.x }}, {{ mouse.y }}
 >
 > `<script setup>`是唯一在调用 await 之后仍可调用组合式函数的地方。编译器会在异步操作之后自动为你恢复当前的组件实例。
 
-## 20.5 通过抽取组合式函数改善代码结构[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#extracting-composables-for-code-organization)
+### 2.5 通过抽取组合式函数改善代码结构[#](https://staging-cn.vuejs.org/guide/reusability/composables.html#extracting-composables-for-code-organization)
 
 抽取组合式函数不仅是为了复用，也是为了代码组织。随着组件复杂度的增高，你可能会最终发现组件多得难以查询和理解。组合式 API 会给予你足够的灵活性，让你可以基于逻辑问题将组件代码拆分成更小的函数：
 

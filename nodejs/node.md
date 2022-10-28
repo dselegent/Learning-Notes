@@ -590,11 +590,13 @@ const qs = require('qs');
 
 1.qs.parse()
 const str = "username='admin'&password='123456'";
-console.log(qs.parse(str)); Object { username: "admin", password: "123456" }
+console.log(qs.parse(str)); 
+// Object { username: "admin", password: "123456" }
 
 2.qs.stringify()
 const a = qs.stringify({ username: 'admin', password: '123456' });
-console.log(a); username=admin&password=123456
+console.log(a); 
+// username=admin&password=123456
 
 
 

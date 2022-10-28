@@ -1,19 +1,19 @@
-# 29.vue-router
+# 15 【Vue-Router】
 
-## 29.1相关理解
+## 1.相关理解
 
-### 29.1.1 vue-router 的理解
+### 1.1 vue-router 的理解
 
 `vue`的一个插件库，专门用来实现SPA应用
 
-### 29.1.2对SPA应用的理解
+### 1.2 对SPA应用的理解
 
 1.单页Web应用（single page web application，SPA）
 2.整个应用只有一个完整的页面
 3.点击页面中的导航链接不会刷新页面，只会做页面的局部更新
 4.数据需要通过ajax请求获取
 
-### 29.1.3路由的理解
+### 1.3 路由的理解
 
 1.什么是路由? 
 	一个路由就是一组映射关系（key - value）
@@ -38,9 +38,9 @@
 
  **结论**：前端路由，指的是 Hash 地址与组件之间的对应关系！
 
-## 29.2基本路由
+## 2.基本路由
 
-### 29.2.1基本使用
+### 2.1基本使用
 
 1. 安装`vue-router`，命令：```npm i vue-router@3```
 
@@ -89,7 +89,7 @@
 
 > 切换的时候会把路由销毁，触发销毁生命周期函数
 
-### 29.2.2实际使用
+### 2.2实际使用
 
 `src/router/index.js`该文件专门用于创建整个应用的路由器
 
@@ -190,14 +190,14 @@ new Vue({
 
 ![image-20220703221721123](https://i0.hdslb.com/bfs/album/a6b9ed1ea260a1815228e3c7ae8992b7d9e1d6e4.png)
 
-## 29.3 几个注意点
+## 3.几个注意点
 
 1. 路由组件通常存放在```pages```文件夹，一般组件通常存放在```components```文件夹。
 2. 通过切换，“隐藏”了的路由组件，默认是被销毁掉的，需要的时候再去挂载。
 3. 每个组件都有自己的```$route(路由)```属性，里面存储着自己的路由信息。
 4. 整个应用只有一个router，可以通过组件的```$router(路由器)```属性获取到。
 
-## 29.4多级路由
+## 4.多级路由
 
 1. 配置路由规则，使用children配置项：
 
@@ -323,9 +323,9 @@ new Vue({
 
    ![image-20220703224025389](https://i0.hdslb.com/bfs/album/41a55583968f6973e31cc6fb84e9a147e08718b5.png)
 
-## 29.5vue中路由重定向redirect
+## 5.vue中路由重定向redirect
 
-   ### 29.5.1重定向到平级的路径上去
+   ### 5.1 重定向到平级的路径上去
 
 ![image-20220703224306857](https://i0.hdslb.com/bfs/album/e1f245611b30240ec8c2c7cfb88ffe78500794ac.png)
 
@@ -333,13 +333,13 @@ new Vue({
 
 **重定向的地址不需要接收参数,把"/"重定向到"/index"**
 
-### 29.5.2重定向到子路由路径上面去
+### 5.2 重定向到子路由路径上面去
 
 ![image-20220703225810368](https://i0.hdslb.com/bfs/album/650c128e52a9ddfab8e16464f1680c39aa8d83f2.png)
 
 父路由(path:'/')重定向到相应的子路由路径上去了 redirect:'/index'
 
-## 29.6命名路由
+## 6.命名路由
 
 1. 作用：可以简化路由的跳转。
 
@@ -388,7 +388,7 @@ new Vue({
       >跳转</router-link>
       ```
 
-## 29.7路由的query参数
+## 7.路由的query参数
 
 1. 传递参数
 
@@ -417,9 +417,9 @@ new Vue({
 
 ![image-20220703230618683](https://i0.hdslb.com/bfs/album/371faa1d11fad7766473e758b17731a91c2f7801.png)
 
-## 29.8路由的params参数
+## 8.路由的params参数
 
-### 29.8.1基本使用
+### 8.1 基本使用
 
 1. 配置路由，声明接收`params`参数
 
@@ -473,7 +473,7 @@ new Vue({
    $route.params.title
    ```
 
-### 29.8.2params传参问题
+### 8.2 params传参问题
 
 （1）如何指定params参数可传可不传  
 
@@ -507,7 +507,7 @@ new Vue({
 > 加入`||undefined`，当我们传递的参数为空串时地址栏url也可以保持正常
 > `this.$router.push({name:"Search",params:{keyword:this.keyword||undefined}})`
 
-## 29.9路由的props配置
+## 9.路由的props配置
 
 作用：让路由组件更方便的收到参数
 
@@ -554,7 +554,7 @@ new Vue({
 </script>
 ```
 
-## 29.10replace
+## 10.replace
 
 1. 作用：**控制路由跳转时操作浏览器历史记录的模式**
 2. 浏览器的历史记录有两种写入方式：分别为```push```和```replace```，```push```是追加历史记录，```replace```是替换当前记录。路由跳转时候默认为```push```
@@ -590,9 +590,9 @@ new Vue({
 </script>
 ```
 
-## 29.11编程式路由导航
+## 11.编程式路由导航
 
-### 29.11.1基本使用
+### 11.1 基本使用
 
 作用：不借助`<router-link>`实现路由跳转，让路由跳转更加灵活
 `this.$router.push({})`	内传的对象与`<router-link>`中的to相同,跳转到指定 hash 地址，并增加一条历史记录
@@ -696,7 +696,7 @@ new Vue({
 
 ![image-20220703231510181](https://i0.hdslb.com/bfs/album/f4a19b698fc0353863482b7da57875b58ac4e823.png)
 
-### 29.11.2多次执行相同的push问题
+### 11.2 多次执行相同的push问题
 
 多次执行相同的push问题，控制台会出现警告  
 例如：使用this.$router.push({name:'Search',params:{keyword:".."||undefined}})时，如果多次执行相同的push，控制台会出现警告。
@@ -711,7 +711,7 @@ console.log(result)
 多次执行出现警告：  
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/308f41adccfe4268a6a2e0b4b2d2cfd0.png)
 原因：push是一个promise，promise需要传递成功和失败两个参数，我们的push中没有传递。   
-方法：this.$router.push({name:'Search',params:{keyword:".."||undefined}},()=>{},()=>{})后面两项分别代表执行成功和失败的回调函数。  
+方法：`this.$router.push({name:'Search',params:{keyword:".."||undefined}},()=>{},()=>{})`后面两项分别代表执行成功和失败的回调函数。  
 **这种写法治标不治本，将来在别的组件中push|replace,编程式导航还是会有类似错误**  
 
 push是VueRouter.prototype的一个方法，在router中的index重写该方法即可(看不懂也没关系，这是前端面试题)
@@ -731,7 +731,7 @@ VueRouter.prototype.push = function (location,resolve,reject){
 }
 ```
 
-## 29.12 缓存路由组件
+## 12.缓存路由组件
 
 1. 作用：让不展示的路由组件保持挂载，不被销毁。
 
@@ -773,7 +773,7 @@ VueRouter.prototype.push = function (location,resolve,reject){
 
 > 切换完回来不会清楚已输入的内容
 
-## 29.13两个新的生命周期钩子
+## 13.两个新的生命周期钩子
 
 1. 作用：路由组件所独有的两个钩子，用于捕获路由组件的激活状态。
 2. 具体名字：
@@ -820,7 +820,7 @@ VueRouter.prototype.push = function (location,resolve,reject){
 
 ![手风琴动画.gif](https://cdn.nlark.com/yuque/0/2022/gif/1379492/1644153618338-66b6e803-45c2-4042-a0c7-ef19053a7bc6.gif)
 
-## 29.14路由守卫
+## 14.路由守卫
 
 1. 作用：对路由进行权限控制
 2. 分类：全局守卫、独享守卫、组件内守卫
@@ -847,7 +847,7 @@ VueRouter.prototype.push = function (location,resolve,reject){
 
 ​	beforeEnter 读取路由的信息
 
-### 29.14.1全局路由守卫
+### 14.1 全局路由守卫
 
 每次发生路由的导航跳转时，都会触发全局前置守卫。因此，在全局前置守卫中，程序员可以对每个路由进行访问权限的控制：
 
@@ -981,7 +981,7 @@ router.afterEach((to,from)=>{
 export default router
 ```
 
-### 29.14.2独享路由守卫
+### 14.2 独享路由守卫
 
 你可以在路由配置上直接定义 beforeEnter 守卫：
 
@@ -1053,7 +1053,7 @@ router.afterEach((to,from)=>{
 export default router
 ```
 
-### 29.14.3组件内路由守卫
+### 14.3 组件内路由守卫
 
 可以在路由组件内直接定义以下路由导航守卫：
 
@@ -1114,7 +1114,7 @@ beforeRouteLeave (to, from, next) {
 }
 ```
 
-### 29.14.4总结
+### 14.4 总结
 
 完整的导航解析流程
 导航被触发。
@@ -1130,7 +1130,7 @@ beforeRouteLeave (to, from, next) {
 触发 DOM 更新。
 调用 `beforeRouteEnter `守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
 
-## 29.15路由懒加载
+## 15.路由懒加载
 
 > 当打包构建应用时，JavaScript 包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更加高效了。
 
@@ -1144,7 +1144,7 @@ beforeRouteLeave (to, from, next) {
 
 新的导入方式，这样导入在加载时只会按需加载
 
-## 29.16路由器的两种工作模式
+## 16.路由器的两种工作模式
 
 1. 对于一个url来说，什么是hash值？—— #及其后面的内容就是hash值。
 2. hash值不会包含在 HTTP 请求中，即：hash值不会带给服务器。
@@ -1159,7 +1159,7 @@ beforeRouteLeave (to, from, next) {
    2. 兼容性和hash模式相比略差。
    3. 应用部署上线时需要后端人员支持，解决刷新页面服务端404的问题。
 
-## 29.17监听路由
+## 17.监听路由
 
 > **复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch（监测变化） $route 对象：**
 
@@ -1186,7 +1186,7 @@ watch:{
     },
 ```
 
-## 29.18滚动行为
+## 18.滚动行为
 
 使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。 vue-router 能做到，而且更好，它让你可以自定义路由切换时页面如何滚动。
 

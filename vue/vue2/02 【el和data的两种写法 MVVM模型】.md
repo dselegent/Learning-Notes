@@ -1,4 +1,6 @@
-# 4.el和data的两种写法
+# 02 【el和data的两种写法 MVVM模型】
+
+## 1.el和data的两种写法
 
 **el**有2种写法
 
@@ -50,7 +52,7 @@
   </script>
 ```
 
-# 5.MVVM模型
+## 2.MVVM模型
 
 ![image-20220627114527315](https://i0.hdslb.com/bfs/album/16a3c9896eb5b087c5c8e8cfa276f89b76b9732e.png)
 

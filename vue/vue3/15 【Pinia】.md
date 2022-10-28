@@ -1,6 +1,6 @@
-# 27.Pinia
+# 15 【Pinia】
 
-## 27.1 pinia是什么？
+## 1.pinia是什么？
 
 > **前言**
 >
@@ -22,7 +22,7 @@
 
 实际上，pinia就是Vuex的升级版，官网也说过，为了尊重原作者，所以取名pinia，而没有取名Vuex，所以大家可以直接将pinia比作为Vue3的Vuex。
 
-## 27.2 为什么要使用pinia？
+## 2.为什么要使用pinia？
 
 很多小伙伴内心是抗拒学习新东西的，比如我们这里所说的pinia，很多小伙伴可能就会抛出一系列的疑问：为什么要学习pinia？pinia有什么优点吗？既然Vue3还能使用Vuex为什么我还要学它？......
 
@@ -43,7 +43,7 @@ pinia的优点还有非常多，上面列出的主要是它的一些主要优点
 
 ![image-20220810223137523](https://i0.hdslb.com/bfs/album/18085683a15c74f35c6bb50aab3e4732bdd68bf4.png)
 
-## 27.3 准备工作
+## 3.准备工作
 
 想要学习pinia，最好有Vue3 的基础，明白组合式API是什么。如果你还不会Vue3，建议先去学习Vue3。
 
@@ -99,7 +99,7 @@ app.use(pinia);
 app.mount("#app");
 ```
 
-## 27.4 创建和使用store
+## 4.创建和使用store
 
 **创建store：**
 
@@ -155,9 +155,9 @@ console.log(store);
 
 一旦 store 被实例化，你就可以直接在 store 上访问 `state`、`getters` 和 `actions` 中定义的任何属性。 
 
-## 27.5 state
+## 5.state
 
-### 27.5.1 添加state
+### 5.1 添加state
 
 我们都知道store是用来存放公共数据的，那么数据具体存在在哪里呢？前面我们利用defineStore函数创建了一个store，该函数第二个参数是一个options配置项，我们需要存放的数据就放在options对象中的state属性内。
 
@@ -181,7 +181,7 @@ export const useUserStore = defineStore("users", {
 
 上段代码中我们给配置项添加了state属性，该属性就是用来存储数据的，我们往state中添加了3条数据。需要注意的是，state接收的是一个箭头函数返回的值，它不能直接接收一个对象。
 
-### 27.5.2 读取state数据
+### 5.2 读取state数据
 
 读取state数据很简单，前面我们尝试过在App.vue中打印store，那么我们添加数据后再来看看打印结果：
 
@@ -220,7 +220,7 @@ const { name, age, sex } = store;
 
 上段代码实现的效果与一个一个获取的效果一样，不过代码简洁了很多。
 
-### 27.5.3 修改state数据
+### 5.3 修改state数据
 
 如果我们想要修改store中的数据，可以直接重新赋值即可，我们在App.vue里面添加一个按钮，点击按钮修改store中的某一个数据。
 
@@ -304,7 +304,7 @@ const changeName = () => {
 
 当我们store中数据发生变化时，页面也更新了！
 
-### 27.5.4 重置state
+### 5.4 重置state
 
 有时候我们修改了state数据，想要将它还原，这个时候该怎么做呢？就比如用户填写了一部分表单，突然想重置为最初始的状态。
 
@@ -322,7 +322,7 @@ const reset = () => {
 
 当我们点击重置按钮时，store中的数据会变为初始状态，页面也会更新。
 
-### 27.5.5 批量更改state数据
+### 5.5 批量更改state数据
 
 前面我们修改state的数据是都是一条一条修改的，比如store.name="张三"等等，如果我们一次性需要修改很多条数据的话，有更加简便的方法，使用store的$patch方法，修改app.vue代码，添加一个批量更改数据的方法。
 
@@ -355,7 +355,7 @@ store.$patch((state) => {
 
 上段代码中我们即批量更改了state的数据，又没有将所有的state字段列举出来。
 
-### 27.5.6 直接替换整个state
+### 5.6 直接替换整个state
 
 pinia提供了方法让我们直接替换整个state对象，使用store的$state方法。
 
@@ -371,7 +371,7 @@ store.$state = { name: '1', age: 1, sex: '1' }
 
 > 字段必须要对的上，不能多不能少，类型也不能错
 
-### 27.5.6 订阅state改变
+### 5.6 订阅state改变
 
 类似于Vuex 的abscribe 只要有state 的变化就会走这个函数
 
@@ -395,13 +395,13 @@ store.$subscribe((args,state)=>{
 })
 ```
 
-## 27.6 getters属性
+## 6.getters属性
 
 getters是defineStore参数配置项里面的另一个属性，前面我们讲了state属性。getter属性值是一个对象，该对象里面是各种各样的方法。大家可以把getter想象成Vue中的计算属性，它的作用就是返回一个新的结果，既然它和Vue中的计算属性类似，那么它肯定也是会被缓存的，就和computed一样。
 
 当然我们这里的getter就是处理state数据。
 
-### 27.6.1 添加getter
+### 6.1 添加getter
 
 我们先来看一下如何定义getter吧，修改user.ts。
 
@@ -427,7 +427,7 @@ export const useUsersStore = defineStore("users", {
 
 上段代码中我们在配置项参数中添加了getter属性，该属性对象中定义了一个getAddAge方法，该方法会默认接收一个state参数，也就是state对象，然后该方法返回的是一个新的数据。
 
-### 27.6.2 使用getter
+### 6.2 使用getter
 
 我们在store中定义了getter，那么在组件中如何使用呢？使用起来非常简单，我们修改App.vue。
 
@@ -455,7 +455,7 @@ const patchStore = () => {
 
 当我们点击批量修改数据按钮时，页面上的新年龄字段也会跟着变化。
 
-### 27.6.3 getter中调用其它getter
+### 6.3 getter中调用其它getter
 
 前面我们的getAddAge方法只是简单的使用了state方法，但是有时候我们需要在这一个getter方法中调用其它getter方法，这个时候如何调用呢？
 
@@ -496,7 +496,7 @@ export const useUsersStore = defineStore("users", {
 <p>调用其它getter：{{ store.getNameAndAge }}</p>
 ```
 
-### 27.6.4 getter传参
+### 6.4 getter传参
 
 既然getter函数做了一些计算或者处理，那么我们很可能会需要传递参数给getter函数，但是我们前面说getter函数就相当于store的计算属性，和vue的计算属性差不多，那么我们都知道Vue中计算属性是不能直接传递参数的，所以我们这里的getter函数如果要接受参数的话，也是需要做处理的。
 
@@ -531,7 +531,7 @@ export const useUsersStore = defineStore("users", {
  <p>新年龄：{{ store.getAddAge(1100) }}</p>
 ```
 
-### 27.6.5 访问其他 Store 的getter[#](https://pinia.web3doc.top/core-concepts/getters.html#访问其他-store-的getter)
+### 6.5 访问其他 Store 的getter[#](https://pinia.web3doc.top/core-concepts/getters.html#访问其他-store-的getter)
 
 要使用其他存储 getter，您可以直接在 *getter* 内部使用它：
 
@@ -551,7 +551,7 @@ export const useStore = defineStore('main', {
 })
 ```
 
-## 27.7 actions属性
+## 7.actions属性
 
 前面我们提到的state和getters属性都主要是数据层面的，并没有具体的业务逻辑代码，它们两个就和我们组件代码中的data数据和computed计算属性一样。
 
@@ -559,7 +559,7 @@ export const useStore = defineStore('main', {
 
 actions属性值同样是一个对象，该对象里面也是存储的各种各样的方法，包括同步方法和异步方法。
 
-### 27.7.1 添加actions
+### 7.1 添加actions
 
 我们可以尝试着添加一个actions方法，修改user.ts。
 
@@ -592,7 +592,7 @@ export const useUsersStore = defineStore("users", {
 
 上段代码中我们定义了一个非常简单的actions方法，在实际场景中，该方法可以是任何逻辑，比如发送请求、存储token等等。大家把actions方法当作一个普通的方法即可，特殊之处在于该方法内部的this指向的是当前store。
 
-### 27.7.2 使用actions
+### 7.2 使用actions
 
 使用actions中的方法也非常简单，比如我们在App.vue中想要调用该方法。
 
@@ -606,7 +606,7 @@ const saveName = () => {
 
 我们点击按钮，直接调用store中的actions方法即可。
 
-### 27.7.3 订阅Actions的调用
+### 7.3 订阅Actions的调用
 
 只要有actions被调用就会走这个函数
 
@@ -618,7 +618,7 @@ store.$onAction((args)=>{
 
 ![image-20220811130908291](https://i0.hdslb.com/bfs/album/bb2b0c34a5492bd5bab903676abdc70bda6fb169.png)
 
-## 27.8 pinia模块化
+## 8.pinia模块化
 
 > 在复杂项目中，不可能把多个模块的数据都定义到一个store中，一般来说会一个模块对应一个store，最后通过一个根store进行整合
 
@@ -667,13 +667,13 @@ const { count, double } = storeToRefs(counter)
 </script>
 ```
 
-## 27.9 pinia数据持久化
+## 9.pinia数据持久化
 
 **目标：** 通过 Pinia 插件快速实现持久化存储。
 
 插件文档：[点击查看](https://www.npmjs.com/package/pinia-plugin-persistedstate)
 
-### 27.9.1 用法
+### 9.1 用法
 
 **安装**
 
@@ -705,13 +705,13 @@ const useHomeStore = defineStore("home",{
 });
 ```
 
-### 27.9.2 常见疑问
+### 9.2 常见疑问
 
 - 模块做了持久化后，以后数据会不会变，怎么办？
   - 先读取本地的数据，如果新的请求获取到新数据，会自动把新数据覆盖掉旧的数据。
   - 无需额外处理，插件会自己更新到最新数据。
 
-### 27.9.3 进阶用法
+### 9.3 进阶用法
 
 需求：不想所有数据都持久化处理，能不能按需持久化所需数据，怎么办？
 

@@ -1,8 +1,8 @@
-# 28.vuex
+# 14 【Vuex】
 
-## 28.1理解 Vuex
+## 1.理解 Vuex
 
-### 28.1.1Vuex 是什么
+### 1.1 Vuex 是什么
 
 概念：专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对Vue应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信
 
@@ -10,16 +10,16 @@
 
 ![image-20220703163536279](https://i0.hdslb.com/bfs/album/31e84085c68f3e1655e4c1e138f756342caab780.png)
 
-### 28.1.2什么时候使用 Vuex
+### 1.2 什么时候使用 Vuex
 
 1多个组件依赖于同一状态
 2来自不同组件的行为需要变更同一状态
 
-### 28.1.3原理图
+### 1.3 原理图
 
 ![image-20220703163619723](https://i0.hdslb.com/bfs/album/cdfc6982506d0efa78703359dad33d93421d09b2.png)
 
-## 28.2搭建Vuex环境
+## 2.搭建Vuex环境
 
 1. 下载安装 `pnpm add vuex@3`
 
@@ -62,7 +62,7 @@
    })
    ```
 
-## 28.3使用Vuex编写
+## 3.使用Vuex编写
 
 1. 初始化数据、配置```actions```、配置```mutations```，操作文件```store.js```
 
@@ -164,7 +164,7 @@
 <style lang="css">button{margin-left: 5px;}</style>
 ```
 
-## 28.4getters 配置项
+## 4.getters 配置项
 
 1. 概念：当state中的数据需要经过加工后再使用时，可以使用getters加工。
 
@@ -188,7 +188,7 @@
 
 3. 组件中读取数据：```$store.getters.bigSum```
 
-## 28.5四个map方法的使用
+## 5.四个map方法的使用
 
 1. <strong>mapState方法：</strong>用于帮助我们映射```state```中的数据为计算属性
 
@@ -286,7 +286,7 @@
 </style>
 ```
 
-## 28.6模块化+命名空间
+## 6.模块化+命名空间
 
 1. 目的：让代码更好维护，让多种数据分类更加明确。
 
@@ -357,3 +357,4 @@
    ...mapMutations('countAbout',{increment:'JIA',decrement:'JIAN'}),
    ```
 
+​	

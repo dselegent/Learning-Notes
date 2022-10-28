@@ -1,4 +1,4 @@
-# 24.script setup 总结
+# 13 【script setup 总结】
 
 > 因为学习的时候，视频版本并没有一些新的语法糖，笔记是没有使用这些语法糖的，但是用法都会以补充的形式加进来。
 
@@ -11,7 +11,7 @@
 - 更好的运行时性能 (其模板会被编译成同一作用域内的渲染函数，避免了渲染上下文代理对象)。
 - 更好的 IDE 类型推导性能 (减少了语言服务器从代码中抽取类型的工作)。
 
-## 24.1 基本语法
+## 1.基本语法
 
 要启用该语法，需要在 `<script>` 代码块上添加 `setup` attribute：
 
@@ -23,7 +23,7 @@ console.log('hello script setup')
 
 里面的代码会被编译成组件 `setup()` 函数的内容。这意味着与普通的 `<script>` 只在组件被首次引入的时候执行一次不同，`<script setup>` 中的代码会在**每次组件实例被创建的时候执行**。
 
-## 24.2 顶层的绑定会被暴露给模板[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#top-level-bindings-are-exposed-to-template)
+## 2.顶层的绑定会被暴露给模板[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#top-level-bindings-are-exposed-to-template)
 
 当使用 `<script setup>` 的时候，任何在 `<script setup>` 声明的顶层的绑定 (包括变量，函数声明，以及 import 导入的内容) 都能在模板中直接使用：
 
@@ -43,7 +43,7 @@ function log() {
 </template>
 ```
 
-## 24.3 响应式[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#reactivity)
+## 3.响应式[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#reactivity)
 
 响应式状态需要明确使用[响应式 API](https://staging-cn.vuejs.org/api/reactivity-core.html) 来创建。和 `setup()` 函数的返回值一样，ref 在模板中使用的时候会自动解包：
 
@@ -59,7 +59,7 @@ const count = ref(0)
 </template>
 ```
 
-## 24.4 使用组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#using-components)
+## 4.使用组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#using-components)
 
 `<script setup>` 范围里的值也能被直接作为自定义组件的标签名使用：
 
@@ -87,7 +87,7 @@ import MyComponent from './MyComponent.vue'
 
 这里 `MyComponent` 应当被理解为像是在引用一个变量。如果你使用过 JSX，此处的心智模型是类似的。其 kebab-case 格式的 `<my-component>` 同样能在模板中使用——不过，我们强烈建议使用 PascalCase 格式以保持一致性。同时这也有助于区分原生的自定义元素。
 
-### 24.4.1 动态组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#dynamic-components)
+### 4.1 动态组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#dynamic-components)
 
 由于组件是通过变量引用而不是基于字符串组件名注册的，在 `<script setup>` 中要使用动态组件的时候，应该使用动态的 `:is` 来绑定：
 
@@ -105,7 +105,7 @@ import Bar from './Bar.vue'
 
 请注意组件是如何在三元表达式中被当做变量使用的。
 
-### 24.4.2 递归组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#recursive-components)
+### 4.2 递归组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#recursive-components)
 
 一个单文件组件可以通过它的文件名被其自己所引用。例如：名为 `FooBar.vue` 的组件可以在其模板中用 `<FooBar/>` 引用它自己。
 
@@ -115,7 +115,7 @@ import Bar from './Bar.vue'
 import { FooBar as FooBarChild } from './components'
 ```
 
-### 24.4.3 命名空间组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#namespaced-components)
+### 4.3 命名空间组件[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#namespaced-components)
 
 可以使用带 `.` 的组件标签，例如 `<Foo.Bar>` 来引用嵌套在对象属性中的组件。这在需要从单个文件中导入多个组件的时候非常有用：
 
@@ -131,7 +131,7 @@ import * as Form from './form-components'
 </template>
 ```
 
-## 24.5 使用自定义指令
+## 5.使用自定义指令
 
 全局注册的自定义指令将正常工作。本地的自定义指令在 `<script setup>` 中不需要显式注册，但他们必须遵循 `vNameOfDirective` 这样的命名规范：
 
@@ -156,7 +156,7 @@ import { myDirective as vMyDirective } from './MyDirective.js'
 </script>
 ```
 
-## 24.6 `defineProps()` 和 `defineEmits()`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#defineprops-defineemits)
+## 6.`defineProps()` 和 `defineEmits()`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#defineprops-defineemits)
 
 为了在声明 `props` 和 `emits` 选项时获得完整的类型推导支持，我们可以使用 `defineProps` 和 `defineEmits` API，它们将自动地在 `<script setup>` 中可用：
 
@@ -178,7 +178,7 @@ const emit = defineEmits(['change', 'delete'])
 
 如果使用了 Typescript，[使用纯类型声明来声明 prop 和 emit](https://staging-cn.vuejs.org/api/sfc-script-setup.html#typescript-only-features) 也是可以的。
 
-## 24.7 `defineExpose`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#defineexpose)
+## 7.`defineExpose`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#defineexpose)
 
 使用 `<script setup>` 的组件是**默认关闭**的——即通过模板引用或者 `$parent` 链获取到的组件的公开实例，**不会**暴露任何在 `<script setup>` 中声明的绑定。
 
@@ -200,7 +200,7 @@ defineExpose({
 
 当父组件通过模板引用的方式获取到当前组件的实例，获取到的实例会像这样 `{ a: number, b: number }` (ref 会和在普通实例中一样被自动解包)
 
-## 24.8 `useSlots()` 和 `useAttrs()`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#useslots-useattrs)
+## 8.`useSlots()` 和 `useAttrs()`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#useslots-useattrs)
 
 在 `<script setup>` 使用 `slots` 和 `attrs` 的情况应该是相对来说较为罕见的，因为可以在模板中直接通过 `$slots` 和 `$attrs` 来访问它们。在你的确需要使用它们的罕见场景中，可以分别用 `useSlots` 和 `useAttrs` 两个辅助函数：
 
@@ -215,7 +215,7 @@ const attrs = useAttrs()
 
 `useSlots` 和 `useAttrs` 是真实的运行时函数，它的返回与 `setupContext.slots` 和 `setupContext.attrs` 等价。它们同样也能在普通的组合式 API 中使用。
 
-## 24.9 与普通的 `<script>` 一起使用[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#usage-alongside-normal-script)
+## 9.与普通的 `<script>` 一起使用[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#usage-alongside-normal-script)
 
 `<script setup> `可以和普通的 `<script> `一起使用。普通的` <script> `在有这些需要的情况下或许会被使用到：
 
@@ -242,7 +242,7 @@ export default {
 </script>
 ```
 
-## 24.10 顶层 `await`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#top-level-await)
+## 10.顶层 `await`[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#top-level-await)
 
 `<script setup> `中可以使用顶层` await`。结果代码会被编译成 `async setup()：`
 
@@ -259,9 +259,9 @@ const post = await fetch(`/api/post/1`).then((r) => r.json())
 
 `async setup()` 必须与 [`Suspense` 内置组件](https://staging-cn.vuejs.org/guide/built-ins/suspense.html) 组合使用，`Suspense` 目前还是处于实验阶段的特性，会在将来的版本中稳定。
 
-## 24.11 针对 TypeScript 的功能[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#typescript-only-features)
+## 11.针对 TypeScript 的功能[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#typescript-only-features)
 
-### 24.11.1 针对类型的 props/emit 声明[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#type-only-propsemit-declarations)
+### 11.1 针对类型的 props/emit 声明[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#type-only-propsemit-declarations)
 
 props 和 emit 都可以通过给 `defineProps` 和 `defineEmits` 传递纯类型参数的方式来声明：
 
@@ -292,7 +292,7 @@ const emit = defineEmits<{
 
   现在还不支持复杂的类型和从其他文件进行类型导入，但我们有计划在将来支持。
 
-### 24.11.2 使用类型声明时的默认 props 值[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#default-props-values-when-using-type-declaration)
+### 11.2 使用类型声明时的默认 props 值[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#default-props-values-when-using-type-declaration)
 
 针对类型的 `defineProps` 声明的不足之处在于，它没有可以给 props 提供默认值的方式。为了解决这个问题，我们还提供了 `withDefaults` 编译器宏：
 
@@ -310,7 +310,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 上面代码会被编译为等价的运行时 props 的 `default` 选项。此外，`withDefaults` 辅助函数提供了对默认值的类型检查，并确保返回的 `props` 的类型删除了已声明默认值的属性的可选标志。
 
-## 24.12 限制[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#restrictions)
+## 12.限制[#](https://staging-cn.vuejs.org/api/sfc-script-setup.html#restrictions)
 
 由于模块执行语义的差异，`<script setup>` 中的代码依赖单文件组件的上下文。当将其移动到外部的 `.js` 或者 `.ts` 文件中的时候，对于开发者和工具来说都会感到混乱。因此，**`<script setup>`** 不能和 `src` attribute 一起使用。
 

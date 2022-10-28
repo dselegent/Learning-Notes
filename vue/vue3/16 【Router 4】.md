@@ -1,4 +1,4 @@
-# 28.Vue-Router
+# 16 【Router 4】
 
 使用Vue3 安装对应的router4版本
 
@@ -8,7 +8,7 @@
 npm install vue-router@4
 ```
 
-## 28.1 路由配置
+## 1.路由配置
 
 **与之前版本区别：**
 
@@ -121,7 +121,7 @@ import router from './router'
 createApp(App).use(router).mount('#app')
 ```
 
-## 28.2 路由跳转及参数
+## 2.路由跳转及参数
 
 **router：** 是VueRouter的一个**全局对象**，通过`Vue.use(VueRouter)`和`VueRouter`构造函数得到的一个实例对象，包含了所有路由包含了许多关键的对象和属性
 
@@ -150,7 +150,7 @@ createApp(App).use(router).mount('#app')
 1. 在组件中： `{{$route.query.color}}` 或 `{{$route.params.color}}`
 2. 在 JS 中： `this.$route.query.color` 或 `this.$route.params.color`
 
-## 28.3 路由（导航）守卫
+## 3.路由（导航）守卫
 
 路由守卫简单来讲就是监听页面**进入**，**修改**，和**离开**的功能。
 
@@ -237,7 +237,7 @@ export default {
 }
 ```
 
-## 28.4 动态路由
+## 4.动态路由
 
 **动态路由参数 id：**
 
@@ -276,7 +276,7 @@ const newsId=computed(()=>{
 </script>
 ```
 
-## 28.5 keep-alive
+## 5.keep-alive
 
 可利用`keep-alive`的 `include` 或 `exclude` 属性（include 和 exclude 包含的name 是组件的name不是router name）来设置缓存：
 
@@ -352,3 +352,4 @@ watch(() => router.currentRoute.value,(val) => {
 
 ```
 
+## 6.vite中的路由懒加载

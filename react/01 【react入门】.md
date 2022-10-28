@@ -57,7 +57,7 @@ babel.min.js
 
 3.创建虚拟DOM，渲染到容器中
 
-```jsx
+```js
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -90,12 +90,18 @@ babel.min.js
 
 ![image-20221022171539523](https://i0.hdslb.com/bfs/album/7c5713f248cc28bcb531d2eda325e56789df4286.png)
 
+> *   ReactDOM.render()
+>     *   用来将React元素渲染到根元素中
+>     *   根元素中所有的内容都会被删除，被React元素所替换
+>     *   当重复调用render()时，React会将两次的渲染结果进行比较，
+>     *   它会确保只修改那些发生变化的元素，对DOM做最少的修改
+
 ## 3.jsx 语法
 
-1. 定义虚拟DOM，不能使用`“”`
+1. 定义虚拟DOM，JSX不是字符串，不要加引号
 2. 标签中混入JS表达式的时候使用`{}`
 
-```jsx
+```js
 id = {myId.toUpperCase()}
 ```
 
@@ -103,15 +109,17 @@ id = {myId.toUpperCase()}
 
 4. 内敛样式要使用`{{}}`包裹
 
-```jsx
+```js
 style={{color:'skyblue',fontSize:'24px'}}
 ```
 
 5. 不能有多个根标签，只能有一个根标签
 
-6. 标签必须闭合，自闭合也行
+6.  JSX的标签必须正确结束（自结束标签必须写/）
 
-7. 如果小写字母开头，就将标签转化为 html 同名元素，如果 html 中无该标签对应的元素，就报错；如果是大写字母开头，react 就去渲染对应的组件，如果没有就报错
+7. JSX中html标签应该小写，React组件应该大写开头。如果小写字母开头，就将标签转化为 html 同名元素，如果 html 中无该标签对应的元素，就报错；如果是大写字母开头，react 就去渲染对应的组件，如果没有就报错
+
+8. 如果表达式是空值、布尔值、undefined，将不会显示
 
 > 关于JS表达式和JS语句：
 >
@@ -125,7 +133,7 @@ style={{color:'skyblue',fontSize:'24px'}}
 
 写在花括号里
 
-```jsx
+```js
 ReactDOM.render(
     <div>
     <h1>小丞</h1>
@@ -135,11 +143,51 @@ ReactDOM.render(
 );
 ```
 
-2. 数组
+2. `class`需要使用`className`代替
+3. `style`中必须使用对象设置` style={{background:'red'}}`
+
+```js
+<style>
+	.title{
+		background-color: orange;
+		width: 200px;
+	}
+</style>
+
+<!-- 准备好一个“容器” -->
+<div id="test"></div>
+
+<script type="text/babel" >
+	const myId = 'aTgUiGu'
+	const myData = 'HeLlo,rEaCt'
+
+	//1.创建虚拟DOM
+	const VDOM = (
+		<div>
+			<h2 className="title" id={myId.toLowerCase()}>
+				<span style={{color:'white',fontSize:'29px'}}>{myData.toLowerCase()}</span>
+			</h2>
+			<h2 className="title" id={myId.toLowerCase()}>
+				<span style={{color:'white',fontSize:'29px'}}>{myData.toUpperCase()}</span>
+			</h2>
+			<input type="text"/>
+		</div>
+	)
+	//2.渲染虚拟DOM到页面
+	ReactDOM.render(VDOM,document.getElementById('test'))
+</script>
+```
+
+![image-20221022204158589](https://i0.hdslb.com/bfs/album/9d4bafde75cb82f79b17a91491c46eb8576b784a.png)
+
+4. 数组
 
 JSX 允许在模板中插入数组，数组自动展开全部成员
 
-```jsx
+> {} 只能用来放js表达式，而不能放语句（if for）
+> 在语句中是可以去操作JSX
+
+```js
 var arr = [
   <h1>小丞</h1>,
   <h2>同学</h2>,
@@ -150,62 +198,11 @@ ReactDOM.render(
 );
 ```
 
-实例如下：
-
-```jsx
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>jsx语法规则</title>
-	<style>
-		.title{
-			background-color: orange;
-			width: 200px;
-		}
-	</style>
-</head>
-<body>
-	<!-- 准备好一个“容器” -->
-	<div id="test"></div>
-
-	<!-- 引入react核心库 -->
-	<script type="text/javascript" src="../js/react.development.js"></script>
-	<!-- 引入react-dom，用于支持react操作DOM -->
-	<script type="text/javascript" src="../js/react-dom.development.js"></script>
-	<!-- 引入babel，用于将jsx转为js -->
-	<script type="text/javascript" src="../js/babel.min.js"></script>
-
-	<script type="text/babel" >
-		const myId = 'aTgUiGu'
-		const myData = 'HeLlo,rEaCt'
-
-		//1.创建虚拟DOM
-		const VDOM = (
-			<div>
-				<h2 className="title" id={myId.toLowerCase()}>
-					<span style={{color:'white',fontSize:'29px'}}>{myData.toLowerCase()}</span>
-				</h2>
-				<h2 className="title" id={myId.toLowerCase()}>
-					<span style={{color:'white',fontSize:'29px'}}>{myData.toUpperCase()}</span>
-				</h2>
-				<input type="text"/>
-			</div>
-		)
-		//2.渲染虚拟DOM到页面
-		ReactDOM.render(VDOM,document.getElementById('test'))
-	</script>
-</body>
-</html>
-```
-
-![image-20221022204158589](https://i0.hdslb.com/bfs/album/9d4bafde75cb82f79b17a91491c46eb8576b784a.png)
-
 **tip: JSX 小练习**
 
 根据动态数据生成 `li`
 
-```jsx
+```js
 const data = ['A','B','C']
 const VDOM = (
     <div>
@@ -223,11 +220,13 @@ ReactDOM.render(VDOM,document.querySelector('.test'))
 
 <img src="https://i0.hdslb.com/bfs/album/09241923178d7fdca14d087e6f1a9627dc3b7081.png" alt="image-20221022204645014"  />
 
+
+
 ## 4.两种创建虚拟DOM的方式
 
 **使用JSX创建虚拟DOM**
 
-```jsx
+```js
 //1.创建虚拟DOM
 	const VDOM = (  /* 此处一定不要写引号，因为不是字符串 */
     	<h1 id="title">
@@ -242,7 +241,23 @@ ReactDOM.render(VDOM,document.querySelector('.test'))
 
 **2.使用JS创建虚拟DOM**
 
-```jsx
+````js
+/*
+* React.createElement()
+*   - 用来创建一个React元素
+*   - 参数：
+*        1.元素的名称（html标签必须小写）
+*        2.标签中的属性
+*           - class属性需要使用className来设置
+*           - 在设置事件时，属性名需要修改为驼峰命名法
+*       3.元素的内容（子元素）
+*   - 注意点：
+*       React元素最终会通过虚拟DOM转换为真实的DOM元素
+*       React元素一旦创建就无法修改，只能通过新创建的元素进行替换
+* */
+````
+
+```js
 //1.创建虚拟DOM,创建嵌套格式的dom
 const VDOM=React.createElement('h1',{id:'title'},React.createElement('span',{},'hello,React'))
 //2.渲染虚拟DOM到页面
@@ -253,23 +268,9 @@ ReactDOM.render(VDOM,document.querySelector('.test'))
 
 ## 5.两种DOM的区别
 
-````jsx
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>hello_react</title>
-  </head>
-  <body>
+````js
     <!-- 准备好一个“容器” -->
     <div id="test"></div>
-
-    <!-- 引入react核心库 -->
-    <script type="text/javascript" src="../js/react.development.js"></script>
-    <!-- 引入react-dom，用于支持react操作DOM -->
-    <script type="text/javascript" src="../js/react-dom.development.js"></script>
-    <!-- 引入babel，用于将jsx转为js -->
-    <script type="text/javascript" src="../js/babel.min.js"></script>
 
     <script type="text/babel">
       /* 此处一定要写babel */
@@ -284,9 +285,6 @@ ReactDOM.render(VDOM,document.querySelector('.test'))
       //   debugger
       console.log(typeof VDOM)
       console.log(VDOM instanceof Object)
-    </script>
-  </body>
-</html>
 ````
 
 ![image-20221022194600803](https://i0.hdslb.com/bfs/album/3c9c35333c0883a1057bd4c82be8bfbf9b69f04b.png)
@@ -298,3 +296,4 @@ ReactDOM.render(VDOM,document.querySelector('.test'))
 ​          2. 虚拟DOM比较“轻”，真实DOM比较“重”，因为虚拟DOM是React内部在用，无需真实DOM上那么多的属性。
 
 ​          3. 虚拟DOM最终会被React转化为真实DOM，呈现在页面上。
+

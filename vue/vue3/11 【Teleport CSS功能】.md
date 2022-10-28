@@ -1,4 +1,8 @@
-# 21.内置组件 Teleport
+
+
+# 11 【Teleport CSS功能】
+
+## 1.内置组件 Teleport
 
 什么是Teleport？——`<Teleport>` 是一个内置组件，它是一种能够将我们的模板渲染至指定DOM节点，不受父级style、v-show等属性影响，但data、prop数据依旧能够共用的技术；类似于 React 的 Portal。
 
@@ -8,7 +12,7 @@
 2. 可以被打包工具 tree-shake。所以它们只会在被使用的时候被引入。
 3. 需要直接主动访问(获取)它们的场景，也可以将它们显性导入。
 
-## 21.1 基本用法
+### 1.1 基本用法
 
 有时我们可能会遇到这样的场景：一个组件模板的一部分在逻辑上从属于该组件，但从整个应用视图的角度来看，它在 DOM 中应该被渲染在整个 Vue 应用外部的其他地方。
 
@@ -184,7 +188,7 @@ let isShow = $ref(false);
 >
 > 原因：scoped 生成的唯一属性会作用于 teleport 内的各元素
 
-## 21.2 官方案例
+### 1.2 官方案例
 
 试想下面这样的 HTML 结构：
 
@@ -251,7 +255,7 @@ const open = ref(false)
 
 我们也可以将 `<Teleport>` 和 [``](https://staging-cn.vuejs.org/guide/built-ins/transition.html) 结合使用来创建一个带动画的模态框。你可以看看[这个示例](https://staging-cn.vuejs.org/examples/#modal)。
 
-## 21.3 禁用 Teleport
+### 1.3 禁用 Teleport
 
 在某些场景下可能需要视情况禁用 `<Teleport>`。举例来说，我们想要在桌面端将一个组件当做浮层来渲染，但在移动端则当作行内组件。我们可以通过对 `<Teleport>` 动态地传入一个 `disabled` prop 来处理这两种不同情况。
 
@@ -263,7 +267,7 @@ const open = ref(false)
 
 这里的 `isMobile` 状态可以根据 CSS media query 的不同结果动态地更新。
 
-## 21.4 多个 Teleport 共享目标
+### 1.4 多个 Teleport 共享目标
 
 一个可重用的模态框组件可能同时存在多个实例。对于此类场景，多个 `<Teleport>` 组件可以将其内容挂载在同一个目标元素上，而顺序就是简单的顺次追加，后挂载的将排在目标元素下更后面的位置上。
 
@@ -294,9 +298,9 @@ const open = ref(false)
 - [`` API 参考](https://staging-cn.vuejs.org/api/built-in-components.html#teleport)
 - [在 SSR 中处理 Teleports](https://staging-cn.vuejs.org/guide/scaling-up/ssr.html#teleports)
 
-# 22.CSS功能
+## 2.CSS功能
 
-## 22.1 CSS Modules[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#css-modules)
+### 2.1 CSS Modules[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#css-modules)
 
 一个 `<style module>` 标签会被编译为 [CSS Modules](https://github.com/css-modules/css-modules) 并且将生成的 CSS class 作为 `$style` 对象暴露给组件：
 
@@ -316,7 +320,7 @@ const open = ref(false)
 
 参考 [CSS Modules spec](https://github.com/css-modules/css-modules) 以查看更多详情，例如 [global exceptions](https://github.com/css-modules/css-modules#exceptions) 和 [composition](https://github.com/css-modules/css-modules#composition)。
 
-### 22.1.1 自定义注入名称[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#custom-inject-name)
+#### 2.1.1 自定义注入名称[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#custom-inject-name)
 
 你可以通过给 `module` attribute 一个值来自定义注入 class 对象的属性名：
 
@@ -340,7 +344,7 @@ const open = ref(false)
 </style>
 ```
 
-### 与组合式 API 一同使用[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#usage-with-composition-api)
+#### 与组合式 API 一同使用[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#usage-with-composition-api)
 
 可以通过 `useCssModule` API 在 `setup()` 和 `<script setup>` 中访问注入的 class。对于使用了自定义注入名称的 `<style module>` 块，`useCssModule` 接收一个匹配的 `module` attribute 值作为第一个参数：
 
@@ -373,7 +377,7 @@ const css = useCssModule('zs')
 </style>
 ```
 
-## 22.2 CSS 中的 `v-bind()`[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#v-bind-in-css)
+### 2.2 CSS 中的 `v-bind()`[#](https://staging-cn.vuejs.org/api/sfc-css-features.html#v-bind-in-css)
 
 单文件组件的 `<style>` 标签支持使用 `v-bind` CSS 函数将 CSS 的值链接到动态的组件状态：
 
@@ -417,9 +421,9 @@ p {
 
 实际的值会被编译成哈希化的 CSS 自定义属性，因此 CSS 本身仍然是静态的。自定义属性会通过内联样式的方式应用到组件的根元素上，并且在源值变更的时候响应式地更新。
 
-## 22.3 组件作用域 CSS
+### 2.3 组件作用域 CSS
 
-### 22.3.1 `<style scoped>`
+#### 2.3.1 `<style scoped>`
 
 当 `<style>` 标签带有 `scoped` attribute 的时候，它的 CSS 只会影响当前组件的元素，和 Shadow DOM 中的样式封装类似。使用时有一些注意事项，不过好处是不需要任何的 polyfill。它的实现方式是通过 PostCSS 将以下内容：
 
@@ -453,7 +457,7 @@ p {
 
 使用 `scoped` 后，父组件的样式将不会渗透到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。这样设计是为了让父组件可以从布局的角度出发，调整其子组件根元素的样式。
 
-### 22.3.1 深度选择器
+#### 2.3.1 深度选择器
 
  处于 scoped 样式中的选择器如果想要做更“深度”的选择，也即：影响到子组件，可以使用 :deep() 这个伪类
 
@@ -473,7 +477,7 @@ p {
 - ***通过 v-html 创建的 DOM 内容不会被作用域样式影响，但你仍然可以使用深度选择器来设置其样式。***
 - **并且我们有时会有需要修改引入的外部组件库的样式的需求，此时就需要使用深度选择器，或者直接`<style>`不加scoped，作用于全局范围。**
 
-### 22.3.3 插槽选择器
+#### 2.3.3 插槽选择器
 
 默认情况下，作用域样式不会影响到 `<slot/>` 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的。使用 `:slotted` 伪类以明确地将插槽内容作为选择器的目标：
 
@@ -536,7 +540,7 @@ import A from "@/components/A.vue"
 
  ![image-20220810215539547](https://i0.hdslb.com/bfs/album/9ca75bb1aee6ca723ef3f328c8c82cdfbc895bd2.png)
 
-### 22.3.4 全局选择器
+#### 2.3.4 全局选择器
 
 在之前我们想加入全局 样式 通常都是新建一个style 标签 不加scoped 现在有更优雅的解决方案
 
@@ -565,7 +569,7 @@ import A from "@/components/A.vue"
 
 效果等同于上面 
 
-### 22.3.5 混合使用局部与全局样式
+#### 2.3.5 混合使用局部与全局样式
 
 你也可以在同一个组件中同时包含作用域样式和非作用域样式：
 
@@ -579,13 +583,13 @@ import A from "@/components/A.vue"
 </style>
 ```
 
-### 22.3.6 注意
+#### 2.3.6 注意
 
 - **Scoped 样式不能代替 class**。由于浏览器渲染各种各样 CSS 选择器的方式，`p { color: red }` 结合作用域样式使用时 (即当与 attribute 选择器组合的时候) 会慢很多倍。如果你使用 class 或者 id 来替代，例如 `.example { color: red }`，那你几乎就可以避免性能的损失。
 
 - **在递归组件中小心使用后代选择器!** 对于一个使用了 `.a .b` 选择器的样式规则来说，如果匹配到 `.a` 的元素包含了一个递归的子组件，那么所有的在那个子组件中的 `.b` 都会匹配到这条样式规则。
 
-## 22.4 组件修改子组件样式
+### 2.4 组件修改子组件样式
 
 首先抛出一个最暴力的方案，但这存在影响其他同名样式的风险。当你意识不到哪出问题的时候，就会让人抓狂。（不推荐的方案！）
 

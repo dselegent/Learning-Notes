@@ -1,6 +1,8 @@
-# 15.Props
+# 08 【Props 组件事件】
 
-## 15.1 Props 声明[#](https://staging-cn.vuejs.org/guide/components/props.html#props-declaration)
+## 1.Props
+
+### 1.1 Props 声明[#](https://staging-cn.vuejs.org/guide/components/props.html#props-declaration)
 
 Props 是一种特别的 attributes，你可以在组件上声明注册。要传递给子组件内容，我们必须在组件的 props 列表上声明它。
 
@@ -85,7 +87,7 @@ defineProps<{
 
 更多关于基于类型的声明的细节请参考[组件 props 类型标注](https://staging-cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props)。
 
-## 15.2 Prop 名字格式[#](https://staging-cn.vuejs.org/guide/components/props.html#prop-name-casing)
+### 1.2 Prop 名字格式[#](https://staging-cn.vuejs.org/guide/components/props.html#prop-name-casing)
 
 如果一个 prop 的名字很长，应使用 camelCase 形式，因为它们是合法的 JavaScript 标识符，可以直接在模板的表达式中使用，也可以避免在作为属性 key 名时必须加上引号。
 
@@ -104,7 +106,7 @@ defineProps({
 
 对于组件名我们推荐使用 [PascalCase](https://staging-cn.vuejs.org/guide/components/registration.html#component-name-casing)，因为这提高了模板的可读性，能帮助我们区分 Vue 组件和原生 HTML 元素。然而对于传递 props 来说，使用 camelCase 并没有太多优势，因此我们推荐更贴近 HTML 的书写风格。
 
-## 15.3 使用一个对象绑定多个 prop[#](https://staging-cn.vuejs.org/guide/components/props.html#binding-multiple-properties-using-an-object)
+### 1.3 使用一个对象绑定多个 prop[#](https://staging-cn.vuejs.org/guide/components/props.html#binding-multiple-properties-using-an-object)
 
 如果你想要将一个对象的所有属性都当作 props 传入，你可以使用[没有参数的 `v-bind`](https://staging-cn.vuejs.org/guide/essentials/template-syntax.html#dynamically-binding-multiple-attributes)，即只使用 `v-bind` 而非 `:prop-name`。例如，这里有一个 `post` 对象：
 
@@ -127,7 +129,7 @@ const post = {
 <BlogPost :id="post.id" :title="post.title" />
 ```
 
-## 15.4 Prop 校验[#](https://staging-cn.vuejs.org/guide/components/props.html#prop-validation)
+### 1.4 Prop 校验[#](https://staging-cn.vuejs.org/guide/components/props.html#prop-validation)
 
 Vue 组件可以更细致地声明对传入的 props 的校验要求。比如我们上面已经看到过的类型声明，如果传入的值不满足类型要求，Vue 会在浏览器控制台中抛出警告来提醒使用者。这在开发给其他开发者使用的组件时非常有用。
 
@@ -193,7 +195,7 @@ defineProps({
 
 如果使用了[基于类型的 prop 声明](https://staging-cn.vuejs.org/api/sfc-script-setup.html#typescript-only-features) ，Vue 会尽最大努力在运行时按照 prop 的类型标注进行编译。举例来说，`defineProps<{ msg: string }>` 会被编译为 `{ msg: { type: String, required: true }}`。
 
-## 15.5 Boolean 类型转换[#](https://staging-cn.vuejs.org/guide/components/props.html#boolean-casting)
+### 1.5 Boolean 类型转换[#](https://staging-cn.vuejs.org/guide/components/props.html#boolean-casting)
 
 为了更贴近原生 boolean attributes 的行为，声明为 `Boolean` 类型的 props 有特别的类型转换规则。以带有如下声明的 `<MyComponent>` 组件为例：
 
@@ -223,7 +225,7 @@ defineProps({
 
 无论声明类型的顺序如何，`Boolean` 类型的特殊转换规则都会被应用。
 
-## 15.6 单向数据流
+### 1.6 单向数据流
 
 所有的 props 都遵循着**单向绑定**原则，props 因父组件的更新而变化，自然地将新的状态向下流往子组件，而不会逆向传递。这避免了子组件意外修改父组件的状态的情况，不然应用的数据流将很容易变得混乱而难以理解。
 
@@ -263,7 +265,7 @@ props.foo = 'bar'
 
 这种更改的主要缺陷是它允许了子组件以某种不明显的方式影响父组件的状态，可能会使数据流在将来变得更难以理解。在最佳实践中，你应该尽可能避免这样的更改，除非父子组件在设计上本来就需要紧密耦合。在大多数场景下，子组件应该[抛出一个事件](https://staging-cn.vuejs.org/guide/components/events.html)来通知父组件做出改变。
 
-## 15.7 defineProps 总结
+### 1.7 defineProps 总结
 
 - defineProps  只能是要么使用`运行时声明`，要么使用`typescript类型声明`。同时使用两种声明方式会导致编译报错。；
 - defineProps、withDefaults 是只在 `<script setup>` 语法糖中才能使用的编译器宏。他不需要导入且会随着` <script setup> `处理过程一同被编译掉。
@@ -339,7 +341,7 @@ props.foo = 'bar'
 
 
 
-# 16.组件事件
+## 2.组件事件
 
 > 基础使用和vue2一样
 
@@ -361,14 +363,14 @@ props.foo = 'bar'
 >  { eventName:null }
 >  { eventName:()=>{} }`
 
-> ### 细节说明：
+> #### 细节说明：
 >
 > 1、数组形式和对象形式的值为null，表示该emit事件无验证函数。
 > 2、对象形式且值为函数表示该 emit 配置了事件验证
 >      验证函数必须有 return 真假值，真值表示通过验证，假值则 vue 会自动抛出 warn 警告！不 return 值默认当做失败，抛出 warn 警告！
 >      **验证函数主要就是验证参数是否正确，并不会在 return false 时中断 emit() 事件！**
 
-## 16.1 触发与监听事件
+### 2.1 触发与监听事件
 
 在组件的模板表达式中，可以直接使用 `$emit` 方法触发自定义事件 (例如：在 `v-on` 的处理函数中)：
 
@@ -395,7 +397,7 @@ props.foo = 'bar'
 >
 > 和原生 DOM 事件不一样，组件触发的事件**没有冒泡机制**。你只能监听直接子组件触发的事件。平级组件或是跨越多层嵌套的组件间通信，应使用一个外部的事件总线，或是使用一个[全局状态管理方案](https://staging-cn.vuejs.org/guide/scaling-up/state-management.html)。
 
-## 16.2 事件参数[#](https://staging-cn.vuejs.org/guide/components/events.html#event-arguments)
+### 2.2 事件参数[#](https://staging-cn.vuejs.org/guide/components/events.html#event-arguments)
 
 有时候我们会需要在触发事件时附带一个特定的值。举例来说，我们想要 `<BlogPost>` 组件来管理文本会缩放得多大。在这个场景下，我们可以给 `$emit` 提供一个额外的参数：
 
@@ -429,7 +431,7 @@ function increaseCount(n) {
 >
 > 所有传入 `$emit()` 的额外参数都会被直接传向监听器。举例来说，`$emit('foo', 1, 2, 3)` 触发后，监听器函数将会收到这三个参数值。
 
-## 16.3 声明触发的事件
+### 2.3 声明触发的事件
 
 组件要触发的事件可以显式地通过 [`defineEmits()`](https://staging-cn.vuejs.org/api/sfc-script-setup.html#defineprops-defineemits) 宏来声明：
 
@@ -520,7 +522,7 @@ TypeScript 用户请参考：[如何为组件所抛出事件标注类型](https:
 
 尽管事件声明是可选的，我们还是推荐你完整地声明所有要触发的事件，以此在代码中作为文档记录组件的用法。同时，事件声明能让 Vue 更好地将事件和[透传 attribute](https://staging-cn.vuejs.org/guide/components/attrs.html#v-on-listener-inheritance) 作出区分，从而避免一些由第三方代码触发的自定义 DOM 事件所导致的边界情况。
 
-## 16.4 事件校验
+### 2.4 事件校验
 
 和对 props 添加类型校验的方式类似，所有触发的事件也可以使用对象形式来描述。
 
@@ -549,7 +551,7 @@ function submitForm(email, password) {
 </script>
 ```
 
-## 16.5 配合 `v-model` 使用
+### 2.5 配合 `v-model` 使用
 
 > - 使用限制：
 >
@@ -646,7 +648,7 @@ defineEmits(['update:title'])
 
 [在演练场中尝试一下](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCB7IHJlZiB9IGZyb20gJ3Z1ZSdcbmltcG9ydCBNeUNvbXBvbmVudCBmcm9tICcuL015Q29tcG9uZW50LnZ1ZSdcbiAgXG5jb25zdCB0aXRsZSA9IHJlZigndi1tb2RlbCBhcmd1bWVudCBleGFtcGxlJylcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxoMT57eyB0aXRsZSB9fTwvaDE+XG4gIDxNeUNvbXBvbmVudCB2LW1vZGVsOnRpdGxlPVwidGl0bGVcIiAvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiTXlDb21wb25lbnQudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmRlZmluZVByb3BzKFsndGl0bGUnXSlcbmRlZmluZUVtaXRzKFsndXBkYXRlOnRpdGxlJ10pXG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8aW5wdXRcbiAgICB0eXBlPVwidGV4dFwiXG4gICAgOnZhbHVlPVwidGl0bGVcIlxuICAgIEBpbnB1dD1cIiRlbWl0KCd1cGRhdGU6dGl0bGUnLCAkZXZlbnQudGFyZ2V0LnZhbHVlKVwiXG4gIC8+XG48L3RlbXBsYXRlPiJ9)
 
-## 16.6 关于组件使用原生事件
+### 2.6 关于组件使用原生事件
 
 > 这是我目前想到的，如果有错误，请指出
 
@@ -692,9 +694,9 @@ function test() {
 
 ![image-20220809130712485](https://i0.hdslb.com/bfs/album/b923af6cbf3547f18b1800321b6c53ce7bbfca71.png)
 
-## 16.7 `vue3`中事件总线
+### 2.7 `vue3`中事件总线
 
-### 16.7.1 插件
+#### 2.7.1 插件
 
 1.在vue3中，创建方法改成了createApp({})，prototype属性也被取消了，因此无法使用之前Vue.prototype.$bus = new Vue()的方式使用事务总线。
 
@@ -758,7 +760,7 @@ app.config.globalProperties.$Bus = Mit
 app.mount('#app')
 ```
 
-### 16.7.2 手写
+#### 2.7.2 手写
 
 `Bus.ts`
 
