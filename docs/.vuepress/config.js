@@ -117,6 +117,5 @@ export default defineUserConfig({
       hostname: 'https://blog.dselegent.cf',
     }),
     nprogressPlugin(),
-    vuepressPluginPage(),
   ],
 })
