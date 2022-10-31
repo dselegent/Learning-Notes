@@ -1,6 +1,6 @@
 # Less基础
 
-# 1.维护CSS的弊端
+## 1.维护CSS的弊端
 
 CSS 是一门非程序式语言，没有变量、函数、SCOPE（作用域）等概念。
 
@@ -9,7 +9,7 @@ CSS 是一门非程序式语言，没有变量、函数、SCOPE（作用域）�
 - CSS 没有很好的计算能力
 - 非前端开发工程师来讲，往往会因为缺少 CSS 编写经验而很难写出组织良好且易于维护的 CSS 代码项目
 
-# 2.Less介绍
+## 2.Less介绍
 
 Less（Leaner Style Sheets 的缩写）是一门 CSS 扩展语言，也称为 CSS 预处理器。
 
@@ -23,7 +23,7 @@ Less 中文网址：[Less 快速入门 | Less.js 中文文档 - Less 中文网 (
 
 一句话：Less 是一门 CSS 预处理语言，它扩展了 CSS 的动态特性。
 
-# 3.Less安装（注意如果使用VSCode无需安装Less）
+## 3.Less安装（注意如果使用VSCode无需安装Less）
 
 **用node运行Less**
 
@@ -59,9 +59,7 @@ vscode 的 Easy LESS 插件
 
 只要保存一下 less 文件，会自动生成 CSS 文件。
 
-# 4.注释(Comments)
-
- 
+## 4.注释(Comments)
 
 - 多行注释保留
 - 单行注释不被保留在编译生成的 CSS 中
@@ -78,7 +76,7 @@ div {
 }
 ```
 
-# 5.变量(Variables)
+## 5.变量(Variables)
 
 变量是指没有固定值，可以改变的。因为我们 CSS 中的一些颜色和数值等经常使用。
 
@@ -88,7 +86,7 @@ div {
 
 `@变量名: 值;`
 
-## 5.1 变量命名规范
+### 5.1 变量命名规范
 
 - 必须有 `@` 为前缀
 - 不能包含特殊字符
@@ -97,20 +95,20 @@ div {
 
 `@color: pink;`
 
-## 5.2 基本使用
+### 5.2 基本使用
 
- ```less
- // 直接使用
- body {
-     color: @color;
- }
- 
- a:hover {
-     color: @color;
- }
- ```
+```less
+// 直接使用
+body {
+    color: @color;
+}
 
-## 5.3 变量插值(Variable Interpolation)
+a:hover {
+    color: @color;
+}
+```
+
+### 5.3 变量插值(Variable Interpolation)
 
 变量用于选择器名、属性名、URL、`@import`语句
 
@@ -153,7 +151,7 @@ body {
 @import '@{themes}/tidal-wave.less';
 ```
 
-## 5.4 延迟加载(Lazy Evaluation)
+### 5.4 延迟加载(Lazy Evaluation)
 
 当一个变量被声明多次，会取最后一次的值，并从当前作用域往外寻找变量。
 
@@ -181,7 +179,7 @@ body {
 }
 ```
 
-## 5.5 属性名变量(Properties as Variables)
+### 5.5 属性名变量(Properties as Variables)
 
 ```less
 .widget {
@@ -199,9 +197,9 @@ body {
 }
 ```
 
-# 6.嵌套(Nesting)
+## 6.嵌套(Nesting)
 
-## 6.1 基本使用
+### 6.1 基本使用
 
 Less 提供了使用嵌套(nesting)代替层叠或与层叠结合使用的能力
 
@@ -225,7 +223,7 @@ Less 提供了使用嵌套(nesting)代替层叠或与层叠结合使用的能力
 
 > 用 Less 书写的代码更加简洁，并且模仿了 HTML 的组织结构。
 
-## 6.2 父选择器 (Parent Selectors)
+### 6.2 父选择器 (Parent Selectors)
 
 在嵌套规则中， `&` 表示父选择器，常用于给现有选择器添加伪类。
 
@@ -251,8 +249,6 @@ Less 提供了使用嵌套(nesting)代替层叠或与层叠结合使用的能力
 }
 ```
 
-
-
 你还可以使用此方法将伪选择器（pseudo-selectors）与混合（mixins）一同使用。下面是一个经典的 clearfix 技巧，重写为一个混合（mixin） (& 表示当前选择器的父级）：
 
 ```less
@@ -271,11 +267,11 @@ Less 提供了使用嵌套(nesting)代替层叠或与层叠结合使用的能力
 }
 ```
 
-# 7.混合(Mixins)
+## 7.混合(Mixins)
 
 混合(Mixin)是一种将一组属性从一个规则集包含(或混入)到另一个规则集的方式，可理解为复制粘贴。
 
-## 7.1 普通混合
+### 7.1 普通混合
 
 1. 定义了一个bordered类
 2. 如果希望在其它规则集中使用这些属性，只需像下面这样输入所需属性的类（class）名称即可
@@ -327,9 +323,7 @@ Less 提供了使用嵌套(nesting)代替层叠或与层叠结合使用的能力
 }
 ```
 
-
-
-## 7.2 带参数的混合(Parametric Mixins)
+### 7.2 带参数的混合(Parametric Mixins)
 
 1. 混合带参数，参数需要按顺序传递
 
@@ -369,7 +363,7 @@ div {
 }
 ```
 
-## 7.3 命名参数
+### 7.3 命名参数
 
 可以在向混合传参是指定参数名称，从而不需要按顺序传入
 
@@ -382,7 +376,7 @@ div {
 }
 ```
 
-## 7.4 @arguments 变量
+### 7.4 @arguments 变量
 
 `@arguments` 变量包含了传入的所有参数
 
@@ -405,7 +399,7 @@ div {
 }
 ```
 
-## 7.5 匹配模式(Pattern-matching)
+### 7.5 匹配模式(Pattern-matching)
 
 在多个相同的混合中(参数个数必须相同)，匹配特定的混合。
 
@@ -435,7 +429,7 @@ div {
 }
 ```
 
-## 7.6 运算(Operations)
+### 7.6 运算(Operations)
 
 任何数字、颜色或者变量都可以参与运算。就是 Less 提供了加（+）、减（-）、乘（*）、除（/）算术运算。
 
@@ -487,7 +481,7 @@ div {
 background-color: #112244 + #111; // #223355
 ```
 
-# 8.继承(Extend)
+## 8.继承(Extend)
 
 Extend Syntax
 
@@ -514,7 +508,7 @@ nav ul {
 }
 ```
 
-# 9.避免编译
+### 9.避免编译
 
 通过加引号可以避免 Less 编译，直接把内容输出到 CSS 中
 
@@ -532,7 +526,7 @@ nav ul {
 }
 ```
 
-# 10.函数（Functions）
+## 10.函数（Functions）
 
 Less 内置了多种函数用于转换颜色、处理字符串、算术运算等。这些函数在Less 函数手册中有详细介绍。
 
@@ -549,7 +543,7 @@ Less 内置了多种函数用于转换颜色、处理字符串、算术运算等
 }
 ```
 
-# 11.导入（Importing）
+## 11.导入（Importing）
 
 你可以导入一个 .less 文件，此文件中的所有变量就可以全部使用了。如果导入的文件是 .less 扩展名，则可以将扩展名省略掉：
 
@@ -559,31 +553,29 @@ Less 内置了多种函数用于转换颜色、处理字符串、算术运算等
 @import "typo.css";
 ```
 
-# 12.导出
+## 12.导出
 
 **手动给每个less文件指定导出**
 
 导出必须写到第一行
 
-~~~less
+```less
 // out: 路径/文件名
 // out: ./mycss/pink.css
-~~~
+```
 
 设置导出：  当面目录下，创建一个 mycss 文件夹， 生成 一个 pink.css （做了改名）
 
 ------
 
-
-~~~less
+```less
 // out: ./mycss/
-~~~
+```
 
 设置导出：  当面目录下，创建一个 mycss 文件夹， 生成 一个 跟less一样的文件名（原名）
 
 **less 禁止导出**
 
-~~~less
+```less
 // out: false
-~~~
-
+```

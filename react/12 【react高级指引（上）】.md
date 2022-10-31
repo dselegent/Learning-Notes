@@ -1,4 +1,4 @@
-# 12 【react高级指引】
+# 12 【react高级指引（上）】
 
 ## 1.setState 扩展
 
@@ -129,7 +129,9 @@ add = () => {
 
 ## 2.Context
 
-Context 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法。
+在React中组件间的数据通信是通过props进行的，父组件给子组件设置props，子组件给后代组件设置props，props在组件间自上向下（父传子）的逐层传递数据。但并不是所有的数据都适合这种传递方式，有些数据需要在多个组件中共同使用，如果还通过props一层一层传递，麻烦自不必多说。
+
+Context为我们提供了一种在不同组件间共享数据的方式，它不再拘泥于props刻板的逐层传递，而是在外层组件中统一设置，设置后内层所有的组件都可以访问到Context中所存储的数据。换句话说，Context类似于JS中的全局作用域，可以将一些公共数据设置到一个同一个Context中，使得所有的组件都可以访问到这些数据。
 
 ### 2.1 何时使用 Context
 
@@ -182,7 +184,7 @@ const ThemeContext  = React.createContext();
 const { Provider } = ThemeContext ;
 ```
 
-用 `Provider` 标签包裹 A组件内的 B 组件，并通过 `value` 值，将数据传递给子组件，这样以 A 组件为父代组件的所有子组件都能够接受到数据
+`Provider`译为生产者，和Consumer消费者对应。Provider会设置在外层组件中，通过`value`属性来指定Context的值。这个Context值在所有的Provider子组件中都可以访问。Context的搜索流程和JS中函数作用域类似，当我们获取Context时，React会在它的外层查找最近的Provider，然后返回它的Context值。如果没有找到Provider，则会返回Context模块中设置的默认值。
 
 ```js
 <Provider value={{ theme }}>
@@ -215,7 +217,7 @@ const {theme} = this.context
 // Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
 // 为当前的 theme 创建一个 context（“light”为默认值）。
 const ThemeContext  = React.createContext('light')
-const {Provider} = ThemeContext 
+
 export default class A extends Component {
 
 	state = {theme:'dark'}
@@ -226,9 +228,9 @@ export default class A extends Component {
     	// 无论多深，任何组件都能读取这个值。
     	// 在这个例子中，我们将 “dark” 作为当前的值传递下去。
 		return (
-				<Provider value={theme}>
+				<ThemeContext.Provider value={theme}>
 					<B/>
-				</Provider>
+				</ThemeContext.Provider>
 		)
 	}
 }
@@ -251,6 +253,7 @@ class C extends Component {
     // React 会往上找到最近的 theme Provider，然后使用它的值。
     // 在这个例子中，当前的 theme 值为 “dark”。
 	static contextType = ThemeContext 
+    
 	render() {
 		const {theme} = this.context
 		return (
@@ -269,11 +272,13 @@ class C extends Component {
 
 函数组件和类式组件只有一点点小差别
 
-```js
+Context对象中有一个属性叫做Consumer，直译过来为消费者，如果你了解生产消费者模式这里就比较好理解了，如果没接触过，你可以将Consumer理解为数据的获取工具。你可以将它理解为一个特殊的组件，所以你需要这样使用它
+
+```jsx
 // Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
 // 为当前的 theme 创建一个 context（“light”为默认值）。
 const ThemeContext  = React.createContext('light')
-const {Provider,Consumer} = ThemeContext 
+ 
 export default class A extends Component {
 
 	state = {theme:'dark'}
@@ -284,9 +289,9 @@ export default class A extends Component {
     	// 无论多深，任何组件都能读取这个值。
     	// 在这个例子中，我们将 “dark” 作为当前的值传递下去。
 		return (
-				<Provider value={theme}>
+				<ThemeContext.Provider value={theme}>
 					<B/>
-				</Provider>
+				</ThemeContext.Provider>
 		)
 	}
 }
@@ -306,20 +311,56 @@ class B extends Component {
 
 function C(){
 	return (
+        <div>
 			<h3>我是C组件</h3>
 			<h4>我从A组件接收到的用户名:
-			<Consumer>
-				{value => value}
-			</Consumer>
+			<ThemeContext.Consumer>
+				{ctx => {
+        			return (<span>ctx</span>)
+        		}}
+			</ThemeContext.Consumer>
 			</h4>
 		</div>
 	)
 }
 ```
 
-一个 React 组件可以订阅 context 的变更，此组件可以让你在[函数式组件](https://zh-hans.reactjs.org/docs/components-and-props.html#function-and-class-components)中可以订阅 context。
+Consumer的标签体必须是一个函数，这个函数会在组件渲染时调用并且将Context中存储的数据作为参数传递进函数，该函数的返回值将会作为组件被最终渲染到页面中。这里我们将参数命名为了ctx，在回调函数中我们就可以通过ctx.xxx访问到Context中的数据。如果需要访问多个Context可以使用多个Consumer嵌套即可。
 
-这种方法需要一个[函数作为子元素（function as a child）](https://zh-hans.reactjs.org/docs/render-props.html#using-props-other-than-render)。这个函数接收当前的 context 值，并返回一个 React 节点。传递给函数的 `value` 值等价于组件树上方离这个 context 最近的 Provider 提供的 `value` 值。如果没有对应的 Provider，`value` 参数等同于传递给 `createContext()` 的 `defaultValue`。
+### 2.4 hook-useContext
+
+通过Consumer使用Context实在是不够优雅，所以React还为我们提供了一个钩子函数`useContext()`，我们只需要将Context对象作为参数传递给钩子函数，它就会直接给我们返回Context对象中存储的数据。
+
+因为我们平时的组件不会写的一个文件中，所以`React.createContext`要单独写在一个文件中
+
+`store/theme-context.js`
+
+```js
+import React from "react";
+
+const ThemeContext  = React.createContext('light')
+
+export default ThemeContext;
+```
+
+```jsx
+import React, {useContext} from 'react';
+import ThemeContext from '../store/theme-context';
+
+function C(){
+    
+    const ctx = useContext(TestContext);
+
+	return (
+        <div>
+			<h3>我是C组件</h3>
+			<h4>我从A组件接收到的用户名:
+			<span>{ctx}</span>
+			</h4>
+		</div>
+	)
+}
+```
 
 ## 3.错误边界
 
@@ -595,8 +636,6 @@ React 中的一个常见模式是一个组件返回多个元素。Fragments 允�
 
 这样我们的内容就直接挂在了 `root` 标签下
 
-> 同时采用空标签，也能实现，但是它不能接收任何值，而 `Fragment` 能够接收 1 个值`key`
-
 ```jsx
 render() {
   return (
@@ -607,277 +646,24 @@ render() {
     </React.Fragment>
   );
 }
-
-/*
-<>
-  <ChildA />
-  <ChildB />
-  <ChildC />
-</>
-*/
 ```
 
-## 6.组件优化
+在React中为我们提供了一种更加便捷的方式，直接使用`<></>`代替Fragment更加简单：
 
-### 6.1 shouldComponentUpdate 优化
-
-在我们之前一直写的代码中，我们一直使用的`Component` 是有问题存在的
-
-1. 只要执行 `setState` ，即使不改变状态数据，组件也会调用 `render`
-2. 当前组件状态更新，也会引起子组件 `render`
-
-而我们想要的是只有组件的 `state` 或者 `props` 数据发生改变的时候，再调用 `render`
-
-我们可以采用重写 `shouldComponentUpdate` 的方法，但是这个方法不能根治这个问题，当状态很多时，我们没有办法增加判断
-
-看个案例来了解下原理：
-
-如果你的组件只有当 `props.color` 或者 `state.count` 的值改变才需要更新时，你可以使用 `shouldComponentUpdate` 来进行检查：
-
-````jsx
-class CounterButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {count: 1};
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.color !== nextProps.color) {
-      return true;
-    }
-    if (this.state.count !== nextState.count) {
-      return true;
-    }
-    return false;
-  }
-
-  render() {
-    return (
-      <button
-        color={this.props.color}
-        onClick={() => this.setState(state => ({count: state.count + 1}))}>
-        Count: {this.state.count}
-      </button>
-    );
-  }
-}
-````
-
-在这段代码中，`shouldComponentUpdate` 仅检查了 `props.color` 或 `state.count` 是否改变。如果这些值没有改变，那么这个组件不会更新。如果你的组件更复杂一些，你可以使用类似“浅比较”的模式来检查 `props` 和 `state` 中所有的字段，以此来决定是否组件需要更新。React 已经提供了一位好帮手来帮你实现这种常见的模式 - 你只要继承 `React.PureComponent` 就行了。
-
-### 6.2 PureComponent 优化
-
-这段代码可以改成以下这种更简洁的形式：
-
-```jsx
-class CounterButton extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {count: 1};
-  }
-
-  render() {
-    return (
-      <button
-        color={this.props.color}
-        onClick={() => this.setState(state => ({count: state.count + 1}))}>
-        Count: {this.state.count}
-      </button>
-    );
-  }
-```
-
-大部分情况下，你可以使用 `React.PureComponent` 来代替手写 `shouldComponentUpdate`。但它只进行浅比较，所以当 props 或者 state 某种程度是可变的话，浅比较会有遗漏，那你就不能使用它了。当数据结构很复杂时，情况会变得麻烦。
-
-> `PureComponent` 会对比当前对象和下一个状态的 `prop` 和 `state` ，而这个比较属于浅比较，比较基本数据类型是否相同，而对于引用数据类型，**比较的是它的引用地址是否相同，这个比较与内容无关**
+> 同时采用空标签，也能实现，但是它不能接收任何值，而 `Fragment` 能够接收 1 个值`key`
 
 ```js
-state = {stus:['小张','小李','小王']}
-
-addStu = ()=>{
-    /* const {stus} = this.state
-    stus.unshift('小刘')
-    this.setState({stus}) */
-
-    const {stus} = this.state
-    this.setState({stus:['小刘',...stus]})
-}
-```
-
-注释掉的那部分，我们是用`unshift`方法为`stus`数组添加了一项，它本身的地址是不变的，这样的话会被当做没有产生变化(因为引用数据类型比较的是地址)，所以我们平时都是采用合并数组的方式去更新数组。
-
-### 6.3 案例
-
-```jsx
-import React, { PureComponent } from 'react'
-import "./index.css";
-
-export default class A extends PureComponent {
-  state = {
-    username:"张三"
-  }
-
-  handleClick = () => {
-    this.setState({})
-  }
-
-  render() {
-    console.log("A:enter render()")
-    const {username} = this.state;
-    const {handleClick} = this;
-
-    return (
-      <div className="a">
-        <div>我是组件A</div>
-        <span>我的username是{username}</span>&nbsp;&nbsp;
-        <button onClick={handleClick}>执行setState且不改变状态数据</button>
-        <B/>
-      </div>
-    )
-  }
-}
-
-class B extends PureComponent{
-  render(){
-    console.log("B:enter render()")
-    return (
-      <div className="b">
-        <div>我是组件B</div>
-      </div>
-    )
-  }
-}
-
-```
-
-点击按钮后不会有任何变化，render函数也没有调用
-
-![image-20221027191454468](https://i0.hdslb.com/bfs/album/fb16728a87c04da136da2a965d4980bd70580234.png)
-
-修改代码
-
-```js
-handleClick = () => {
-    this.setState({
-      username: '李四',
-    })
-}
-```
-
-点击按钮后只有`A`组件的`render`函数会调用
-
-![image-20221027192124322](https://i0.hdslb.com/bfs/album/f0022ed007d420efc7b284799314e5f2bfa944db.png)
-
-修改代码
-
-```js
-handleClick = () => {
-    const { state } = this
-    state.username = '李四'
-    this.setState(state)
-}
-```
-
-![image-20221027192253591](https://i0.hdslb.com/bfs/album/8cb94c97d7c461cc870ad0e5cb3a1e370d33f95c.png)
-
-点击后不会有任何变化，`render`函数没有调用，这个时候其实是`shouldComponentUpdate`返回的`false`。
-
-## 7.Render Props
-
-**如何向组件内部动态传入带内容的结构(标签)?**
-
-```css
-Vue中: 
-	使用slot技术, 也就是通过组件标签体传入结构  <AA><BB/></AA>
-React中:
-	使用children props: 通过组件标签体传入结构
-	使用render props: 通过组件标签属性传入结构, 一般用render函数属性
-```
-
-**children props**
-
-```jsx
 render() {
-    return (
-            <A>
-              <B>xxxx</B>
-            </A>
-    )
+  return (
+        <>
+          <ChildA />
+          <ChildB />
+          <ChildC />
+        </>
+  );
 }
-
-
-问题: 如果B组件需要A组件内的数据, ==> 做不到 
 ```
 
-术语 [“render prop”](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce) 是指一种在 React 组件之间使用一个值为函数的 prop 共享代码的简单技术
-
-采用 render props 技术，我们可以像组件内部动态传入带有内容的结构
-
-> 当我们在一个组件标签中填写内容时，这个内容会被定义为 children props，我们可以通过 `this.props.children` 来获取
-
-例如：
-
-```html
-<A>hello</A>
-```
-
-这个 hello 我们就可以通过 children 来获取
-
-而我们所说的 render props 就是在组件标签中传入一个 render 方法(名字可以自己定义，这个名字更语义化)，又因为属于 props ，因而被叫做了 render props
-
-```jsx
-<A render={(name) => <B name={name} />} />
-A组件: {this.props.render(内部state数据)}
-B组件: 读取A组件传入的数据显示 {this.props.data} 
-```
-
-你可以把 `render` 看作是 `props`，只是它有特殊作用，当然它也可以用其他名字来命名
-
-在上面的代码中，我们需要在 A 组件中预留出 B 组件渲染的位置 在需要的位置上加上`{this.props.render(name)}`
-
-那我们在 B 组件中，如何接收 A 组件传递的 `name` 值呢？通过 `this.props.name` 的方式
-
-```jsx
-export default class Parent extends Component {
-	render() {
-		return (
-			<div className="parent">
-				<h3>我是Parent组件</h3>
-				<A render={ name => (<B name={name}/>) }/>
-			</div>
-		)
-	}
-}
-
-class A extends Component {
-	state = {name:'tom'}
-	render() {
-		console.log(this.props);
-		const {name} = this.state
-		return (
-			<div className="a">
-				<h3>我是A组件</h3>
-				{this.props.render(name)}
-			</div>
-		)
-	}
-}
-
-class B extends Component {
-	render() {
-		console.log('B--render');
-		return (
-			<div className="b">
-				<h3>我是B组件,{this.props.name}</h3>
-			</div>
-		)
-	}
-}
-
-```
-
-## 8.使用 PropTypes 进行类型检查
+## 6.使用 PropTypes 进行类型检查
 
 **已在 `02 【面向组件编程】`中 `3.props `进行说明**
-
-## 9.静态类型检查

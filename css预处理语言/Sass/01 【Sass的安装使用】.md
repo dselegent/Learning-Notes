@@ -1,4 +1,4 @@
-# Sass的安装使用
+# 01 【Sass的安装使用】
 
 ## 1.介绍
 
@@ -28,7 +28,7 @@ css预处理技术的种类
 Sass(Syntactically Awesome StyleSheets)是一种CSS预处理器(`preprocessor`)， 是一款强化 CSS 的辅助工具。可以高效的编写样式，同时实现变量、嵌套、组合、继承等编程语言功能。
 
 > css是一门非程序式语言，没有变量、函数、scope(作用域)等概念。
->
+> 
 > - CSS需要书写大量看似没有逻辑的代码，冗余度比较高
 > - 不方便维护及扩展，难以复用
 > - css没有很好的计算能力
@@ -62,42 +62,42 @@ npm install -g sass
 
 Sass使用.scss作为文件后缀名，不能直接在< link >标签里使用，需要编译为 .css文件。 **演示：**
 
-1.  建一个html文件，随便写个h1标签：
-
+1. 建一个html文件，随便写个h1标签：
+   
    ![image-20220823140518434](https://i0.hdslb.com/bfs/album/bacbc180d9a88cd06ac988ab8fab52448a35348b.png)
 
 2. 建一个.scss后缀的文件，如input.scss，写点基本样式sass的语法：
    ![image-20220823140550201](https://i0.hdslb.com/bfs/album/7446e8cfea1963feec70f74c98e15a5570f0a8cd.png)
 
 3. 在html文件所在的路径下打开cmd命令控制符，输入：
+   
    ```shell
    //单文件转换命令
    sass input.scss:output.css
    
    // 或 sass input.scss output.css
    ```
-
+   
    表示把名字为 input.scss 转换成名字为 ouput.css 的文件。
    回车后，接下来发现就得到了css的文件。
-
+   
    ![image-20220823140645814](https://i0.hdslb.com/bfs/album/cd57c9686d892e6f30e4f15aa3124c150a3038db.png)
 
->使用 : 编译输出时，前后不能有空格，即 `:` 前紧跟输入的scss文件，`:` 后紧跟输出的css文件。
+> 使用 : 编译输出时，前后不能有空格，即 `:` 前紧跟输入的scss文件，`:` 后紧跟输出的css文件。
 
 > `:` 冒号形式的命令，常用于编译文件夹（中的所有sass文件）的输入输出。
 
-​	css文件内容如下，可以看出转换好了：
-​	![image-20220823140750386](https://i0.hdslb.com/bfs/album/23a4e7317c5dc935065a7d17de1af039ef1fef0a.png)
-​	接下来就是老操作了，在HTML里用 < link >标签把css文件引入就行。
+​    css文件内容如下，可以看出转换好了：
+​    ![image-20220823140750386](https://i0.hdslb.com/bfs/album/23a4e7317c5dc935065a7d17de1af039ef1fef0a.png)
+​    接下来就是老操作了，在HTML里用 < link >标签把css文件引入就行。
 
 4. 但是不可能说写一句.scss语句就转换一次，太麻烦，所以可以自动转换，当我在.scss里写一句，.css就自动生成一句。在cmd输入以下：
+   
    ```bash
    sass --watch input.scss:ouput.css
    ```
-
+   
    表示监视变化，当input.scss一变化，output.css就变化
-
-
 
 空格和冒号对应生成css的两中模式，如果是一对一模式（一个scss生成一个css），使用空格即可；如果是多对多模式，比如一个文件夹生成到另一个文件夹，同时一次性有多个scss文件生成css文件等。
 
@@ -239,7 +239,7 @@ sass --style=compressed styletest.scss
   默认的转换后的css文件保存在scss文件的同级目录下，但实际，我们通常需要把所有scss文件保存在scss文件夹，而css文件希望保存在css的文件夹，如图所示：
   ![image-20220823173159840](https://i0.hdslb.com/bfs/album/50de6685454beb2c1ae13f5a12f7a70bc59d2c7d.png)
 
-​		我们在配置中如下设置：
+​        我们在配置中如下设置：
 
 ```json
 "liveSassCompile.settings.formats": [
@@ -367,4 +367,3 @@ module.exports = {
     ]
 }
 ```
-

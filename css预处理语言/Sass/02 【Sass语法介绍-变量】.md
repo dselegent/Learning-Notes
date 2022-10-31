@@ -1,4 +1,4 @@
-# Sass语法介绍
+# 02 【Sass语法介绍-变量】
 
 sass有两种语法格式Sass(早期的缩进格式：Indented Sass)和SCSS(Sassy CSS)
 
@@ -56,7 +56,7 @@ sass使用`$`符号来标识变量。
 ```scss
 $highlight-color: #F90;
 $font-stack: Helvetica, sans-serif;
- 
+
 body {
     font: 100% $font-stack;
     color: $highlight-color;
@@ -268,4 +268,3 @@ h1 {
 ![image-20220823183316776](https://i0.hdslb.com/bfs/album/1cafa46bfec00abd4c1dfd2d5c86ac8bf960bad8.png)
 
 在实际的项目中，Sass 变量的使用频率也是非常高的，不亚于 Sass 嵌套，所以一定要好好掌握这一节的内容，变量的应用会让你更加顺手的去管理项目中的样式！
-

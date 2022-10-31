@@ -45,6 +45,22 @@
 
 【先引入react.development.js，后引入react-dom.development.js】
 
+> `react.development.js`
+>
+> - react 是react核心库，只要使用react就必须要引入
+> - 下载地址：https://unpkg.com/react@18.0.0/umd/react.development.js
+>
+> `react-dom.development.js`
+>
+> - react-dom 是react的dom包，使用react开发web应用时必须引入
+> - 下载地址：https://unpkg.com/react-dom@18.0.0/umd/react-dom.development.js
+>
+> `babel.min.js `
+>
+> - 由于JSX最终需要转换为JS代码执行，所以浏览器并不能正常识别JSX，所以当我们在浏览器中直接使用JSX时，还必须引入babel来完成对代码的编译。
+>
+> - babel下载地址：https://unpkg.com/babel-standalone@6/babel.min.js
+
 ![image-20221022171647360](https://i0.hdslb.com/bfs/album/514c5df0f5f8e7242ca17e1c939b4822b716315f.png)
 
 ```
@@ -80,23 +96,38 @@ babel.min.js
       //1.创建虚拟DOM
       const VDOM = <h1>Hello</h1> /* 此处一定不要写引号，因为不是字符串 */
       //2.渲染虚拟DOM到页面
-      ReactDOM.render(VDOM, document.getElementById('test'))
+	const root = ReactDOM.createRoot(document.querySelector('#test'));
+      root.render(VDOM);
     </script>
   </body>
 </html>
 ```
 
+> 后面很多地方没有用`createRoot`这种方式是因为一开始学的课程是2020年的，这是现在新的创建方式。
+>
+> 这里我就只把第一个案例改成新方式了
+
 这样，就会在页面中的这个div容器上添加这个h1.
 
 ![image-20221022171539523](https://i0.hdslb.com/bfs/album/7c5713f248cc28bcb531d2eda325e56789df4286.png)
 
+> *   React.createElement()
+>     - `React.createElement(type, [props], [...children])`
+>     - 用来创建React元素
+>     - React元素无法修改
+> *   ReactDOM.createRoot()
+>     - `createRoot(container[, options])`
+>     - 用来创建React的根容器，容器用来放置React元素
 > *   ReactDOM.render()
+>     *   `root.render(element)`
 >     *   用来将React元素渲染到根元素中
 >     *   根元素中所有的内容都会被删除，被React元素所替换
 >     *   当重复调用render()时，React会将两次的渲染结果进行比较，
 >     *   它会确保只修改那些发生变化的元素，对DOM做最少的修改
 
 ## 3.jsx 语法
+
+JSX 是 JavaScript 的语法扩展，JSX 使得我们可以以类似于 HTML 的形式去使用 JS。JSX便是React中声明式编程的体现方式。声明式编程，简单理解就是以结果为导向的编程。使用JSX将我们所期望的网页结构编写出来，然后React再根据JSX自动生成JS代码。所以我们所编写的JSX代码，最终都会转换为以调用`React.createElement()`创建元素的代码。
 
 1. 定义虚拟DOM，JSX不是字符串，不要加引号
 2. 标签中混入JS表达式的时候使用`{}`

@@ -1,12 +1,14 @@
-# 4.axios
+# 02 【axios fetch 跨域】
 
-## 4.1 axios 是什么?
+## 1.axios
+
+### 1.1 axios 是什么?
 
 1. 前端最流行的 ajax请求库
 2. react/vue 官方都推荐使用 axios 发ajax 请求
 3. [文档: https://github.com/axios/axios](https://github.com/axios/axios)
 
-## 4.2 axios 特点
+### 1.2 axios 特点
 
 1. 基于 xhr + promise 的异步 ajax请求库
 2. 浏览器端/node 端都可以使用
@@ -15,7 +17,7 @@
 5. 请求/响应数据转换
 6. 批量发送多个请求
 
-## 4.3 axios 常用语法
+### 1.3 axios 常用语法
 
 axios(config): 通用/最本质的发任意类型请求的方式
 axios(url[, config]): 可以只指定url 发get 请求
@@ -39,7 +41,7 @@ axios.spread(): 用来指定接收所有成功数据的回调函数的方法
 
 ![image-20220625194840070](https://i0.hdslb.com/bfs/album/ddc28465dad12c1c979947998de61a0ca9bd3968.png)
 
-## 4.4使用
+### 1.4 使用
 
 ##### 配置对象常用的配置项
 
@@ -70,7 +72,7 @@ axios.spread(): 用来指定接收所有成功数据的回调函数的方法
   data: {
     firstName: 'Fred'
   },
-  
+
   //设置请求的另外一种格式，不过这个是直接设置字符串的
   data: 'Country=Brasil&City=Belo Horizonte',
 
@@ -94,12 +96,11 @@ axios.spread(): 用来指定接收所有成功数据的回调函数的方法
   validateStatus: function (status) {
     return status >= 200 && status < 300; 
   }
-
 ```
 
 **代码**
 
-```html
+```js
     <button id="btn1">发送get请求</button> <br><br>
     <button id="btn2">发送post请求</button><br><br>
     <button id="btn3">发送put请求</button><br><br>
@@ -163,7 +164,7 @@ axios.spread(): 用来指定接收所有成功数据的回调函数的方法
 
     //其他发送请求的api
 
-    
+
     document.getElementById("btn5").onclick = function(){
         //发送get,使用get，第一个参数时url，第二个参数时config配置对象
        axios.get("http://localhost:3000/posts/1")
@@ -216,7 +217,7 @@ axios.spread(): 用来指定接收所有成功数据的回调函数的方法
        })
 ```
 
-## 4.5创建一个新的axios对象
+### 1.5 创建一个新的axios对象
 
 根据指定配置创建一个新的 axios, 也就是每个新 axios 都有自己的配置
 新 axios 只是没有取消请求和批量发请求的方法, 其它所有语法都是一致的
@@ -226,17 +227,16 @@ axios.spread(): 用来指定接收所有成功数据的回调函数的方法
 
 ```js
 const instance = axios.create({ // instance是函数类型
-	baseURL: 'http://localhost:3000'
+    baseURL: 'http://localhost:3000'
 })
 // 使用instance发Ajax请求
 instance({
-	url: '/posts'
+    url: '/posts'
 })
 instance.get('/posts')
-
 ```
 
-## 4.6拦截器
+### 1.6 拦截器
 
 **请求拦截器**（在发送请求前，使用函数对请求的参数和内容进行处理和检测，若请求有问题可直接进行拦截->取消，后进先执行=则后面的请求拦截器先执行）
 
@@ -289,7 +289,7 @@ script>
           return Promise.reject(error);
         }
       );
- 
+
       axios.interceptors.request.use(
         function (config) {
           config.timeout = 5000;
@@ -304,7 +304,7 @@ script>
           return Promise.reject(error);
         }
       );
- 
+
       //设置一个响应拦截器，可以对响应结果做一些处理
       axios.interceptors.response.use(
         function (response) {
@@ -317,7 +317,7 @@ script>
           return Promise.reject(error);
         }
       );
- 
+
       //设置一个响应拦截器
       axios.interceptors.response.use(
         function (response) {
@@ -329,7 +329,7 @@ script>
           return Promise.reject(error);
         }
       );
- 
+
       //发送请求
       axios({
         method: "GET",
@@ -347,7 +347,7 @@ script>
 
 ![image-20220625200618691](https://i0.hdslb.com/bfs/album/397433af4df136d75a4f6efdf2be9b9d95f450ab.png)
 
-## 4.7取消请求
+### 1.7 取消请求
 
 **0.22版本之前可以使用,0.22开始被废弃**
 
@@ -385,7 +385,7 @@ script>
         cancel = null;
       });
     };
- 
+
     //取消请求
     btns[1].onclick = () => {
       cancel();
@@ -413,7 +413,7 @@ const controller = new AbortController();
       }
 ```
 
-## 4.8在vue中封装axios
+### 1.8 在vue中封装axios
 
 `requests.js`
 
@@ -468,11 +468,9 @@ export const reqRegister = data =>
   requests({ url: `/user/passport/register`, method: 'post', data });
 ```
 
+## 2.fetch
 
-
-# 5.fetch
-
-## 5.1XMLHttpRequest缺点
+### 2.1 XMLHttpRequest缺点
 
 浏览器提供了原生的AJAX实现类XMLHttpRequest，基于该类实例，我们可以实现在网页上发送AJAX请求到服务端。
 
@@ -483,7 +481,7 @@ HTTP请求，响应都被耦合在XMLHttpRequest实例上，结构不够简单�
 如果HTTP响应数据过大，则会占用大量内存
 最后一点就是，XMLHttpRequest实现AJAX的步骤太零碎了
 
-## 5.2fetch的优点
+### 2.2 fetch的优点
 
 fetch和XMLHttpRequest一样，也是浏览器原生的，用于发送AJAX请求。
 
@@ -512,9 +510,9 @@ fetch('http://localhost:3000/test').then(response => { // fetch函数返回值�
 
 fetch函数返回的Promise对象的结果值HTTP响应是流式获取，即使HTTP响应数据很大，也不会占用过多的内存。
 
-## 5.3fetch的请求和响应
+### 2.3 fetch的请求和响应
 
-### 5.3.1Request
+#### 2.3.1 Request
 
 ```javascript
 fetch(url,options).then((response)=>{
@@ -580,7 +578,7 @@ fetch('http://localhost:3000/test',{
 - ReadableStream对象
 - BufferSource对象
 
-### 5.3.2Response
+#### 2.3.2 Response
 
 fetch 请求成功后，响应 response 对象如图：
 
@@ -597,23 +595,26 @@ fetch 请求成功后，响应 response 对象如图：
 - body - 响应体。响应体内的数据，根据类型各自处理。
 
 - type - 返回请求类型。
-
+  
   - basic: 标准值, 同源响应, 带有所有的头部信息除了“Set-Cookie” 和 “Set-Cookie2″.
+  
   - cors: Response 接收到一个有效的跨域请求. 
+  
   - error: 网络错误. 没有有用的描述错误的信息。响应的状态为0，header为空且不可变。从 Response.error()中获得的响应的类型.
+  
   - opaque: 响应 “no-cors” 的跨域请求.
-
+  
   - redirected - 返回布尔值，表示该 Response 是否来自一个重定向，如果是的话，它的 URL 列表将会有多个条目。
 
 - url:HTTP请求URL
 
 其中，我们需要注意的是body属性值是一个可读流，所以我们无法直接获取body内容，需要从可读流中读取内容，而读取可读流中内容也是一个异步操作，Response贴心的为我们提供了如下实例方法去异步地获取body可读流中的内容
 
-- json()	读取body内容为JSON对象
-- text()	读取body内容为普通文本字符串
-- formData()	读取body内容为FormData对象
-- blob()	读取body内容为Blob对象
-- arrayBuffer()	读取body内容为ArrayBuffer对象
+- json()    读取body内容为JSON对象
+- text()    读取body内容为普通文本字符串
+- formData()    读取body内容为FormData对象
+- blob()    读取body内容为Blob对象
+- arrayBuffer()    读取body内容为ArrayBuffer对象
 
 以上方法都返回一个Promise对象，且Promise对象的结果值为它们读取到并转换为对应格式的数据。
 
@@ -637,9 +638,9 @@ fetch 请求成功后，响应 response 对象如图：
 
 通过以上代码测试发现，当response.json()返回的Promise的结果值确实是body实际内容，并且自动被转化为JSON对象。
 
-## 5.4GET和POST
+### 2.4 GET和POST
 
-### 5.4.1GET
+#### 2.1.1 GET
 
 ```JS
   fetch(`http://localhost:80/fetch.html?user=${user.value}&pas=${pas.value}`,{
@@ -649,7 +650,7 @@ fetch 请求成功后，响应 response 对象如图：
   })
 ```
 
-### 5.4.2POST
+#### 2.1.2 POST
 
 ```js
 fetch(`http://localhost:80/fetch`,{
@@ -661,7 +662,6 @@ fetch(`http://localhost:80/fetch`,{
  }).then(response=>{
   console.log('响应',response)
 })
-
 ```
 
 如果是提交json数据时，需要把json转换成字符串。如
@@ -701,25 +701,25 @@ fetch('/avatars', {
 });
 ```
 
-## 5.5fetch默认不带cookie
+### 2.5 fetch默认不带cookie
 
 传递cookie时，必须在[header](https://so.csdn.net/so/search?q=header&spm=1001.2101.3001.7020)参数内加上 credentials:'include'，才会像 xhr 将当前cookie 带有请求中。
 
-## 5.6异常处理
+### 2.6 异常处理
 
 fetch 不同于 xhr ，xhr 自带取消、错误等方法，所以服务器返回 4xx 或 5xx 时，是不会抛出错误的，需要手动处理，通过 response 中的 status 字段来判断。
 
-# 6.跨域
+## 6.跨域
 
-## 6.1 同源策略
+### 6.1 同源策略
 
 - 同源策略(Same-Origin Policy)最早由Netscape 公司提出，是浏览器的一种安全策略
 - 同源： 协议、域名、端口号必须完全相同
 - 跨域： 违背同源策略就是**跨域**
 
-## 6.2 如何解决跨域
+### 6.2 如何解决跨域
 
-### 6.2.1JSONP
+#### 6.2.1 JSONP
 
 > jsonp 只支持get请求不支持post请求
 
@@ -753,7 +753,7 @@ JSONP 就是利用script 标签的跨域能力来发送请求的。
 
 ```js
 app.get("/check-username" , function (req , res) {
-	var callback = req.query.callback;
+    var callback = req.query.callback;
     const data = {
         name: '孙悟空'
     };
@@ -764,7 +764,7 @@ app.get("/check-username" , function (req , res) {
 });
 ```
 
-### 6.2.2 CORS
+#### 6.2.2 CORS
 
 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS
 
@@ -783,22 +783,9 @@ https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS
 
 ```js
 router.get("/testAJAX" , function (req , res) {
-	//通过res 来设置响应头，来允许跨域请求
-	//res.set("Access-Control-Allow-Origin","http://127.0.0.1:3000");
-	res.set("Access-Control-Allow-Origin","*");//允许所有来源访问
-	res.send("testAJAX 返回的响应");
+    //通过res 来设置响应头，来允许跨域请求
+    //res.set("Access-Control-Allow-Origin","http://127.0.0.1:3000");
+    res.set("Access-Control-Allow-Origin","*");//允许所有来源访问
+    res.send("testAJAX 返回的响应");
 });
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
