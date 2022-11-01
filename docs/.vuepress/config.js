@@ -3,6 +3,7 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics' // 做google收录&上报分析用
 import { nprogressPlugin } from '@vuepress/plugin-nprogress'
+import { searchPlugin } from '@vuepress/plugin-search'
 import sidebar from './config/sidebar'
 
 export default defineUserConfig({
@@ -103,10 +104,18 @@ export default defineUserConfig({
     // 默认主题
     colorMode: 'dark',
     // 仓库地址
-    repo: 'dselegent/blog',
+    repo: 'dselegent/dselegent-blog',
+    // 编辑此页的地址设置
+    docsRepo: 'https://github.com/dselegent/dselegent-blog',
+    docsBranch: 'main',
+    docsDir: 'docs',
+    editLinkPattern: ':repo/edit/:branch/:path',
+    // 404页面文字设置
     notFound: ['你搞错了吧'],
     backToHome: '去主页看看吧',
     editLinkText: '编辑此页',
+    lastUpdatedText: '最近更新时间',
+    contributorsText: '贡献者列表',
   }),
   plugins: [
     // 做google收录&上报分析用
@@ -117,5 +126,13 @@ export default defineUserConfig({
       hostname: 'https://blog.dselegent.cf',
     }),
     nprogressPlugin(),
+    searchPlugin({
+      locales: {
+        '/': {
+          placeholder: '搜索文档',
+        },
+      },
+      searchMaxSuggestions: 10,
+    }),
   ],
 })
