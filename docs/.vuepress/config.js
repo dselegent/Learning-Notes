@@ -27,7 +27,7 @@ export default defineUserConfig({
   (function() {
     var hm = document.createElement("script");
     hm.src = "https://hm.baidu.com/hm.js?xcsafasdffsadfafd";
-    var s = document.getElementsByTagName("script")[0]; 
+    var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
   })();
   `,
@@ -89,6 +89,7 @@ export default defineUserConfig({
       {
         text: '服务端',
         children: [
+          { text: 'nodejs', link: '/notes/nodejs/01' },
           { text: 'linux', link: '/notes/linux/01' },
           { text: 'mysql', link: '/notes/mysql/01' },
           { text: 'mongodb', link: '/notes/mongodb/01' },
