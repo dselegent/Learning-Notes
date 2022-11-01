@@ -1,8 +1,6 @@
-# Set 和 Map 数据结构
+# 09【Set 和 Map 数据结构】
 
-
-
-# 1.什么是 Set？
+## 1.什么是 Set？
 
 Set 是一系列无序、没有重复值的数据集合。
 
@@ -20,9 +18,9 @@ console.log(s);		// Set(2) { 1, 2 }
 // Set 没有下标去标识每一个值，所以 Set 是无序的，也不能像数组那样通过下标去访问 Set 的成员。
 ```
 
-# 2.Set 实例的方法和属性
+## 2.Set 实例的方法和属性
 
-## 2.1 add 方法
+### 2.1 add 方法
 
 ```javascript
 const s = new Set();
@@ -32,7 +30,7 @@ s.add(1).add(2).add(2).add(3);
 console.log(s);		// Set(4) { 0, 1, 2, 3 }
 ```
 
-## 2.2 has 方法
+### 2.2 has 方法
 
 ```javascript
 const s = new Set();
@@ -42,7 +40,7 @@ console.log(s.has(1));	// true
 console.log(s.has(4));	// false
 ```
 
-## 2.3 delete 方法
+### 2.3 delete 方法
 
 ```javascript
 const s = new Set();
@@ -54,7 +52,7 @@ s.delete(4);
 console.log(s);	// Set(3) { 0, 1, 3 }
 ```
 
-## 2.4 clear 方法
+### 2.4 clear 方法
 
 ```javascript
 const s = new Set();
@@ -64,7 +62,7 @@ s.clear();
 console.log(s);	// Set(0) {}
 ```
 
-## 2.5 forEach 方法
+### 2.5 forEach 方法
 
 作用：用于遍历 Set 的（按照成员添加进集合的顺序遍历）。
 
@@ -118,7 +116,7 @@ s.forEach(function (value, key, set) {
 */
 ```
 
-## 2.6 size 属性
+### 2.6 size 属性
 
 ```javascript
 const s = new Set();
@@ -128,7 +126,7 @@ s.add(1).add(2).add(2).add(3);
 console.log(s.size);	// 4
 ```
 
-# 3.Set 构造函数的参数
+## 3.Set 构造函数的参数
 
 - 数组
 - 字符串、arguments、NodeList、Set 等
@@ -184,7 +182,7 @@ console.log(s);				// Set(2) { 1, 2 }
 // 这也是复制一个 Set 的方法
 ```
 
-# 4. Set 注意事项
+## 4. Set 注意事项
 
 【Set 如何判断重复】
 
@@ -205,7 +203,7 @@ console.log(s);			 // Set(2) { {}, {} }
 - 不需要通过下标访问，只需要遍历时
 - 为了使用 Set 提供的方法和属性时
 
-# 5.Set 的应用
+## 5.Set 的应用
 
 【数组去重】
 
@@ -280,7 +278,7 @@ let difference = new Set([...a].filter(x => !b.has(x)));
 // Set {1}
 ```
 
-# 6.什么是 Map？
+## 6.什么是 Map？
 
 Map 可以理解为：“映射”。
 
@@ -319,9 +317,9 @@ Map(4) {
 */
 ```
 
-# 7.Map 实例的方法和属性
+## 7.Map 实例的方法和属性
 
-## 7.1 set 方法
+### 7.1 set 方法
 
 `set`方法设置键名`key`对应的键值为`value`，然后返回整个 Map 结构。如果`key`已经有值，则键值会被更新，否则就新生成该键。
 
@@ -342,7 +340,7 @@ let map = new Map()
   .set(3, 'c');
 ```
 
-## 7.2 get 方法
+### 7.2 get 方法
 
 `get`方法读取`key`对应的键值，如果找不到`key`，返回`undefined`。
 
@@ -355,7 +353,7 @@ m.set(hello, 'Hello ES6!') // 键是函数
 m.get(hello)  // Hello ES6!
 ```
 
-## 7.3 has 方法
+### 7.3 has 方法
 
 `has`方法返回一个布尔值，表示某个键是否在当前 Map 对象之中。
 
@@ -372,7 +370,7 @@ m.has(262)           // true
 m.has(undefined)     // true
 ```
 
-## 7.4 delete 方法
+### 7.4 delete 方法
 
 `delete`方法删除某个键，返回`true`。如果删除失败，返回`false`。
 
@@ -385,7 +383,7 @@ m.delete(undefined)
 m.has(undefined)       // false
 ```
 
-## 7.5 clear 方法
+### 7.5 clear 方法
 
 `clear`方法清除所有成员，没有返回值。
 
@@ -399,7 +397,7 @@ map.clear()
 map.size // 0
 ```
 
-## 7.6 forEach 方法
+### 7.6 forEach 方法
 
 ```javascript
 m.forEach(function (value, key, map) {
@@ -407,7 +405,7 @@ m.forEach(function (value, key, map) {
 }, document);
 ```
 
-## 7.7 size 属性
+### 7.7 size 属性
 
 `size`属性返回 Map 结构的成员总数。
 
@@ -419,7 +417,7 @@ map.set('bar', false);
 map.size // 2
 ```
 
-# 8.Map 构造函数的参数
+## 8.Map 构造函数的参数
 
 - 二维数组
 - Set、Map 等
@@ -461,7 +459,7 @@ console.log(m2, m2 === m);
 // Map 复制的方法
 ```
 
-# 9.Map 注意事项
+## 9.Map 注意事项
 
 【Map 如何判断键名是否相同】
 
@@ -476,7 +474,7 @@ console.log(m2, m2 === m);
 - 需要字符串以外的值做键
 - 对象一般用在模拟实体上
 
-# 10.Map 的应用
+## 10.Map 的应用
 
 ```html
 <!DOCTYPE html>

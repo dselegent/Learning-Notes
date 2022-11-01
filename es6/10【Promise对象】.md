@@ -1,10 +1,10 @@
-# Promise对象
+# 10【Promise对象】
 
-# 1.同步异步的介绍
+## 1.同步异步的介绍
 
 Promise 是异步操作的一种解决方案。
 
-> ### 异步的概念
+> #### 异步的概念
 >
 > 异步（Asynchronous, async）是与同步（Synchronous, sync）相对的概念。
 >
@@ -16,7 +16,7 @@ Promise 是异步操作的一种解决方案。
 >
 > ![img](https://i0.hdslb.com/bfs/album/d1cc4d26fc4056acf3f704bddb4bfecdf3b3ddd0.png)
 >
-> ### 什么时候用异步编程
+> #### 什么时候用异步编程
 >
 > 在前端编程中（甚至后端有时也是这样），我们在处理一些简短、快速的操作时，例如计算 1 + 1 的结果，往往在主线程中就可以完成。主线程作为一个线程，不能够同时接受多方面的请求。所以，当一个事件没有结束时，界面将无法处理其他请求。
 >
@@ -26,7 +26,7 @@ Promise 是异步操作的一种解决方案。
 >
 > JavaScript 是单线程语言，为了解决多线程问题，JavaScript 中的异步操作函数往往通过**回调函数**来实现异步任务的结果处理。
 >
-> ### 回调函数（callback function）
+> #### 回调函数（callback function）
 >
 > > 在 JavaScript 中，回调函数具体的定义为：函数A 作为参数（函数引用）传递到另一个 函数B 中，并且这个 函数B 执行函数A。我们就说 函数A 叫做回调函数。如果没有名称（函数表达式），就叫做匿名回调函数。
 >
@@ -55,7 +55,7 @@ Promise 是异步操作的一种解决方案。
 > > console.log('two');
 > > ```
 >
-> ## 实例
+> ### 实例
 >
 > `setInterval()` 和 `setTimeout()` 是两个异步语句。
 >
@@ -93,7 +93,7 @@ Promise 是异步操作的一种解决方案。
 >
 > 当然，JavaScript 语法十分友好，我们不必单独定义一个函数 print ，我们常常将上面的程序写成：
 >
-> ## 实例
+> ### 实例
 >
 > ```html
 > <!DOCTYPE html>
@@ -127,7 +127,7 @@ Promise 是异步操作的一种解决方案。
 >
 > **注意：**既然 setTimeout 会在子线程中等待 3 秒，在 setTimeout 函数执行之后主线程并没有停止，所以：
 >
-> ## 实例
+> ### 实例
 >
 > ```html
 > <!DOCTYPE html>
@@ -288,7 +288,7 @@ Promise 一般用来解决层层嵌套的回调函数（回调地狱 callback he
 
 <img src="https://i0.hdslb.com/bfs/album/97e97a5e20c5634615ea020b9840ef838d9c0718.gif" style="zoom:25%;" />
 
-# 2.Promise 的含义
+## 2.Promise 的含义
 
 Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了`Promise`对象。
 
@@ -314,7 +314,7 @@ Promise 有三个状态：pending（等待）、fulfilled 或 resolved（成功�
 
 `Promise`也有一些缺点。首先，无法取消`Promise`，一旦新建它就会立即执行，无法中途取消。其次，如果不设置回调函数，`Promise`内部抛出的错误，不会反应到外部。第三，当处于`pending`状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
 
-# 3.Promise 的基本用法
+## 3.Promise 的基本用法
 
 ES6 规定，`Promise`对象是一个构造函数，用来生成`Promise`实例。
 
@@ -475,7 +475,7 @@ new Promise((resolve, reject) => {
 })
 ```
 
-# 4.Promise.prototype.then()
+## 4.Promise.prototype.then()
 
 1. then 方法的两个回调函数什么时候执行
 
@@ -592,7 +592,7 @@ new Promise((resolve, reject) => {
 
 ![2](https://i0.hdslb.com/bfs/album/1891f1c10ba44350cb747b01463178deb806c8bf.gif)
 
-# 5.Promise.prototype.catch() 
+## 5.Promise.prototype.catch() 
 
 由之前的例子可以看出，我们在使用 Promise 的时候，大部分情况下，我们只用 resolve() 方法（成功态），所以在 Promise 回调函数中我们常常省略 reject 函数参数，在 then 中我们常常省略第二个回调函数。
 
@@ -641,7 +641,7 @@ new Promise((resolve, reject) => {
 
 > 一般总是建议，Promise 对象后面要跟一个或多个 catch 方法，这样可以处理 Promise 内部发生的错误！
 
-# 6.Promise.prototype.finally()
+## 6.Promise.prototype.finally()
 
  当 Promise 状态发生变化时，不论如何变化都会执行，不变化不执行。
 
@@ -712,7 +712,7 @@ new Promise((resolve, reject) => {
 
 `finally`：主要是用来处理一些必做操作，比如在操作数据库之后（无论成功与否）都要关闭数据库连接。
 
-# 7.Promise.all()
+## 7.Promise.all()
 
 `Promise.all()`方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。
 
@@ -816,7 +816,7 @@ p2 完成了
 */
 ```
 
-# 8.Promise.resolve()和Promise.reject()
+## 8.Promise.resolve()和Promise.reject()
 
  以上两者都是 Promise 构造函数的方法。
 
@@ -918,7 +918,7 @@ res then
 
 > 与 Promise.resolve() 不同，Promise.reject() 无论接收什么类型的参数，都会原封不动的向后传递！
 
-# 9.Promise.race()
+## 9.Promise.race()
 
 `Promise.race()`方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。
 
@@ -947,7 +947,7 @@ p
 
 上面代码中，如果 5 秒之内`fetch`方法无法返回结果，变量`p`的状态就会变为`rejected`，从而触发`catch`方法指定的回调函数。
 
-# 10.Promise.allSettled()
+## 10.Promise.allSettled()
 
 有时候，我们希望等到一组异步操作都结束了，不管每一个操作是成功还是失败，再进行下一步操作。但是，现有的 Promise 方法很难实现这个要求。
 
@@ -1030,7 +1030,7 @@ const errors = results
   .map(p => p.reason);
 ```
 
-# 11.Promise的应用
+## 11.Promise的应用
 
 【异步加载图片】
 

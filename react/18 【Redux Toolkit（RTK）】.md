@@ -586,3 +586,313 @@ export const todoSlice = createSlice({
 - 教 `dispatch` 如何接受除普通 action 对象之外的其他值，例如函数和 promise，通过拦截它们并 dispatch 实际 action 对象来代替
 
 Redux 有多种异步 middleware，每一种都允许你使用不同的语法编写逻辑。最常见的异步 middleware 是 [`redux-thunk`](https://github.com/reduxjs/redux-thunk)，它可以让你编写可能直接包含异步逻辑的普通函数。Redux Toolkit 的 `configureStore` 功能[默认自动设置 thunk middleware](https://redux-toolkit.js.org/api/getDefaultMiddleware#included-default-middleware)，[我们推荐使用 thunk 作为 Redux 开发异步逻辑的标准方式](https://cn.redux.js.org/style-guide/#use-thunks-for-async-logic)。
+
+### 6.2 Thunk 函数
+
+`thunk`最重要的思想，就是可以接受一个返回函数的`action creator`。如果这个`action creator` 返回的是一个函数，就执行它，如果不是，就按照原来的`action`执行。
+
+正因为这个action creator可以返回一个函数，那么就可以在这个函数中执行一些异步的操作。
+
+Thunks 通常还可以使用 action creator 再次 dispatch 普通的 action，比如 `dispatch(increment())`
+
+为了与 dispatch 普通 action 对象保持一致，我们通常将它们写为 *thunk action creators*，它返回 thunk 函数。这些 action creator 可以接受可以在 thunk 中使用的参数。
+
+```js
+const incrementAsync = amount => {
+  return (dispatch, getState) => {
+    setTimeout(() => {
+      dispatch(incrementByAmount(amount))
+    }, 1000)
+  }
+}
+```
+
+incrementAsync函数就返回了一个函数，将dispatch作为函数的第一个参数传递进去，在函数内进行异步操作就可以了。
+
+Thunk 通常写在 “slice” 文件中。`createSlice` 本身对定义 thunk 没有任何特殊支持，因此你应该将它们作为单独的函数编写在同一个 slice 文件中。这样，他们就可以访问该 slice 的普通 action creator，并且很容易找到 thunk 的位置。
+
+### 6.3 改写之前的计数器案例
+
+增加一个延时器
+
+`store/features/counterSlice.js`
+
+```js
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+  value: 0,
+}
+
+// 创建一个Slice
+export const counterSlice = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    incrementByAmount: (state, action) => {
+      // action 里面有 type 和 payload 两个属性，所有的传参都在payload里面
+      state.value += action.payload
+    },
+  },
+})
+
+const {incrementByAmount } = counterSlice.actions
+
+export const incrementAsync = amount => {
+  return (dispatch, getState) => {
+      
+    const stateBefore = getState()
+    console.log('Counter before:', stateBefore.counter)
+      
+    setTimeout(() => {
+      dispatch(incrementByAmount(amount))
+      const stateAfter = getState()
+      console.log('Counter after:', stateAfter.counter)
+    }, 1000)
+  }
+}
+
+// 暴露reducer
+export default counterSlice.reducer
+```
+
+``App.jsx`
+
+```jsx
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+// 引入对应的方法
+import { incrementAsync } from './store/features/counterSlice'
+
+export default function App() {
+  const count = useSelector(state => state.counter.value)
+  const dispatch = useDispatch()
+  const [amount, setAmount] = useState(1)
+
+  return (
+    <div style={{ width: 500, margin: '100px auto' }}>
+      <input type="text" value={amount} onChange={e => setAmount(e.target.value)} />
+      <button onClick={() => dispatch(incrementAsync(Number(amount) || 0))}> Add Async </button>
+      <span>{count}</span>
+    </div>
+  )
+}
+```
+
+![image-20221031171739218](https://i0.hdslb.com/bfs/album/0d1821f7e40c5806f0de11044594080898978abb.png)
+
+### 6.4 编写异步 Thunks
+
+Thunk 内部可能有异步逻辑，例如 `setTimeout`、`Promise` 和 `async/await`。这使它们成为使用 AJAX 发起 API 请求的好地方。
+
+Redux 的数据请求逻辑通常遵循以下可预测的模式：
+
+- 在请求之前 dispatch 请求“开始”的 action，以指示请求正在进行中。这可用于跟踪加载状态以允许跳过重复请求或在 UI 中显示加载中提示。
+- 发出异步请求
+- 根据请求结果，异步逻辑 dispatch 包含结果数据的“成功” action 或包含错误详细信息的 “失败” action。在这两种情况下，reducer 逻辑都会清除加载状态，并且要么展示成功案例的结果数据，要么保存错误值并在需要的地方展示。
+
+这些步骤不是 *必需的*，而是常用的。（如果你只关心一个成功的结果，你可以在请求完成时发送一个“成功” action ，并跳过“开始”和“失败” action 。）
+
+Redux Toolkit 提供了一个 `createAsyncThunk` API 来实现这些 action 的创建和 dispatch，我们很快就会看看如何使用它。
+
+如果我们手动编写一个典型的 async thunk 的代码，它可能看起来像这样：
+
+```js
+const getRepoDetailsStarted = () => ({
+  type: 'repoDetails/fetchStarted'
+})
+const getRepoDetailsSuccess = repoDetails => ({
+  type: 'repoDetails/fetchSucceeded',
+  payload: repoDetails
+})
+const getRepoDetailsFailed = error => ({
+  type: 'repoDetails/fetchFailed',
+  error
+})
+const fetchIssuesCount = (org, repo) => async dispatch => {
+  dispatch(getRepoDetailsStarted())
+  try {
+    const repoDetails = await getRepoDetails(org, repo)
+    dispatch(getRepoDetailsSuccess(repoDetails))
+  } catch (err) {
+    dispatch(getRepoDetailsFailed(err.toString()))
+  }
+}
+```
+
+但是，使用这种方法编写代码很乏味。每个单独的请求类型都需要重复类似的实现：
+
+- 需要为三种不同的情况定义独特的 action 类型
+- 每种 action 类型通常都有相应的 action creator 功能
+- 必须编写一个 thunk 以正确的顺序发送正确的 action
+
+`createAsyncThunk` 实现了这套模式：通过生成 action type 和 action creator 并生成一个自动 dispatch 这些 action 的 thunk。你提供一个回调函数来进行异步调用，并把结果数据返回成 Promise。
+
+### 6.5 使用 createAsyncThunk 请求数据
+
+Redux Toolkit 的 `createAsyncThunk` API 生成 thunk，为你自动 dispatch 那些 "start/success/failure" action。
+
+让我们从添加一个 thunk 开始，该 thunk 将进行 AJAX 调用。
+
+`store/features/counterSlice.js`
+
+```jsx
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+
+// 请求电影列表
+const reqMovieListApi = () =>
+  fetch(
+    'https://pcw-api.iqiyi.com/search/recommend/list?channel_id=1&data_type=1&mode=24&page_id=1&ret_num=48',
+  ).then(res => res.json())
+
+const initialState = {
+  status: 'idel',
+  list: [],
+  totals: 0,
+}
+
+// thunk函数允许执行异步逻辑, 通常用于发出异步请求。
+// createAsyncThunk 创建一个异步action，方法触发的时候会有三种状态：
+// pending（进行中）、fulfilled（成功）、rejected（失败）
+export const getMovieData = createAsyncThunk('movie/getMovie', async () => {
+  const res = await reqMovieListApi()
+  return res.data
+})
+```
+
+`createAsyncThunk` 接收 2 个参数:
+
+- 将用作生成的 action 类型的前缀的字符串
+- 一个 “payload creator” 回调函数，它应该返回一个包含一些数据的 `Promise`，或者一个被拒绝的带有错误的 `Promise`
+
+Payload creator 通常会进行某种 AJAX 调用，并且可以直接从 AJAX 调用返回 `Promise`，或者从 API 响应中提取一些数据并返回。我们通常使用 JS `async/await` 语法来编写它，这让我们可以编写使用 `Promise` 的函数，同时使用标准的 `try/catch` 逻辑而不是 `somePromise.then()` 链式调用。
+
+在这种情况下，我们传入 `'movie/getMovie'` 作为 action 类型的前缀。我们的 payload 创建回调等待 API 调用返回响应。响应对象的格式为 `{data: []}`，我们希望我们 dispatch 的 Redux action 有一个 payload，也就是电影列表的数组。所以，我们提取 `response.data`，并从回调中返回它。
+
+当调用 `dispatch(getMovieData())` 的时候，`getMovieData` 这个 thunk 会首先 dispatch 一个 action 类型为`'movie/getMovie/pending'`：
+
+![image-20221031180756586](https://i0.hdslb.com/bfs/album/9be6ef4c8ae21c2620a5e397d99cfe7f4d2865c2.png)
+
+我们可以在我们的 reducer 中监听这个 action 并将请求状态标记为 “loading 正在加载”。
+
+一旦 `Promise` 成功，`getMovieData` thunk 会接受我们从回调中返回的 `response.data` ，并 dispatch 一个 action，action 的 payload 为 接口返回的数据（`response.data` ），action 的 类型为 `'movie/getMovie/fulfilled'`。
+
+![image-20221031180934282](https://i0.hdslb.com/bfs/album/159df9d98522a45641396216dba60a03baec4a71.png)
+
+### 6.6 使用 extraReducers
+
+有时 slice 的 reducer 需要响应 *没有* 定义到该 slice 的 `reducers` 字段中的 action。这个时候就需要使用 slice 中的 `extraReducers` 字段。
+
+`extraReducers` 选项是一个接收名为 `builder` 的参数的函数。`builder` 对象提供了一些方法，让我们可以定义额外的 case reducer，这些 reducer 将响应在 slice 之外定义的 action。我们将使用 `builder.addCase(actionCreator, reducer)` 来处理异步 thunk dispatch 的每个 action。
+
+在这个例子中，我们需要监听我们 `getMovieData` thunk dispatch 的 "pending" 和 "fulfilled" action 类型。这些 action creator 附加到我们实际的 `getMovieData` 函数中，我们可以将它们传递给 `extraReducers` 来监听这些 action：
+
+```js
+const initialState = {
+  status: 'idel',
+  list: [],
+  totals: 0,
+}
+
+export const getMovieData = createAsyncThunk('movie/getMovie', async () => {
+  const res = await reqMovieListApi()
+  return res.data
+})
+
+// 创建一个 Slice
+export const movieSlice = createSlice({
+  name: 'movie',
+  initialState,
+  // extraReducers 字段让 slice 处理在别处定义的 actions，
+  // 包括由 createAsyncThunk 或其他slice生成的actions。
+  extraReducers(builder) {
+    builder
+      .addCase(getMovieData.pending, state => {
+        console.log('🚀 ~ 进行中！')
+        state.status = 'pending'
+      })
+      .addCase(getMovieData.fulfilled, (state, action) => {
+        console.log('🚀 ~ fulfilled', action.payload)
+        state.status = 'pending'
+        state.list = state.list.concat(action.payload.list)
+        state.totals = action.payload.list.length
+      })
+      .addCase(getMovieData.rejected, (state, action) => {
+        console.log('🚀 ~ rejected', action)
+        state.status = 'pending'
+        state.error = action.error.message
+      })
+  },
+})
+
+// 默认导出
+export default movieSlice.reducer
+```
+
+我们将根据返回的 `Promise` 处理可以由 thunk dispatch 的三种 action 类型：
+
+- 当请求开始时，我们将 `status` 枚举设置为 `'pending'`
+- 如果请求成功，我们将 `status` 标记为 `'pending'`，并将获取的电影列表添加到 `state.list`
+- 如果请求失败，我们会将 `status` 标记为 `'pending'`，并将任何错误消息保存到状态中以便我们可以显示它
+
+### 6.7 完善案例
+
+`store/index.js`
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+import counterSlice from './features/counterSlice'
+import movieSlice from './features/movieSlice'
+
+// configureStore创建一个redux数据
+const store = configureStore({
+  // 合并多个Slice
+  reducer: {
+    counter: counterSlice,
+    movie: movieSlice,
+  },
+})
+
+export default store
+```
+
+`Movie.jsx`
+
+```jsx
+// 引入相关的hooks
+import { useSelector, useDispatch } from 'react-redux'
+// 引入对应的方法
+import { getMovieData } from '../store/features/movieSlice'
+function Movie() {
+  // 通过useSelector直接拿到store中定义的list
+  const movieList = useSelector(store => store.movie.list)
+  // 通过useDispatch 派发事件
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          dispatch(getMovieData())
+        }}
+      >
+        获取数据
+      </button>
+      <ul>
+        {movieList.map(movie => {
+          return <li key={movie.tvId}> {movie.name}</li>
+        })}
+      </ul>
+    </div>
+  )
+}
+
+export default Movie
+```
+
+![image-20221031182248330](https://i0.hdslb.com/bfs/album/84d47a7b89855f8182268804f9dfdfcf232fc632.png)
+
+`createAsyncThunk `可以写在任何一个slice的`extraReducers`中，它接收2个参数，
+
+- 生成`action`的`type`值，这里type是要自己定义，不像是`createSlice`自动生成`type`，这就要注意避免命名冲突问题了(如果`createSlice`定义了相当的`name`和方法，也是会冲突的)
+- 包含数据处理的`promise`，首先会`dispatch`一个`action`类型为`movie/getMovie/pending`，当异步请求完成后，根据结果成功或是失败，决定dispatch出action的类型为`movie/getMovie/fulfilled`或`movie/getMovie/rejected`，这三个`action`可以在`slice`的`extraReducers`中进行处理。这个`promise`也只接收2个参数，分别是`payload`和包含了`dispatch`、`getState`的`thunkAPI`对象，所以除了在`slice`的`extraReducers`中处理之外，`createAsyncThunk`中也可以调用任意的action，这样就很像原本thunk的写法了，并不推荐

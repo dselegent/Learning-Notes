@@ -1,6 +1,6 @@
-# module的语法
+# 12【module的语法】
 
-# 1.初识Module
+## 1.初识Module
 
 （1）什么是模块
 
@@ -14,7 +14,7 @@
 2. 消除全局变量（模块中的变量都是局部的，不同模块之间不会相互干扰，可以通过特定语法暴露指定内容）
 3. 管理加载顺序（之前我们将一个总的 JavaScript 程序分几个文件写，但在最终合并调用时，js 的引入需要满足前后依赖关系。比如：被引用的 js 文件就一定要在引用它的 js 文件之前加载）
 
-# 2.Module的基本用法
+## 2.Module的基本用法
 
 > 注意：Module 要生效，必须在服务器环境下才能执行。
 >
@@ -27,7 +27,7 @@
 - 用 export 关键字导出模块需要暴露的部分
 - 在使用 script 标签加载的时候，需要加上 type="module"，否则就以普通 JS 文件的形式引入了，就不是模块了
 
-# 3.Module的导入导出
+## 3.Module的导入导出
 
 > 导出的东西可以被导入（import），并访问到！
 >
@@ -36,7 +36,7 @@
 > - export default 导出，import 导入
 > - export 导出，import 导入
 
-## 3.1 export default 导出和对应的 import 导入
+### 3.1 export default 导出和对应的 import 导入
 
 （1）一个模块没有导出，是否可以将其导入？
 
@@ -114,7 +114,7 @@ export default class{};			 // 可以导出class
 </html>
 ```
 
-## 3.2 export 导出和对应的 import 导入
+### 3.2 export 导出和对应的 import 导入
 
 **（1）基本用法**
 
@@ -264,7 +264,7 @@ import sex, {fn, className, age} from "./module.js";
 // 注意：export default 必须在 export 之前
 ```
 
-# 4.export 与 import 的复合写法
+## 4.export 与 import 的复合写法
 
 如果在一个模块之中，先输入后输出同一个模块，`import`语句可以与`export`语句写在一起。
 
@@ -326,9 +326,9 @@ import * as ns from "mod";
 export {ns};
 ```
 
-# 5.import()
+## 5.import()
 
-## 5.1 简介
+### 5.1 简介
 
 前面介绍过，`import`命令会被 JavaScript 引擎静态分析，先于模块内的其他语句执行（`import`命令叫做“连接” binding 其实更合适）。所以，下面的代码会报错。
 
@@ -394,7 +394,7 @@ renderWidget();
 
 上面示例中，`await`命令后面就是使用`import()`，对比`then()`的写法明显更简洁易读。
 
-## 5.2 适用场合
+### 5.2 适用场合
 
 下面是`import()`的一些适用场合。
 
@@ -441,7 +441,7 @@ import(f())
 
 上面代码中，根据函数`f`的返回结果，加载不同的模块。
 
-## 5.3 注意点
+### 5.3 注意点
 
 `import()`加载模块成功以后，这个模块会作为一个对象，当作`then`方法的参数。因此，可以使用对象解构赋值的语法，获取输出接口。
 
