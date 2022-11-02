@@ -11,7 +11,11 @@ export default defineUserConfig({
   title: 'dselegent blog',
   description: 'dselegent的博客站点',
   head: [
-    ['meta', { name: 'referrer', content: 'no-referrer' }],
+    [
+      'meta',
+      { name: 'referrer', content: 'no-referrer' },
+      { name: 'baidu-site-verification', content: 'code-iW58SZ4SVS' },
+    ],
     [
       'link',
       {
