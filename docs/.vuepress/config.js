@@ -16,6 +16,7 @@ export default defineUserConfig({
       { name: 'referrer', content: 'no-referrer' },
       { name: 'baidu-site-verification', content: 'code-iW58SZ4SVS' },
     ],
+    ['meta', { name: 'baidu-site-verification', content: 'code-iW58SZ4SVS' }],
     [
       'link',
       {
