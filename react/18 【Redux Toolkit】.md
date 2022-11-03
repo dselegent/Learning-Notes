@@ -1,4 +1,4 @@
-# 17 【Redux Toolkit（RTK）】
+# 18 【Redux Toolkit】
 
 上边的案例我们一直在使用Redux核心库来使用Redux，除了Redux核心库外Redux还为我们提供了一种使用Redux的方式——Redux Toolkit。它的名字起的非常直白，Redux工具包，简称RTK。RTK可以帮助我们处理使用Redux过程中的重复性工作，简化Redux中的各种操作。
 
@@ -896,3 +896,97 @@ export default Movie
 
 - 生成`action`的`type`值，这里type是要自己定义，不像是`createSlice`自动生成`type`，这就要注意避免命名冲突问题了(如果`createSlice`定义了相当的`name`和方法，也是会冲突的)
 - 包含数据处理的`promise`，首先会`dispatch`一个`action`类型为`movie/getMovie/pending`，当异步请求完成后，根据结果成功或是失败，决定dispatch出action的类型为`movie/getMovie/fulfilled`或`movie/getMovie/rejected`，这三个`action`可以在`slice`的`extraReducers`中进行处理。这个`promise`也只接收2个参数，分别是`payload`和包含了`dispatch`、`getState`的`thunkAPI`对象，所以除了在`slice`的`extraReducers`中处理之外，`createAsyncThunk`中也可以调用任意的action，这样就很像原本thunk的写法了，并不推荐
+
+## 7.数据持久化
+
+### 7.1 概念
+
+一般是指页面刷新后，数据仍然能够保持原来的状态。
+
+一般在前端当中，数据持久化，可以通过将数据存储到localstorage或Cookie中存起来，用到的时
+
+候直接从本地存储中获取数据。而redux-persist是把redux中的数据在localstorage中存起来，起到持久化的效果。
+
+### 7.2 使用
+
+```bash
+npm i redux-persist redux --save
+```
+
+`store/index.js`
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+// --- 新增 ---
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { combineReducers } from 'redux'
+// --- 新增 ---
+import counterSlice from './features/counterSlice'
+import movieSlice from './features/movieSlice'
+
+// --- 新增 ---
+const persistConfig = {
+  key: 'root',
+  storage,
+  // 指定哪些reducer数据持久化
+  whitelist: ['movie'],
+}
+
+const persistedReducer = persistReducer(
+  persistConfig,
+  combineReducers({
+    counter: counterSlice,
+    movie: movieSlice,
+  }),
+)
+// --- 新增 ---
+
+// 这里照着我这样配中间件就行，getDefaultMiddleware不要直接导入了，已经内置了
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
+
+export const persistor = persistStore(store)
+```
+
+`main.js`
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import Movie from './components/Movie'
+import { Provider } from 'react-redux'
+
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <Movie />
+    </PersistGate>
+  </Provider>,
+)
+```
+
+然后就可以直接使用了。
+
+### 7.3 最终效果
+
