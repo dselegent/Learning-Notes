@@ -437,3 +437,33 @@ const a = async () => {
 ```
 
 上面代码中，`b()`运行的时候，`a()`是暂停执行，上下文环境都保存着。一旦`b()`或`c()`报错，错误堆栈将包括`a()`。
+
+## 4.es13新增
+
+在 JavaScript 中，await 运算符用于暂停执行，直到 Promise 被解决（履行或拒绝）。以前，我们只能在 async 函数中使用此运算符 - 使用 async 关键字声明的函数。我们无法在全球范围内这样做。
+
+```js
+function setTimeoutAsync(timeout) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, timeout);
+  });
+}
+// SyntaxError: await is only valid in async functions
+await setTimeoutAsync(3000);
+```
+
+使用 ES13，现在我们可以：
+
+```js
+function setTimeoutAsync(timeout) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, timeout);
+  });
+}
+// Waits for timeout - no error thrown
+await setTimeoutAsync(3000);
+```

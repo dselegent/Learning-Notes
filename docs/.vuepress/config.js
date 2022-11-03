@@ -4,6 +4,8 @@ import { sitemapPlugin } from 'vuepress-plugin-sitemap2'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics' // 做google收录&上报分析用
 import { nprogressPlugin } from '@vuepress/plugin-nprogress'
 import { searchPlugin } from '@vuepress/plugin-search'
+import { commentPlugin } from 'vuepress-plugin-comment2'
+
 import sidebar from './config/sidebar'
 
 export default defineUserConfig({
@@ -78,7 +80,7 @@ export default defineUserConfig({
           {
             text: 'css提高',
             children: [
-              { text: 'less', link: '/notes/less/less学习笔记' },
+              { text: 'less', link: '/notes/less/01' },
               { text: 'sass', link: '/notes/sass/01' },
               { text: 'tailwindcss', link: '/notes/tailwindcss/01' },
             ],
@@ -158,6 +160,14 @@ export default defineUserConfig({
         },
       },
       searchMaxSuggestions: 10,
+    }),
+    commentPlugin({
+      // 插件选项
+      provider: 'Giscus', //评论服务提供者。
+      repo: 'dselegent/dselegent-blog',
+      repoId: 'R_kgDOIU8mcA',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOIU8mcM4CSWWp',
     }),
   ],
 })
