@@ -15,6 +15,7 @@ export default defineUserConfig({
   head: [
     ['meta', { name: 'referrer', content: 'no-referrer' }],
     ['meta', { name: 'baidu-site-verification', content: 'code-iW58SZ4SVS' }],
+ ['meta', { name: 'google-site-verification', content: 'XVRUSmXYuJfszJ50uwUc7phaeM7EtTrtaIzFGPROgEA' }],
     [
       'link',
       {
