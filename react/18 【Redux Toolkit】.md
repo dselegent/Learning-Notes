@@ -910,13 +910,13 @@ export default Movie
 ### 7.2 使用
 
 ```bash
-npm i redux-persist redux --save
+npm i redux-persist --save
 ```
 
 `store/index.js`
 
 ```js
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 // --- 新增 ---
 import {
   persistStore,
@@ -929,7 +929,6 @@ import {
   REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { combineReducers } from 'redux'
 // --- 新增 ---
 import counterSlice from './features/counterSlice'
 import movieSlice from './features/movieSlice'
@@ -988,5 +987,73 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 然后就可以直接使用了。
 
-### 7.3 最终效果
+最终效果：
+
+![image-20221105211826950](https://i0.hdslb.com/bfs/album/97d4bbd5610cc930365efd8ecfb63a83174a9ce4.png)
+
+### 7.3 让每一个仓库单独存储
+
+> 以前使用过`pinia-plugin-persist`，我觉得这个`pinia`这个插件使用比`redux-persist`方便
+>
+> 这里的方法是我自己想出来的，不知道对不对
+
+`store/index.js`
+
+```js
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import counterSlice from './features/counterSlice'
+import movieSlice from './features/movieSlice'
+
+const rootPersistConfig = {
+  key: 'root',
+  storage,
+  whitelist: [],
+}
+
+const moviePersistConfig = {
+  key: 'movie',
+  storage,
+}
+
+const counterPersistConfig = {
+  key: 'counter',
+  storage,
+}
+
+const persistedReducer = persistReducer(
+  rootPersistConfig,
+  combineReducers({
+    counter: persistReducer(counterPersistConfig, counterSlice),
+    movie: persistReducer(moviePersistConfig, movieSlice),
+  }),
+)
+
+// configureStore创建一个redux数据
+export const store = configureStore({
+  // 合并多个Slice
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
+export const persistor = persistStore(store)
+```
+
+效果：
+
+![image-20221105212117068](https://i0.hdslb.com/bfs/album/4825fcc8afd830b4099bd1e772c76e4266c529d1.png)
 

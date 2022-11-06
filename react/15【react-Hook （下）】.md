@@ -377,4 +377,3 @@ const clickHandler = useCallback(() => {
 ![image-20221030181534667](https://i0.hdslb.com/bfs/album/d1f9956dac9668ab3c7af6dc5f093f1155f39d6b.png)
 
 点击了两次增加后，count变成了预期值4。
-

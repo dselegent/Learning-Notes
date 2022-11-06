@@ -84,7 +84,7 @@ mongooes.disconnect();
 
 ```js
 const mongoose = require("mongoose")
-const Schema=mongooes.schema;
+const Schema=mongooes.Schema;
 //创建模式对象
 const UserType=new Schema({
     name:{
