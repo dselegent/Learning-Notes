@@ -869,3 +869,114 @@ export default store
 > 您可以在`createApi`中全局设置此项`refetchOnReconnect`，但也可以覆盖默认值，并通过传递给每个单独的钩子调用或在调度[`启动`](https://redux-toolkit.js.org/rtk-query/api/created-api/endpoints#initiate)操作时进行更精细的控制。
 >
 > 如果您指定手动分派查询的时间，RTK 查询将无法自动为您重新获取。`track: false`
+
+## 9.刷新缓存数据
+
+当我们点击`添加学生`时，我们可以在浏览器 DevTools 中查看 Network 选项卡，确认 HTTP `POST` 请求成功。 但是，如果我们回到`所有学生组件`，新的学生信息并不会被展示出来。我们在内存中仍然有相同的缓存数据。
+
+我们需要告诉 RTK Query 刷新其缓存的学生列表，以便我们可以看到我们刚刚添加的新学生信息。
+
+### 9.1 手动刷新
+
+第一个选项是手动强制 RTK Query 重新获取给定请求接口的数据。Query hooks 结果对象包含一个 “refetch” 函数，我们可以调用它来强制重新获取。 我们可以暂时将“重新获取学生列表”按钮添加到`<AllStudent>`，并在添加新学生后单击该按钮。
+
+`AllStudent.jsx`
+
+```jsx
+import React from 'react'
+import { useGetStudentsQuery } from './store/features/api/sudentApiSlice'
+
+export default function App() {
+  const {
+    data: studentsRes,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+  } = useGetStudentsQuery()
+
+  let content
+  if (isLoading) {
+    content = '正在加载中'
+  } else if (isSuccess) {
+    content = studentsRes.data.map(stu => (
+      <p key={stu._id}>
+        {stu.name} ---
+        {stu.age} ---
+        {stu.sex}
+      </p>
+    ))
+  } else if (isError) {
+    content = error.toString()
+  }
+
+  return (
+    <div>
+      <p>
+        <button onClick={refetch}>重新获取学生列表</button>
+      </p>
+      {content}
+    </div>
+  )
+}
+```
+
+首先先从首页添加一个学生数据,然后回到`所有学生组件`
+
+![image-20221106161045089](https://i0.hdslb.com/bfs/album/60d83adac6a06c893f4642031d0af0256e755a2b.png)
+
+这个时候由于有缓存，用的还是之前的数据，我们使用`reFetch`方法来强制刷新数据
+
+![image-20221106161736244](https://i0.hdslb.com/bfs/album/867b54faf816fb065d0b2a6393652e9f5c49952f.png)
+
+### 9.2 缓存失效自动刷新-数据标签
+
+有时需要让用户手动单击以重新获取数据，但对于正常使用而言绝对不是一个好的解决方案。
+
+我们知道我们的服务器拥有所有帖子的完整列表，包括我们刚刚添加的帖子。 理想情况下，我们希望我们的应用程序在 Mutation 请求完成后自动重新获取更新的帖子列表。 这样我们就知道我们的客户端缓存数据与服务器所拥有的数据是同步的。
+
+**RTK Query 让我们定义查询和 mutations 之间的关系，以启用自动数据重新获取，使用标签**。标签是一个字符串或小对象，可让你命名某些类型的数据和缓存的 *无效* 部分。当缓存标签失效时，RTK Query 将自动重新获取标记有该标签的请求接口。
+
+基本标签使用需要向我们的 API slice 添加三条信息：
+
+- API slice 对象中的根 `tagTypes` 字段，声明数据类型的字符串标签名称数组，例如 `'student'`
+- 查询请求接口中的 “providesTags” 数组，列出了一组描述该查询中数据的标签
+- Mutation 请求接口中的“invalidatesTags”数组，列出了每次 Mutation 运行时失效的一组标签
+
+我们可以在 API slice 中添加一个名为 `'student'` 的标签，让我们在添加新帖子时自动重新获取 `getStudents` 请求接口：
+
+`features/api/sudentApiSlice.js`
+
+```js
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+
+export const sudentApiSlice = createApi({
+  reducerPath: 'studentApi', 
+  baseQuery: fetchBaseQuery({
+    baseUrl: '/api',
+  }),
+  tagTypes: ['student'],
+  endpoints: builder => ({
+    getStudents: builder.query({
+      query: () => '/all/student',
+      providesTags: [{ type: 'student', id: 'LIST' }],
+    }),
+    addNewStudent: builder.mutation({
+      query: student => ({
+        url: '/student',
+        method: 'POST',
+        // 将整个post对象作为请求的主体
+        body: student,
+      }),
+      invalidatesTags: [{ type: 'student', id: 'LIST' }],
+    }),
+  }),
+})
+
+export const { useGetStudentsQuery,useAddNewStudentMutation } = sudentApiSlice
+```
+
+这就是我们所需要的！ 现在，如果我们单击`添加学生`，然后回到`AllStudent`组件重新发起请求，渲染新的数据
+
+请注意，这里的文字字符串 `'student'` 没有什么特别之处。 我们可以称它为“Fred”、“qwerty”或其他任何名称。 它只需要在每个字段中使用相同的字符串，以便 RTK Query 知道“当发生这种 Mutation 时，使列出相同标签字符串的所有请求接口无效”。
