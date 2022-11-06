@@ -664,10 +664,10 @@ Model.findByIdAndUpdate([conditions], [update], [options], [callback])
 
 ## 7.文档删除
 
-### 7.1 remove()
+### 7.1 deleteOne()
 
 - 会删除符合条件的所有数据
-- Model的remove（）
+- Model的deleteOne（）
 
 ```js
 const mongoose = require('mongoose')
@@ -676,15 +676,15 @@ mongoose.connect('mongodb://localhost:27017/student',err=>{
      var Schema =new mongoose.Schema({ name:String,grades:Number,test:{type:Number,default:0}})
      var stuModel = mongoose.model('grades',Schema)
      //删除名字中包含‘差生’的数据
-	 stuModel.remove({name:/差生/},function(err){})
+	 stuModel.deleteOne({name:/差生/},function(err){})
      // 回调函数不能省略，但可以使用exec() 简写
-     //stuModel.remove({name:/差生/}).exec()
+     //stuModel.deleteOne({name:/差生/}).exec()
     })
   }
 })
 ```
 
-- 文档的remove（）
+- 文档的deleteOne（）
 
 ```js
 const mongoose = require('mongoose')
@@ -695,7 +695,7 @@ mongoose.connect('mongodb://localhost:27017/student',err=>{
      //删除名字中包含‘差生’的数据
 	 stuModel.find({name:/差生/},function(err,docs){
          docs.forEach((item,index,arr)=>{
-             item.remove((err,doc)=>{
+             item.deleteOne((err,doc)=>{
                  //doc为被删除的值
                  console.log(doc)
              })
