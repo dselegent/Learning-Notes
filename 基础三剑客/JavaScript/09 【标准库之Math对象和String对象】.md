@@ -1,4 +1,6 @@
-# 10.Math对象
+# 09 【标准库之Math对象和String对象】
+
+## 1.Math对象
 
 `Math`是 JavaScript 的原生对象，提供各种数学功能。该对象不是构造函数，不能生成实例，所有的属性和方法都必须在`Math`对象上调用。
 
@@ -12,7 +14,7 @@
 - `Math.round()`：四舍五入
 - `Math.random()`：随机数
 
-## 10.1 Math.abs()
+### 1.1 Math.abs()
 
 `Math.abs`方法返回参数值的绝对值。
 
@@ -21,7 +23,7 @@ Math.abs(1) // 1
 Math.abs(-1) // 1
 ```
 
-## 10.2 Math.max()，Math.min()
+### 1.2 Math.max()，Math.min()
 
 `Math.max`方法返回参数之中最大的那个值，`Math.min`返回最小的那个值。如果参数为空, `Math.min`返回`Infinity`, `Math.max`返回`-Infinity`。
 
@@ -32,7 +34,7 @@ Math.min() // Infinity
 Math.max() // -Infinity
 ```
 
-## 10.3 Math.floor()，Math.ceil()
+### 1.3 Math.floor()，Math.ceil()
 
 `Math.floor`方法返回小于或等于参数值的最大整数（地板值）。
 
@@ -66,7 +68,7 @@ ToInteger(-3.8) // -3
 
 上面代码中，不管正数或负数，`ToInteger`函数总是返回一个数值的整数部分。
 
-## 10.4 Math.round()
+### 1.4 Math.round()
 
 `Math.round`方法用于四舍五入。
 
@@ -87,7 +89,7 @@ Math.round(-1.5) // -1
 Math.round(-1.6) // -2
 ```
 
-## 10.5 Math.random()
+### 1.5 Math.random()
 
 `Math.random()`返回0到1之间的一个伪随机数，可能等于0，但是一定小于1。
 
@@ -136,9 +138,9 @@ random_str(6) // "NdQKOr"
 
 上面代码中，`random_str`函数接受一个整数作为参数，返回变量`ALPHABET`内的随机字符所组成的指定长度的字符串。
 
-# 11.String对象
+## 2.String对象
 
-## 11.1 概述
+### 2.1 概述
 
 `String`对象是 JavaScript 原生提供的三个包装对象之一，用来生成字符串对象。
 
@@ -174,7 +176,7 @@ String(5) // "5"
 
 上面代码将布尔值`true`和数值`5`，分别转换为字符串。
 
-## 11.2 实例属性
+### 2.2 实例属性
 
 **String.prototype.length**
 
@@ -184,7 +186,7 @@ String(5) // "5"
 'abc'.length // 3
 ```
 
-## 11.3 实例方法
+### 实例方法
 
 [W3C JavaScript 字符串方法](https://www.w3school.com.cn/js/js_string_methods.asp)
 
