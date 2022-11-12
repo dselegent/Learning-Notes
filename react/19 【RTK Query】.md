@@ -980,3 +980,19 @@ export const { useGetStudentsQuery,useAddNewStudentMutation } = sudentApiSlice
 这就是我们所需要的！ 现在，如果我们单击`添加学生`，然后回到`AllStudent`组件重新发起请求，渲染新的数据
 
 请注意，这里的文字字符串 `'student'` 没有什么特别之处。 我们可以称它为“Fred”、“qwerty”或其他任何名称。 它只需要在每个字段中使用相同的字符串，以便 RTK Query 知道“当发生这种 Mutation 时，使列出相同标签字符串的所有请求接口无效”。
+
+## 10.小总结
+
+- RTK Query 是 Redux Toolkit 中包含的数据获取和缓存解决方案
+  - RTK Query 为你抽象了管理缓存服务器数据的过程，无需编写加载状态、存储结果和发出请求的逻辑
+  - RTK Query 建立在 Redux 中使用的相同模式之上，例如异步 thunk
+- RTK Query 对每个应用程序使用单个 “API slice”，使用 `createApi` 定义
+  - RTK Query 提供与 UI 无关和特定于 React 的 `createApi` 版本
+  - API slice 为不同的服务器操作定义了多个“请求接口”
+  - 如果使用 React 集成，API slice 包括自动生成的 React hooks
+- 查询请求接口允许从服务器获取和缓存数据
+  - Query Hooks 返回一个 “data” 值，以及加载状态标志
+  - 查询可以手动重新获取，或者使用标签自动重新获取缓存失效
+- Mutation 请求接口允许更新服务器上的数据
+  - Mutation hooks 返回一个发送更新请求的“触发”函数，以及加载状态
+  - 触发函数返回一个可以解包并等待的 Promise
