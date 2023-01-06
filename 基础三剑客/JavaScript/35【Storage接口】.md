@@ -1,6 +1,6 @@
-# Storage接口
+# 35【Storage接口】
 
-# 1.概述
+## 1.概述
 
 Storage 接口用于脚本在浏览器保存数据。两个对象部署了这个接口：`window.sessionStorage`和`window.localStorage`。
 
@@ -10,7 +10,7 @@ Storage 接口用于脚本在浏览器保存数据。两个对象部署了这个
 
 这个接口很像 Cookie 的强化版，能够使用大得多的存储空间。目前，每个域名的存储上限视浏览器而定，Chrome 是 2.5MB，Firefox 和 Opera 是 5MB，IE 是 10MB。其中，Firefox 的存储空间由一级域名决定，而其他浏览器没有这个限制。也就是说，Firefox 中，`a.example.com`和`b.example.com`共享 5MB 的存储空间。另外，与 Cookie 一样，它们也受同域限制。某个网页存入的数据，只有同域下的网页才能读取，如果跨域操作会报错。
 
-# 2.属性和方法
+## 2.属性和方法
 
 Storage 接口只有一个属性。
 
@@ -26,7 +26,7 @@ window.localStorage.length // 3
 
 该接口提供5个方法。
 
-## 2.1 Storage.setItem()
+### 2.1 Storage.setItem()
 
 `Storage.setItem()`方法用于存入数据。它接受两个参数，第一个是键名，第二个是保存的数据。如果键名已经存在，该方法会更新已有的键值。该方法没有返回值。
 
@@ -55,7 +55,7 @@ window.localStorage['foo'] = '123';
 window.localStorage.setItem('foo', '123');
 ```
 
-## 2.2 Storage.getItem()
+### 2.2 Storage.getItem()
 
 `Storage.getItem()`方法用于读取数据。它只有一个参数，就是键名。如果键名不存在，该方法返回`null`。
 
@@ -66,7 +66,7 @@ window.localStorage.getItem('key')
 
 键名应该是一个字符串，否则会被自动转为字符串。
 
-## 2.3 Storage.removeItem()
+### 2.3 Storage.removeItem()
 
 `Storage.removeItem()`方法用于清除某个键名对应的键值。它接受键名作为参数，如果键名不存在，该方法不会做任何事情。
 
@@ -75,7 +75,7 @@ sessionStorage.removeItem('key');
 localStorage.removeItem('key');
 ```
 
-## 2.4 Storage.clear()
+### 2.4 Storage.clear()
 
 `Storage.clear()`方法用于清除所有保存的数据。该方法的返回值是`undefined`。
 
@@ -84,7 +84,7 @@ window.sessionStorage.clear()
 window.localStorage.clear()
 ```
 
-## 2.5 Storage.key()
+### 2.5 Storage.key()
 
 `Storage.key()`方法接受一个整数作为参数（从零开始），返回该位置对应的键名。
 
@@ -101,7 +101,7 @@ for (var i = 0; i < window.localStorage.length; i++) {
 }
 ```
 
-# 3. storage 事件 
+## 3. storage 事件 
 
 Storage 接口储存的数据发生变化时，会触发 storage 事件，可以指定这个事件的监听函数。
 

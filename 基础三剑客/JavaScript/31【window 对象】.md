@@ -1,6 +1,6 @@
-# window 对象
+# 31【window 对象】
 
-# 1.概述
+## 1.概述
 
 浏览器里面，`window`对象（注意，`w`为小写）指当前的浏览器窗口。它也是当前页面的顶层对象，即最高一层的对象，所有其他对象都是它的下属。一个变量如果未声明，那么默认就是顶层对象的属性。
 
@@ -13,9 +13,9 @@ window.a // 1
 
 `window`有自己的实体含义，其实不适合当作最高一层的顶层对象，这是一个语言的设计失误。最早，设计这门语言的时候，原始设想是语言内置的对象越少越好，这样可以提高浏览器的性能。因此，语言设计者 Brendan Eich 就把`window`对象当作顶层对象，所有未声明就赋值的变量都自动变成`window`对象的属性。这种设计使得编译阶段无法检测出未声明变量，但到了今天已经没有办法纠正了。
 
-# 2.window 对象的属性
+## 2.window 对象的属性
 
-## 2.1 window.name
+### 2.1 window.name
 
 `window.name`属性是一个字符串，表示当前浏览器窗口的名字。窗口不一定需要名字，这个属性主要配合超链接和表单的`target`属性使用。
 
@@ -29,7 +29,7 @@ console.log(window.name)
 
 只要浏览器窗口不关闭，这个属性是不会消失的。举例来说，访问`a.com`时，该页面的脚本设置了`window.name`，接下来在同一个窗口里面载入了`b.com`，新页面的脚本可以读到上一个网页设置的`window.name`。页面刷新也是这种情况。一旦浏览器窗口关闭后，该属性保存的值就会消失，因为这时窗口已经不存在了。
 
-## 2.2 位置大小属性
+### 2.2 位置大小属性
 
 以下属性返回`window`对象的位置信息和大小信息。
 
@@ -69,9 +69,9 @@ if (window.scrollY < 75) {
 
 `window.pageXOffset`属性和`window.pageYOffset`属性，是`window.scrollX`和`window.scrollY`别名。
 
-# 3.window 对象的方法
+## 3.window 对象的方法
 
-## 3.1 window.alert()，window.prompt()，window.confirm()
+### 3.1 window.alert()，window.prompt()，window.confirm()
 
 `window.alert()`、`window.prompt()`、`window.confirm()`都是浏览器与用户互动的全局方法。它们会弹出不同的对话框，要求用户做出回应。注意，这三个方法弹出的对话框，都是浏览器统一规定的式样，无法定制。
 
@@ -140,7 +140,7 @@ window.onunload = function () {
 
 这三个方法都具有堵塞效应，一旦弹出对话框，整个页面就是暂停执行，等待用户做出反应。
 
-## 3.2 window.scrollTo()，window.scroll()，window.scrollBy() 
+### 3.2 window.scrollTo()，window.scroll()，window.scrollBy() 
 
 `window.scrollTo`方法用于将文档滚动到指定位置。它接受两个参数，表示滚动后位于窗口左上角的页面坐标。
 
@@ -183,11 +183,11 @@ window.scrollBy(0, window.innerHeight)
 - Element.scrollLeft
 - Element.scrollIntoView()
 
-# 4.事件
+## 4.事件
 
 `window`对象可以接收以下事件。
 
-## 4.2 load 事件和 onload 属性
+### 4.2 load 事件和 onload 属性
 
 `load`事件发生在文档在浏览器窗口加载完毕时。`window.onload`属性可以指定这个事件的回调函数。
 
@@ -203,7 +203,7 @@ window.onload = function() {
 
 上面代码在网页加载完毕后，获取指定元素并进行处理。
 
-## 4.2 error 事件和 onerror 属性
+### 4.2 error 事件和 onerror 属性
 
 浏览器脚本发生错误时，会触发`window`对象的`error`事件。我们可以通过`window.onerror`属性对该事件指定回调函数。
 
