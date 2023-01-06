@@ -1,6 +1,6 @@
-# 20.Document 节点
+# 17 【Document 节点】
 
-## 20.1 Document 节点的概述
+## 1.Document 节点的概述
 
 `document`节点对象代表整个文档，每张网页都有自己的`document`对象。`window.document`属性就指向这个对象。只要浏览器开始载入 HTML 文档，该对象就存在了，可以直接使用。
 
@@ -13,11 +13,9 @@
 
 `document`对象继承了`EventTarget`接口和`Node`接口，并且混入（mixin）了`ParentNode`接口。这意味着，这些接口的方法都可以在`document`对象上调用。除此之外，`document`对象还有很多自己的属性和方法。
 
+## 2.Document 节点的属性
 
-
-## 20.2 Document 节点的属性
-
-### 20.2.1 快捷方式属性
+### 2.1 快捷方式属性
 
 以下属性是指向文档内部的某个节点的快捷方式。
 
@@ -78,7 +76,7 @@ if (document.fullscreenElement.nodeName == 'VIDEO') {
 
 上面代码中，通过`document.fullscreenElement`可以知道`<video>`元素有没有处在全屏状态，从而判断用户行为。
 
-### 20.2.2 节点集合属性
+### 2.2 节点集合属性
 
 以下属性返回一个`HTMLCollection`实例，表示文档内部特定元素的集合。这些集合都是动态的，原节点有任何变化，立刻会反映在集合中。
 
@@ -169,7 +167,7 @@ document.scripts instanceof HTMLCollection // true
 document.myForm === document.forms.myForm // true
 ```
 
-### 20.2.3 文档静态信息属性
+### 2.3 文档静态信息属性
 
 以下属性返回文档信息。
 
@@ -255,9 +253,9 @@ document.referrer
 
 一般来说，如果网页代码的第一行设置了明确的`DOCTYPE`（比如`<!doctype html>`），`document.compatMode`的值都为`CSS1Compat`。
 
-## 20.3 Document 节点的方法
+## 3.Document 节点的方法
 
-### 20.3.1 访问元素节点
+### 3.1 访问元素节点
 
 所谓 “访问” 元素节点，就是指 “得到”、“获取” 页面上的元素节点。
 
@@ -265,7 +263,7 @@ document.referrer
 
 访问元素节点主要依靠 document 对象。
 
-### 20.3.2 认识 document 对象
+### 3.2 认识 document 对象
 
 document 对象是 DOM 中最重要的东西，几乎所有 DOM 的功能都封装在了 document 对象中。
 
@@ -278,7 +276,7 @@ typeof document;	// object
 document.nodeType;	// 9
 ```
 
-### 20.3.3 访问元素节点的常用方法
+### 3.3 访问元素节点的常用方法
 
 注意：以下方法的参数都是字符串值 `''`。
 
@@ -296,7 +294,7 @@ document.nodeType;	// 9
 >
 > Selector：选择器。
 
-### 20.3.4 getElementById()
+### 3.4 getElementById()
 
 `document.getElementById()` 功能是通过 id 得到元素节点。
 
@@ -320,7 +318,7 @@ var para = document.getElementById('para');
 >
 > 原则上，html 中同一名称的 id 也只能出现一次。
 
-### 20.3.5 延迟运行
+### 3.5 延迟运行
 
 在测试 DOM 代码时，通常 JS 代码要写到 HTML 节点的后面，否则 JS 无法找到相应的 HTML 节点。
 
@@ -405,7 +403,7 @@ var para = document.getElementById('para');
 </html>
 ```
 
-### 20.3.6 getElementsByTagName()
+### 3.6 getElementsByTagName()
 
 `getElementsByTagName()` 方法的功能是通过标签名得到节点数组。
 
@@ -499,7 +497,7 @@ var ps = document.getElementsByTagName('p');
 </html>
 ```
 
-### 20.3.7 getElementsByClassName()
+### 3.7 getElementsByClassName()
 
 `getElementsByClassName()` 方法的功能是通过类名得到节点数组。
 
@@ -524,7 +522,7 @@ var spec_divs = document.getElementsByClassName('spec');
 
 某个节点元素也可以调用 getElementsByClassName() 方法，从而得到其内部的某类名的元素节点。
 
-### 20.3.8 querySelector()
+### 3.8 querySelector()
 
 `querySelector()` 方法的功能是通过选择器得到元素。
 
@@ -552,7 +550,7 @@ querySelector() 方法从 IE8 开始兼容，但从 IE9 开始支持 CSS3 的选
 
 > 注意：不能选择伪类！
 
-### 20.3.9 querySelectorAll()
+### 3.9 querySelectorAll()
 
 `querySelectorAll()` 方法的功能是通过选择器得到元素数组。
 
@@ -593,7 +591,7 @@ querySelector() 方法从 IE8 开始兼容，但从 IE9 开始支持 CSS3 的选
 </html>
 ```
 
-### 20.3.10 document.open()，document.close()
+### 3.10 document.open()，document.close()
 
 `document.open`方法清除当前文档所有内容，使得文档处于可写状态，供`document.write`方法写入内容。
 
@@ -605,7 +603,7 @@ document.write('hello world');
 document.close();
 ```
 
-### 20.3.11 document.write()
+### 3.11 document.write()
 
 `document.write`方法用于向当前文档写入内容。
 
@@ -627,4 +625,4 @@ document.write('<p>hello world</p>');
 
 上面代码中，`document.write`会将`<p>`当作 HTML 标签解释。
 
-### 20.3.12 剩下的方法将在后续章节讲解
+### 3.12 剩下的方法将在后续章节讲解

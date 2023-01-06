@@ -1,4 +1,4 @@
-# 三大家族scroll、offset、client
+# 27 【三大家族scroll、offset、client】
 
 JS的三大家族主要是Offset、Scroll、Client，通过对三大家族不同属性的灵活使用，我们可以模拟出很多炫酷的JS动画，增强界面的视觉感染力！让静态页面活起来！
 
@@ -8,9 +8,9 @@ JS的三大家族主要是Offset、Scroll、Client，通过对三大家族不同
 
 > 对于clientX、clientY、offsetX、offsetY已在鼠标事件记录过
 
-# 1.scroll家族
+## 1.scroll家族
 
-## 1.1 scrollHeight和scrollWidth（只读）
+### 1.1 scrollHeight和scrollWidth（只读）
 
 > 获取元素整个**内容**的高度和宽度 （包含看不见的）  ，如果有滚动条（滚动条会占用部分宽高），不计算滚动条的宽高
 
@@ -40,7 +40,7 @@ document.getElementById('myDiv').scrollHeight // 356
 
 
 
-## 1.2 scrollTop和scrollLeft（可修改）
+### 1.2 scrollTop和scrollLeft（可修改）
 
 > 获取元素垂直和水平滚动条滚动的距离(被卷去的头部和左侧)
 
@@ -55,11 +55,11 @@ document.documentElement.scrollTop
 
 这两个属性都可读写，设置该属性的值（不需要单位），会导致浏览器将当前元素自动滚动到相应的位置。
 
-# 2.offset家族
+## 2.offset家族
 
 ![image-20220825183858516](https://i0.hdslb.com/bfs/album/416c7cae6c2abeee8358e955de8f31c792bb7259.png)
 
-## 2.1 offsetHeight和offsetWidth
+### 2.1 offsetHeight和offsetWidth
 
 > 获取盒子的高度宽度，包括内容区、内边距、边框（这里就是css设置的那些样式组合）
 
@@ -69,7 +69,7 @@ document.documentElement.scrollTop
 
 这两个属性都是只读属性，只比`Element.clientHeight`和`Element.clientWidth`多了边框的高度或宽度。如果元素的 CSS 设为不可见（比如`display: none;`），则返回`0`。
 
-## 2.2 offsetParent
+### 2.2 offsetParent
 
 `Element.offsetParent`属性返回最靠近当前元素的、并且 CSS 的`position`属性不等于`static`的上层元素。
 
@@ -99,7 +99,7 @@ document.documentElement.scrollTop
 
 如果某个元素的所有上层节点的`position`属性都是`static`，则`Element.offsetParent`属性指向`<body>`元素。
 
-## 2.3 offsetLeft和offsetTop（只读）
+### 2.3 offsetLeft和offsetTop（只读）
 
 > 当前元素和定位父元素之间的偏移量（如果没有设置定位父元素，就是相对于左上角的位置,top是距离顶部的距离,left是最左边的距离）
 > offsetLeft水平偏移量 offsetTop垂直偏移量
@@ -121,9 +121,9 @@ function getElementPosition(e) {
 }
 ```
 
-# 3.client家族
+## 3.client家族
 
-## 3.1 clientHeight和clientWidth(不包含滚动条)
+### 3.1 clientHeight和clientWidth(不包含滚动条)
 
 > 元素的**可见**高度，包括元素的内容区和内边距的高度
 > 元素的**可见**宽度，包括元素的内容区和内边距的宽度
@@ -144,7 +144,7 @@ document.documentElement.clientHeight
 document.body.clientHeight
 ```
 
-## 3.2 clientLeft和ClientTop
+### 3.2 clientLeft和ClientTop
 
 > 边框宽度和边框的高度
 
@@ -206,7 +206,7 @@ document.body.clientHeight
         }
 ```
 
-# 4.getBoundingClientRect()方法
+## 4.getBoundingClientRect()方法
 
 getBoundingClientRect()获取元素位置，这个方法没有参数
 
@@ -237,7 +237,7 @@ var rect = obj.getBoundingClientRect();
 
 ​	
 
-# 5.总结
+## 5.总结
 
 ![image-20220620111553872](https://tva1.sinaimg.cn/large/0074UQWJgy1h3ejhem2rlj30ow07uq7a.jpg)
 

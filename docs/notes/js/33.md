@@ -1,6 +1,6 @@
-# History对象和Location对象
+# 33 【History对象和Location对象】
 
-# 1.History 对象概述
+## 1.History 对象概述
 
 `window.history`属性指向 History 对象，它表示当前窗口的浏览历史。
 
@@ -22,9 +22,9 @@ history.go(-1)
 
 浏览器工具栏的“前进”和“后退”按钮，其实就是对 History 对象进行操作。
 
-# 2.History 对象方法
+## 2.History 对象方法
 
-## 2.1 History.back()、History.forward()、History.go() 
+### 2.1 History.back()、History.forward()、History.go() 
 
 这三个方法用于在历史之中移动。
 
@@ -46,7 +46,7 @@ history.go(0); // 刷新当前页面
 
 注意，移动到以前访问过的页面时，页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。
 
-# 3.Location 对象属性
+## 3.Location 对象属性
 
 `Location`对象是浏览器提供的原生对象，提供 URL 相关的信息和操作方法。通过`window.location`和`document.location`属性，可以拿到这个对象。
 
@@ -118,7 +118,7 @@ document.location.href = 'http://www.example.com';
 
 另外，`Location.href`属性是浏览器唯一允许跨域写入的属性，即非同源的窗口可以改写另一个窗口（比如子窗口与父窗口）的`Location.href`属性，导致后者的网址跳转。`Location`的其他属性都不允许跨域写入。
 
-# 4.Location 对象方法
+## 4.Location 对象方法
 
 **（1）Location.assign()**
 
@@ -155,7 +155,7 @@ window.location.reload(true);
 
 `toString`方法返回整个 URL 字符串，相当于读取`Location.href`属性。
 
-# 5.URL 的编码和解码
+## 5.URL 的编码和解码
 
 网页的 URL 只能包含合法的字符。合法字符分成两类。
 
@@ -173,7 +173,7 @@ JavaScript 提供四个 URL 的编码/解码方法。
 - `decodeURI()`
 - `decodeURIComponent()`
 
-## 5.1 encodeURI()
+### 5.1 encodeURI()
 
 `encodeURI()`方法用于转码整个 URL。它的参数是一个字符串，代表整个 URL。它会将元字符和语义字符之外的字符，都进行转义。
 
@@ -182,7 +182,7 @@ encodeURI('http://www.example.com/q=春节')
 // "http://www.example.com/q=%E6%98%A5%E8%8A%82"
 ```
 
-## 5.2 encodeURIComponent()
+### 5.2 encodeURIComponent()
 
 `encodeURIComponent()`方法用于转码 URL 的组成部分，会转码除了语义字符之外的所有字符，即元字符也会被转码。所以，它不能用于转码整个 URL。它接受一个参数，就是 URL 的片段。
 
@@ -195,7 +195,7 @@ encodeURIComponent('http://www.example.com/q=春节')
 
 上面代码中，`encodeURIComponent()`会连 URL 元字符一起转义，所以如果转码整个 URL 就会出错。
 
-## 5.3 decodeURI()
+### 5.3 decodeURI()
 
 `decodeURI()`方法用于整个 URL 的解码。它是`encodeURI()`方法的逆运算。它接受一个参数，就是转码后的 URL。
 
@@ -204,7 +204,7 @@ decodeURI('http://www.example.com/q=%E6%98%A5%E8%8A%82')
 // "http://www.example.com/q=春节"
 ```
 
-## 5.4 decodeURIComponent()
+### 5.4 decodeURIComponent()
 
 `decodeURIComponent()`用于URL 片段的解码。它是`encodeURIComponent()`方法的逆运算。它接受一个参数，就是转码后的 URL 片段。
 

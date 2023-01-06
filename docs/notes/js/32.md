@@ -1,6 +1,6 @@
-# Navigator 对象和Screen 对象
+# 32 【Navigator 对象和Screen 对象】
 
-# 1.Navigator 对象的属性
+## 1.Navigator 对象的属性
 
 ```js
 /*
@@ -21,7 +21,7 @@
 
 
 
-## 1.1 Navigator.userAgent
+### 1.1 Navigator.userAgent
 
 `navigator.userAgent`属性返回浏览器的 User Agent 字符串，表示用户设备信息，包含了浏览器的厂商、版本、操作系统等信息。
 
@@ -68,7 +68,7 @@ if (sUsrAg.indexOf("Firefox") > -1) {
 }
 ```
 
-## 1.2 Navigator.platform
+### 1.2 Navigator.platform
 
 `Navigator.platform`属性返回用户的操作系统信息，比如`MacIntel`、`Win32`、`Linux x86_64`等 。
 
@@ -77,7 +77,7 @@ navigator.platform
 // "Linux x86_64"
 ```
 
-## 1.3 Navigator.onLine
+### 1.3 Navigator.onLine
 
 `navigator.onLine`属性返回一个布尔值，表示用户当前在线还是离线（浏览器断线）。
 
@@ -94,7 +94,7 @@ window.addEventListener('offline', function(e) { console.log('offline'); });
 window.addEventListener('online', function(e) { console.log('online'); });
 ```
 
-## 1.4 Navigator.language，Navigator.languages
+### 1.4 Navigator.language，Navigator.languages
 
 `Navigator.language`属性返回一个字符串，表示浏览器的首选语言。该属性只读。
 
@@ -110,7 +110,7 @@ navigator.languages  // ["en-US", "en", "zh-CN", "zh", "zh-TW"]
 
 如果这个属性发生变化，就会在`window`对象上触发`languagechange`事件。
 
-# 2.Navigator对象总结
+## 2.Navigator对象总结
 
 `window.navigator` 属性可以检索 navigator 对象，它内部含有用户此次活动的浏览器的相关属性和标识。
 
@@ -144,7 +144,7 @@ navigator.languages  // ["en-US", "en", "zh-CN", "zh", "zh-TW"]
 
 ![](https://i0.hdslb.com/bfs/album/fb71cba3594f5a097d6b7f48e64bb1d26a9f5a1a.png)
 
-# 3.Screen 对象
+## 3.Screen 对象
 
 Screen 对象表示当前窗口所在的屏幕，提供显示设备的信息。`window.screen`属性指向这个对象。
 

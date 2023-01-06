@@ -1,6 +1,6 @@
-# 17.console 对象与控制台
+# 14 【语法之console 对象与控制台】
 
-## 17.1 console 对象
+## 1.console 对象
 
 `console`对象是 JavaScript 的原生对象，它有点像 Unix 系统的标准输出`stdout`和标准错误`stderr`，可以输出各种信息到控制台，并且还提供了很多有用的辅助方法。
 
@@ -29,11 +29,11 @@
 
 `Console`面板基本上就是一个命令行窗口，你可以在提示符下，键入各种命令。
 
-## 17.2 console 对象的静态方法
+## 2.console 对象的静态方法
 
 `console`对象提供的各种静态方法，用来与控制台窗口互动。
 
-### 17.2.1 console.log()，console.info()，console.debug()
+### 2.1 console.log()，console.info()，console.debug()
 
 `console.log`方法用于在控制台输出信息。它可以接受一个或多个参数，将它们连接起来输出。
 
@@ -132,7 +132,7 @@ console.log("出错了！");
 
 上面代码表示，使用自定义的`console.log`方法，可以在显示结果添加当前时间。
 
-### 17.2.2 console.warn()，console.error()
+### 2.2 console.warn()，console.error()
 
 `warn`方法和`error`方法也是在控制台输出信息，它们与`log`方法的不同之处在于，`warn`方法输出信息时，在最前面加一个黄色三角，表示警告；`error`方法输出信息时，在最前面加一个红色的叉，表示出错。同时，还会高亮显示输出文字和错误发生的堆栈。其他方面都一样。
 
@@ -145,7 +145,7 @@ console.warn('Warning! Too few nodes (%d)', document.childNodes.length)
 
 可以这样理解，`log`方法是写入标准输出（`stdout`），`warn`方法和`error`方法是写入标准错误（`stderr`）。
 
-### 17.2.3 console.table()
+### 2.3 console.table()
 
 对于某些复合类型的数据，`console.table`方法可以将其转为表格显示。
 
@@ -185,7 +185,7 @@ console.table(languages);
 | csharp  | "C#" | "object-oriented" |
 | fsharp  | "F#" | "functional"      |
 
-### 17.2.4 console.count()
+### 2.4 console.count()
 
 `count`方法用于计数，输出它被调用了多少次。
 
@@ -233,7 +233,7 @@ greet('bob')
 
 上面代码根据参数的不同，显示`bob`执行了两次，`alice`执行了一次。
 
-### 17.2.5 console.dir()，console.dirxml()
+### 2.5 console.dir()，console.dirxml()
 
 `dir`方法用来对一个对象进行检查（inspect），并以易于阅读和打印的格式显示。
 
@@ -276,7 +276,7 @@ console.dirxml([1, 2, 3])
 console.dir([1, 2, 3])
 ```
 
-### 17.2.6 console.assert()
+### 2.6 console.assert()
 
 `console.assert`方法主要用于程序运行过程中，进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序执行。这样就相当于提示用户，内部状态不正确。
 
@@ -304,7 +304,7 @@ console.assert(list.childNodes.length < 500, '节点个数大于等于500')
 
 上面代码中，如果符合条件的节点小于500个，不会有任何输出；只有大于等于500时，才会在控制台提示错误，并且显示指定文本。
 
-### 17.2.7 console.time()，console.timeEnd()
+### 2.7 console.time()，console.timeEnd()
 
 这两个方法用于计时，可以算出一个操作所花费的准确时间。
 
@@ -322,7 +322,7 @@ console.timeEnd('Array initialize');
 
 `time`方法表示计时开始，`timeEnd`方法表示计时结束。它们的参数是计时器的名称。调用`timeEnd`方法之后，控制台会显示“计时器名称: 所耗费的时间”。
 
-### 17.2.8 console.trace()，console.clear()
+### 2.8 console.trace()，console.clear()
 
 `console.trace`方法显示当前执行的代码在堆栈中的调用路径。
 
@@ -337,7 +337,7 @@ console.trace()
 
 `console.clear`方法用于清除当前控制台的所有输出，将光标回置到第一行。如果用户选中了控制台的“Preserve log”选项，`console.clear`方法将不起作用。
 
-## 17.3 debugger 语句
+## 3.debugger 语句
 
 `debugger`语句主要用于除错，作用是设置断点。如果有正在运行的除错工具，程序运行到`debugger`语句时会自动停下。如果没有除错工具，`debugger`语句不会产生任何结果，JavaScript 引擎自动跳过这一句。
 
