@@ -92,7 +92,6 @@ export default hopeTheme({
     blog: {
       excerpt: true,
     },
-    photoSwipe: true,
 
     // 评论配置（仅做样例，记得更换）
     comment: {
