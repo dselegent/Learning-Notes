@@ -1,33 +1,23 @@
 {
-	"name": "vuepress",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"dev": "vuepress dev docs",
-		"docs:dev": "vuepress dev docs",
-		"build": "vuepress build docs",
-		"docs:build": "vuepress build docs"
-	},
-	"author": "dselegent",
-	"keywords": [
-		"front-end",
-		"blog",	
-		"vuepress",
-		"前端笔记"
-	],
-	"homepage": "https://github.com/dselegent/blog",
-	"license": "ISC",
-	"devDependencies": {
-		"@vuepress/client": "2.0.0-beta.53",
-		"@vuepress/plugin-docsearch": "2.0.0-beta.53",
-		"@vuepress/plugin-google-analytics": "2.0.0-beta.53",
-		"@vuepress/plugin-nprogress": "2.0.0-beta.53",
-		"@vuepress/plugin-search": "2.0.0-beta.53",
-		"@vuepress/theme-default": "2.0.0-beta.53",
-		"vue": "^3.2.41",
-		"vuepress": "2.0.0-beta.53",
-		"vuepress-plugin-comment2": "2.0.0-beta.119",
-		"vuepress-plugin-sitemap2": "2.0.0-beta.116"
-	}
+  "name": "learn-data",
+  "version": "1.1.9",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:clean-dev": "vuepress dev docs --clean-cache"
+  },
+  "dependencies": {
+    "@vuepress/client": "2.0.0-beta.60",
+    "@vuepress/plugin-docsearch": "2.0.0-beta.60",
+    "@vuepress/plugin-google-analytics": "2.0.0-beta.60",
+    "@vuepress/utils": "2.0.0-beta.60",
+    "cpx2": "^4.2.0",
+    "pnpm": "^7.26.0",
+    "vue": "^3.2.45",
+    "vuepress": "2.0.0-beta.60",
+    "vuepress-plugin-search-pro": "2.0.0-beta.166",
+    "vuepress-theme-hope": "2.0.0-beta.166"
+  }
 }

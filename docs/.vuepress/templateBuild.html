@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!--vuepress-ssr-head-->
+    <meta name="keywords" content="自我提升,效率提升,开源工具,学习笔记" />
+    <style>
+      :root {
+        --bg-color: #fff;
+      }
+
+      html[data-theme='dark'] {
+        --bg-color: #252232;
+      }
+
+      html,
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-theme-hope-scheme')
+      const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+
+      if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+        document.querySelector('html').setAttribute('data-theme', 'dark')
+      }
+    </script>
+    <!--vuepress-ssr-styles-->
+    <!--vuepress-ssr-resources-->
+  </head>
+  <body>
+    <div id="app"><!--vuepress-ssr-app--></div>
+    <!--vuepress-ssr-scripts-->
+    <script
+      src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-y/instant.page/5.1.0/instantpage.min.js"
+      type="application/javascript"
+    ></script>
+  </body>
+</html>

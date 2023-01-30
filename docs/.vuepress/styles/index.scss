@@ -1,0 +1,16 @@
+// toc.scss, navbar.scss, sidebar.scss
+
+.toc-place-holder {
+  // 从原本距离导航栏 2rem 改为 5rem
+  top: calc(var(--navbar-height) + 5rem);
+}
+
+#toc {
+  // 增加 toc 与内容区的距离
+  // left: calc(100% + 2rem);
+
+  // 隐藏目录文字「此页内容」
+  .toc-header {
+    visibility: hidden;
+  }
+}
