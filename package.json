@@ -2,7 +2,6 @@
   "name": "learn-data",
   "version": "1.1.9",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
@@ -19,5 +18,10 @@
     "vuepress": "2.0.0-beta.60",
     "vuepress-plugin-search-pro": "2.0.0-beta.166",
     "vuepress-theme-hope": "2.0.0-beta.166"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "husky": "^8.0.3"
   }
 }
