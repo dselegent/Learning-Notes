@@ -28,6 +28,21 @@ export default sidebar([
     children: 'structure',
   },
   {
+    text: '专业知识',
+    icon: 'computer',
+    prefix: '/professional_knowledge/',
+    collapsible: true,
+    children: [
+      {
+        text: '计算机网络',
+        icon: 'network',
+        prefix: 'computer_network/',
+        collapsible: true,
+        children: 'structure',
+      },
+    ],
+  },
+  {
     text: '前端',
     icon: 'page',
     prefix: '/front_end/',

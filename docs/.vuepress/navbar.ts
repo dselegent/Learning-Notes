@@ -18,7 +18,14 @@ export default navbar([
   {
     text: '专业知识',
     icon: 'computer',
-    link: '/professional_knowledge',
+    prefix: '/professional_knowledge/',
+    children: [
+      {
+        text: '计算机网络',
+        icon: 'network',
+        link: 'computer_network/01.html',
+      },
+    ],
   },
   {
     text: '前端',
@@ -132,6 +139,7 @@ export default navbar([
   {
     text: '服务端',
     prefix: '/back_end/',
+    icon: 'page',
     children: [
       {
         text: 'nodeJs',
