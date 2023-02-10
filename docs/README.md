@@ -6,7 +6,8 @@ icon: home
 title: 互联网小白
 # heroImage: /logo.png
 heroText: 互联网小白
-tagline: 盛年不重来，一日难再晨
+# tagline: 盛年不重来，一日难再晨
+tagline: 由于网站重构过，所以老朋友们之前收藏的笔记地址显示404，可以通过顶部导航栏找到对应的笔记
 bgImage: http://tc.seoipo.com/home-bg-1.jpg
 # heroFullScreen: true
 # projects:
