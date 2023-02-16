@@ -258,4 +258,28 @@ export default sidebar([
       },
     ],
   },
+  {
+    text: '工具',
+    icon: 'page',
+    prefix: '/tool/',
+    link: '',
+    collapsible: true,
+    children: [
+      {
+        text: '前端规范化',
+        icon: '',
+        prefix: 'lint/',
+        link: '',
+        collapsible: true,
+        children: [
+          {
+            text: 'git规范化',
+            icon: 'git',
+            link: '01.html',
+            collapsible: true,
+          },
+        ],
+      },
+    ],
+  },
 ])

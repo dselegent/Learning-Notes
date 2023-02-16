@@ -169,5 +169,23 @@ export default navbar([
       },
     ],
   },
+  {
+    text: '工具',
+    icon: 'tool',
+    prefix: '/tool/',
+    children: [
+      {
+        text: '前端规范化',
+        prefix: 'lint/',
+        children: [
+          {
+            text: 'git规范化',
+            icon: 'git',
+            link: '01.html',
+          },
+        ],
+      },
+    ],
+  },
   { text: '笔记', icon: 'note', link: 'https://github.com/dselegent/Learning-Notes' },
 ])
