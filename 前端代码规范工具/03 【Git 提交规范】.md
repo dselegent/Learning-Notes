@@ -1,4 +1,4 @@
-# 01 【Git 提交规范】
+# 03 【Git 提交规范】
 
 ## 1.Git提交规范（Commitizen）
 
