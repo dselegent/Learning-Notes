@@ -266,17 +266,26 @@ export default sidebar([
     collapsible: true,
     children: [
       {
-        text: '前端规范化',
+        text: '前端代码规范化',
         icon: '',
         prefix: 'lint/',
         link: '',
         collapsible: true,
         children: [
           {
-            text: 'git规范化',
-            icon: 'git',
+            text: 'JS 代码规范',
+            icon: 'javascript',
             link: '01.html',
-            collapsible: true,
+          },
+          {
+            text: 'CSS 代码规范',
+            icon: 'css',
+            link: '02.html',
+          },
+          {
+            text: 'Git 规范化',
+            icon: 'git',
+            link: '03.html',
           },
         ],
       },

@@ -175,13 +175,23 @@ export default navbar([
     prefix: '/tool/',
     children: [
       {
-        text: '前端规范化',
+        text: '前端代码规范化',
         prefix: 'lint/',
         children: [
           {
-            text: 'git规范化',
-            icon: 'git',
+            text: 'JS 代码规范',
+            icon: 'javascript',
             link: '01.html',
+          },
+          {
+            text: 'CSS 代码规范',
+            icon: 'css',
+            link: '02.html',
+          },
+          {
+            text: 'Git 规范化',
+            icon: 'git',
+            link: '03.html',
           },
         ],
       },
