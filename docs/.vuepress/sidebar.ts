@@ -40,6 +40,13 @@ export default sidebar([
         collapsible: true,
         children: 'structure',
       },
+      {
+        text: '软件工程',
+        icon: 'repair',
+        prefix: 'software_engineer/',
+        collapsible: true,
+        children: 'structure',
+      },
     ],
   },
   {

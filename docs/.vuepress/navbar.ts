@@ -25,6 +25,11 @@ export default navbar([
         icon: 'network',
         link: 'computer_network/01.html',
       },
+      {
+        text: '软件工程',
+        icon: 'repair',
+        link: 'software_engineer/01.html',
+      },
     ],
   },
   {
