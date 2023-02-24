@@ -37,10 +37,11 @@ const mongoose = require("mongoose");
 mongoose.connect('mongodb://数据库地址:端口号/数据库名',{useMongoClient:true})
 如果端口号是默认端口号(27017)则可以省略不写
 */
-mongoose.connect("mongodb://localhost:27017/ds2", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect('mongodb://127.0.0.1:27017/ds2', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+})
 
 // 3.监听mongodb数据库的连接状态
 // 绑定数据库连接成功事件
