@@ -1,8 +1,8 @@
-# 34.flex布局
+# 19 【flex布局】
 
-## 34.1 flex布局体验
+## 1.flex布局体验
 
-### 34.1.1  传统布局与flex布局
+### 1.1 传统布局与flex布局
 
 【传统布局】
 
@@ -22,7 +22,7 @@
 1. 如果是 PC 端页面布局，我们还是建议使用传统布局
 2. 如果是移动端或者不考虑兼容性问题的 PC 端页面布局，推荐使用 flex 弹性布局
 
-### 34.1.2 初体验
+### 1.2 初体验
 
 **弹性盒**
 
@@ -104,7 +104,7 @@
 
 ![](https://i0.hdslb.com/bfs/album/d7a57c689b9692c5dccc4131f7c9e105ca63ef0f.gif)
 
-## 34.2 flex布局原理
+## 2.flex布局原理
 
 flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模型**提供最大的灵活性**，**任何一个容器都可以指定为 flex 布局**。
 
@@ -125,7 +125,7 @@ flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模
 
 **就是通过给父盒子添加 flex 属性，来控制子盒子的位置和排列方式。**
 
-## 34.3 常见弹性容器属性
+## 3.常见弹性容器属性
 
 以下由 6 个属性是对父元素设置的
 
@@ -136,7 +136,7 @@ flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模
 - `align-content`：设置侧轴上的子元素的排列方式（多行）
 - `align-items`：设置侧轴上的子元素排列方式（单行）
 
-## 34.4  flex-direction设置主轴的方向
+## 4.flex-direction设置主轴的方向
 
 `flex-direction` 指定容器中弹性元素的排列方式
 
@@ -209,7 +209,7 @@ flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模
 
 ![](https://i0.hdslb.com/bfs/album/8c13a430cea233f2c574e7f49ef3a08339850144.png)
 
-## 34.5 justify-content设置主轴上的子元素排列方式
+## 5.justify-content设置主轴上的子元素排列方式
 
 `justify-content` 属性定义了项目在主轴上的对齐方式
 
@@ -356,7 +356,7 @@ flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模
 
 ![](https://i0.hdslb.com/bfs/album/d2cb207e29718ed796592a033c3a65fab834161c.png)
 
-## 34.6 flex-wrap设置子元素是否换行
+## 6.flex-wrap设置子元素是否换行
 
 `flex-wrap` 设置弹性元素是否在弹性容器中自动换行
 
@@ -407,7 +407,7 @@ flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模
 
 <img src="https://i0.hdslb.com/bfs/album/1825de48955b6e4cf496224fa41d0b4a6ddc6969.png" style="zoom:50%;" />
 
-## 34.7 flex-flow复合属性
+## 7.flex-flow复合属性
 
 `flex-flow` 属性是 flex-direction 和 flex-wrap 属性的复合属性
 
@@ -445,7 +445,7 @@ flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模
 
 ![](https://i0.hdslb.com/bfs/album/df1cb1d2aeddf3d0d561d4da400d324065127d13.png)
 
-## 34.8  align-items设置侧轴上的子元素排列方式（单行）
+## 8.align-items设置侧轴上的子元素排列方式（单行）
 
 该属性是控制子项在侧轴（默认是 y轴）上的排列方式，在子项为单项（单行）的时候使用。
 
@@ -534,7 +534,7 @@ flex 是 flexible Box 的缩写，意为 “弹性布局”，用来为盒状模
 
 > align-items 只能统一对侧轴上的子元素排列方式，假如有多行子元素，要分别对不同的行设置不同的排列方式，那么此种方式就无法做了。
 
-## 34.9 align-content 设置侧轴上的子元素的排列方式（多行）
+## 9.align-content 设置侧轴上的子元素的排列方式（多行）
 
 设置子项在侧轴上的排列方式并且只能用于子项出现 **换行** 的情况（多行），在单行下是没有效果的。
 
@@ -639,7 +639,7 @@ align-items: center;
 
 ![image-20220812111500820](https://i0.hdslb.com/bfs/album/91bff2646ecca85d0a785579f731df13ac287138.png)
 
-## 34.10 align-content和align-items区别
+## 10.align-content和align-items区别
 
 - align-items 适用于单行情况下，只有上对齐、下对齐、居中和拉伸
 - align-content 适应于换行（多行）的情况下（单行情况下无效），可以设置上对齐、下对齐、居中、拉伸以及平均分配剩余空间等属性值
@@ -647,7 +647,7 @@ align-items: center;
 
 ![](https://i0.hdslb.com/bfs/album/ff9d3a127b6b9fad056166008f9eb5420eddd506.png)
 
-## 34.11 常见弹性元素属性
+## 11.常见弹性元素属性
 
 - `flex-grow` 指定弹性元素的伸展系数，默认值为0
 - `flex-shrink` 指定弹性元素的收缩系数，默认值为1
@@ -656,7 +656,7 @@ align-items: center;
 - `order` 决定弹性元素的排列顺序（前后顺序）
 - `align-self` 控制子项自己在侧轴的排列方式
 
-## 34.12 伸展系数
+## 12.伸展系数
 
 `flex-grow` 指定弹性元素的伸展系数，默认值为0
 
@@ -664,7 +664,7 @@ align-items: center;
 
 - 父元素的剩余空间，会按照比例进行分配
 
-### 34.12.1 flex-grow基础
+### 12.1 flex-grow基础
 
 flex-grow 属性定义项目的扩大系数，用于**分配容器的剩余空间**，那么什么是剩余空间呢？
 
@@ -896,7 +896,7 @@ flex-grow 属性定义项目的扩大系数，用于**分配容器的剩余空�
 
 符合计算预期。
 
-### 34.12.2 flow-grow应用
+### 12.2 flow-grow应用
 
 flow-grow属性在项目中运用很多，比如页面布局、导航条、分页等。
 
@@ -999,7 +999,7 @@ flow-grow属性在项目中运用很多，比如页面布局、导航条、分�
 
 4. flex-grow不是设置具体的尺寸，在弹性布局中应用广泛。
 
-## 34.13 缩减系数
+## 13.缩减系数
 
 `flex-shrink` 指定弹性元素的收缩系数，默认值为1
 
@@ -1009,7 +1009,7 @@ flow-grow属性在项目中运用很多，比如页面布局、导航条、分�
 
 简单的说 flex-grow 用于放大，那么 flex-shrink 就是用于缩小了，两个属性就是反过来，计算方式都类似。放大是因为有剩余空间，缩小就是因为项目的宽度超过容器了，有一个**超出空间**，所以就要进行缩小。
 
-### 34.13.1 flex-shrink基础
+### 13.1 flex-shrink基础
 
 超出空间计算方式：
 
@@ -1187,7 +1187,7 @@ flow-grow属性在项目中运用很多，比如页面布局、导航条、分�
 
 符合计算预期。
 
-### 34.13.2 总结
+### 13.2 总结
 
 1. 项目的总大小超出容器部分成为超出空间。
 2. flex-shrink用于设置项目的缩小系数。
@@ -1205,9 +1205,9 @@ flow-grow属性在项目中运用很多，比如页面布局、导航条、分�
 公式：要压缩的空间 * ( 单个项目flex-shrink / 所有项目的flex-shrink之和 )
 ```
 
-## 34.14 基础长度
+## 14.基础长度
 
-### 34.14.1 flex-basis基础
+### 14.1 flex-basis基础
 
 `flex-basis` 指定的是元素在主轴上的基础长度	
 
@@ -1271,7 +1271,7 @@ flex-basis 这边并没有说是定义项目的宽度，而是说：占据主轴
 2. flex-basis 是设置项目 占据主轴空间的大小、不全等于width。
 3. flex-basis 优先级比 width 更高。
 
-## 34.15 flex属性
+## 15.flex属性
 
 前面三节讲了 flex-grow、flex-shrink、flex-basis 三个项目属性。
 
@@ -1376,7 +1376,7 @@ flex: 2;
 
 ![image-20220812121218240](https://i0.hdslb.com/bfs/album/430479d8da8e7d6c5d4b7f43409ec183dbb8cd22.png)
 
-## 34.16  order属性定义项目的排列顺序
+## 16.order属性定义项目的排列顺序
 
 order 用于是设置项目的排序顺序，从小到大排列。
 
@@ -1435,7 +1435,7 @@ order 默认值为 0。
 
 ![image-20220812121638855](https://i0.hdslb.com/bfs/album/c1de61e6423afeceac2cd21cec17dd825ff825fd.png)
 
-## 34.17 align-self属性
+## 17.align-self属性
 
 项目属性 align-self，和 align-items 类似。align-items设置在容器上，作用所有的项目。align-self 设置在项目上，作用单个项目
 
