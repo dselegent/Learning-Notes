@@ -1,6 +1,6 @@
-# 25.布局技巧
+# 14 【布局技巧】
 
-## 25.1margin负值的运用
+## 1.margin负值的运用
 
 如何实现以下效果呢？
 
@@ -60,7 +60,7 @@
 
 ![](https://i0.hdslb.com/bfs/album/4770749c8b172785c95d74eb63c1a8b32414d562.gif)
 
-## 25.2文字围绕浮动元素
+## 2.文字围绕浮动元素
 
 ![image-20220731130042261](https://i0.hdslb.com/bfs/album/dd98d64047c31e6f2f039a1d6820f8f553a619a3.png)在制作文字位于图片周围的效果时，可以巧妙运用浮动元素不会压住文字的特性。
 
@@ -111,7 +111,7 @@
 
 ![image-20220731130121823](https://i0.hdslb.com/bfs/album/11680b737167fce5477684aae1bd5da25c9771b9.png)
 
-## 25.3行内块的巧妙运用
+## 3.行内块的巧妙运用
 
 ![image-20220731130226395](https://i0.hdslb.com/bfs/album/3cf6e7aac08517762cf131353da7356446d441da.png)
 
@@ -198,7 +198,7 @@
 
 ![image-20220731130305517](https://i0.hdslb.com/bfs/album/0fc7eb3a52ceee8cd40e769cfd224b0b43ca455d.png)
 
-## 25.4CSS三角强化
+## 4.CSS三角强化
 
 ![image-20220731130421657](https://i0.hdslb.com/bfs/album/ae3cf42bf5bdd0f4f6b80137a5952e0c9e41250a.png)
 
@@ -294,7 +294,7 @@ border-width: 22px 8px 0 0;
 
 ![image-20220731130508908](https://i0.hdslb.com/bfs/album/853acdcde9f758b7d3e5254d21942389195e5031.png)
 
-## 25.5CSS初始化
+## 5.CSS初始化
 
 不同浏览器对有些标签的默认值是不同的，为了消除不同浏览器对 HTML 文本呈现的差异，照顾浏览器的兼容，我们需要对 CSS 初始化。
 
