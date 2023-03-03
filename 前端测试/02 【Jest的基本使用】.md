@@ -574,3 +574,172 @@ test('this test will not run', () => {
 
 如果您有一个测试在作为较大套件的一部分运行时经常失败，但在单独运行时不会失败，那么很有可能是来自不同测试的东西干扰了这个测试。通常可以通过使用`beforeEach`清除某些共享状态来解决此问题。如果您不确定是否正在修改某些共享状态，也可以尝试记录数据的`beforeEach`。
 
+## 6.Mock 函数
+
+> 在写单元测试的时候有一个最重要的步骤就是Mock，我们通常会根据接口来Mock接口的实现，比如你要测试某个class中的某个方法，而这个方法又依赖了外部的一些接口的实现，从单元测试的角度来说我只关心我测试的方法的内部逻辑，我并不关注与当前class本身依赖的实现，所以我们通常会Mock掉依赖接口的返回，因为我们的测试重点在于特定的方法，所以在Jest中同样提供了Mock的功能，本节主要介绍Jest的Mock Function的功能。
+
+Mock 函数可以轻松地测试代码之间的连接——这通过擦除函数的实际实现，捕获对函数的调用 ( 以及在这些调用中传递的参数) ，在使用 `new` 实例化时捕获构造函数的实例，或允许测试时配置返回值的形式来实现。Jest中有两种方式的Mock Function，一种是利用Jest提供的Mock Function创建，另外一种是手动创建来覆写本身的依赖实现。
+
+### 6.1 使用Mock 函数
+
+假设我们要测试函数 `forEach` 的内部实现，这个函数为传入的数组中的每个元素调用一个回调函数，代码如下：
+
+```js
+function forEach(items, callback) {
+  for (let index = 0; index < items.length; index++) {
+    callback(items[index]);
+  }
+}
+```
+
+为了测试此函数，我们可以使用一个 mock 函数，然后检查 mock 函数的状态来确保回调函数如期调用。
+
+```js
+test('mock test', () => {
+  const mockCallback = jest.fn(function (x) {
+    return x + 42
+  })
+  forEach([0, 1], mockCallback)
+
+  // 此模拟函数被调用了两次
+  expect(mockCallback.mock.calls.length).toBe(2)
+
+  // 第一次调用函数时的第一个参数是 0
+  expect(mockCallback.mock.calls[0][0]).toBe(0)
+
+  // 第二次调用函数时的第一个参数是 1
+  expect(mockCallback.mock.calls[1][0]).toBe(1)
+
+  // 第一次调用函数时的返回值是 42
+  expect(mockCallback.mock.results[0].value).toBe(42)
+
+  console.log(mockCallback.mock)
+})
+```
+
+<img src="https://article.biliimg.com/bfs/article/3a00f5b1d2b5f840862549bb7221a4451f3c1105.png" alt="image-20230215230829993" style="zoom: 80%;" />
+
+### 6.2 .mock 属性
+
+几乎所有的Mock Function都带有 .mock的属性，它保存了此函数被调用的信息。 `.mock` 属性还追踪每次调用时 `this`的值，所以也让检视 this 的值成为可能：
+
+```js
+const myMock1 = jest.fn();
+const a = new myMock1();
+console.log(myMock1.mock.instances);
+// > [ <a> ]
+
+const myMock2 = jest.fn();
+const b = {};
+const bound = myMock2.bind(b);
+bound();
+console.log(myMock2.mock.contexts);
+// > [ <b> ]
+```
+
+在测试中，需要对函数如何被调用，或者实例化做断言时，这些 mock 成员变量很有帮助意义︰
+
+```js
+// 这个函数只调用一次
+expect(someMockFunction.mock.calls.length).toBe(1);
+
+// 这个函数被第一次调用时的第一个 arg 是 'first arg'
+expect(someMockFunction.mock.calls[0][0]).toBe('first arg');
+
+// 这个函数被第一次调用时的第二个 arg 是 'second arg'
+expect(someMockFunction.mock.calls[0][1]).toBe('second arg');
+
+// 第一次调用这个函数的返回值为“return value”
+expect(someMockFunction.mock.results[0].value).toBe('return value');
+
+// The function was called with a certain `this` context: the `element` object.
+// 这个函数是用当前的“this”上下文是：“element”对象。
+expect(someMockFunction.mock.contexts[0]).toBe(element);
+
+// 这个函数被实例化两次
+expect(someMockFunction.mock.instances.length).toBe(2);
+
+// 这个函数被第一次实例化返回的对象中，有一个 name 属性，且被设置为了 'test’ 
+expect(someMockFunction.mock.instances[0].name).toEqual('test');
+
+// 上次调用这个函数的第一个参数是“test”
+expect(someMockFunction.mock.lastCall[0]).toBe('test');
+```
+
+### 6.3 模拟返回值
+
+Mock 函数也可以用于在测试期间将测试值注入您的代码︰
+
+```js
+const myMock = jest.fn();
+console.log(myMock());
+// > undefined
+
+myMock
+  .mockReturnValueOnce(10)
+  .mockReturnValueOnce('x')
+  .mockReturnValue(true);
+
+console.log(myMock(), myMock(), myMock(), myMock());
+// > 10, 'x', true, true
+```
+
+用于函数连续传递风格（CPS）的代码中时，Mock 函数也非常有效。 以这种风格编写的代码有助于避免那种需要通过复杂的中间值，来重建他们在真实组件的行为，这有利于在它们被调用之前将值直接注入到测试中。
+
+```js
+const filterTestFn = jest.fn();
+
+// 对第一次调用进行模拟返回“true”，
+// 第二次调用为“false”
+filterTestFn.mockReturnValueOnce(true).mockReturnValueOnce(false);
+
+const result = [11, 12].filter(filterTestFn);
+
+console.log(result);
+// > [11]
+console.log(filterTestFn.mock.calls);
+// > [ [11], [12] ]
+```
+
+大多数现实世界的例子实际上都涉及到将一个被依赖的组件上使用 mock 函数替代并进行配置，这在技术上（和上面的描述）是相同的。 在这些情况下，尽量避免在非真正想要进行测试的任何函数内实现逻辑。
+
+### 6.4 模拟模块
+
+假设我们有一个从我们的 API 获取用户的类。该类使用[axios](https://github.com/axios/axios)调用 API，然后返回`data`包含所有用户的属性：
+
+`user.js`
+
+```js
+import axios from 'axios';
+
+class Users {
+  static all() {
+    return axios.get('/users.json').then(resp => resp.data);
+  }
+}
+
+export default Users;
+```
+
+现在，为了在不实际访问 API 的情况下测试此方法（从而创建缓慢且脆弱的测试），我们可以使用该`jest.mock(...)`函数来自动模拟 axios 模块。
+
+一旦我们模拟了模块，我们就可以提供一个`mockResolvedValue`for`.get`返回我们希望测试断言的数据。实际上，我们是在说我们想要`axios.get('/users.json')`返回一个假的响应。
+
+`user.test.js`
+
+```js
+import axios from 'axios';
+import Users from './users';
+
+jest.mock('axios');
+
+test('should fetch users', () => {
+  const users = [{name: 'Bob'}];
+  const resp = {data: users};
+  axios.get.mockResolvedValue(resp);
+
+  // 或者您可以根据您的用例使用以下选项：
+  // axios.get.mockImplementation(() => Promise.resolve(resp))
+  return Users.all().then(data => expect(data).toEqual(users));
+});
+```
