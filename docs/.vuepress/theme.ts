@@ -5,11 +5,11 @@ import sidebar from './sidebar'
 
 export default hopeTheme({
   // 主题选项：https://theme-hope.vuejs.press/zh/config/theme/layout.html
-  hostname: 'https://blog.dselegent.cf',
+  hostname: 'https://blog.dselegent.icu',
 
   author: {
     name: 'dselegent',
-    url: 'https://blog.dselegent.cf',
+    url: 'https://blog.dselegent.icu',
   },
 
   iconAssets: 'iconfont',
@@ -96,7 +96,7 @@ export default hopeTheme({
     // 评论配置（仅做样例，记得更换）
     comment: {
       provider: 'Waline',
-      serverURL: 'https://waline.dselegent.cf',
+      serverURL: 'https://waline.dselegent.icu',
       reaction: [
         'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-y/twemoji/13.1.0/72x72/1f44d.png',
         'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-y/twemoji/13.1.0/72x72/1f44f.png',
