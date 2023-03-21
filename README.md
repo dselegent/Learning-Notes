@@ -1,6 +1,6 @@
 # 博客地址
 
-[博客地址](https://blog.dselegent.cf)
+[博客地址](https://blog.dselegent.icu)
 
 有什么错误的地方可以提出来，博客项目在我的另外一个仓库[dselegent-blog](https://github.com/dselegent/dselegent-blog)
 
