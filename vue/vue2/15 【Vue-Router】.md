@@ -393,8 +393,8 @@ new Vue({
 1. 传递参数
 
    ```vue
-   <!-- 跳转并携带query参数，to的字符串写法 -->
-   <router-link :to="/home/message/detail?id=666&title=你好">跳转</router-link>
+   <!-- 跳转并携带query参数，to的字符串写法 (先转成js表达式，然后使用模版字符串)-->
+   <router-link :to="`/home/message/detail?id=666&title=你好`">跳转</router-link>
    				
    <!-- 跳转并携带query参数，to的对象写法 -->
    <router-link 
