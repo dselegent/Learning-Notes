@@ -981,7 +981,163 @@ export const { useGetStudentsQuery,useAddNewStudentMutation } = sudentApiSlice
 
 请注意，这里的文字字符串 `'student'` 没有什么特别之处。 我们可以称它为“Fred”、“qwerty”或其他任何名称。 它只需要在每个字段中使用相同的字符串，以便 RTK Query 知道“当发生这种 Mutation 时，使列出相同标签字符串的所有请求接口无效”。
 
-## 10.小总结
+## 10.RTKQ 结合 Axios
+
+先来看看一个简单的案例：
+
+
+
+```js
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { Provider } from "react-redux"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react"
+import { configureStore } from "@reduxjs/toolkit"
+import { setupListeners } from "@reduxjs/toolkit/dist/query"
+
+const productApi = createApi({
+    reducerPath: "productApi",
+    baseQuery: fetchBaseQuery({
+        baseUrl:
+            "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store",
+    }),
+    endpoints(build) {
+        return {
+            getProducts: build.query({
+                query() {
+                    return {
+                        url: "/products.json",
+                    }
+                },
+            }),
+        }
+    },
+})
+
+const { useGetProductsQuery } = productApi
+
+const store = configureStore({
+    reducer: {
+        [productApi.reducerPath]: productApi.reducer,
+    },
+
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(productApi.middleware),
+})
+
+setupListeners(store.dispatch)
+
+const App = () => {
+    const { data, isSuccess } = useGetProductsQuery()
+
+    return (
+        <div>
+            App
+            <hr />
+            {isSuccess && JSON.stringify(data)}
+        </div>
+    )
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+)
+```
+
+上例中`productApi`用来调用product数据，定义api时的baseQuery属性用来指定我们要使用的发送请求的工具，其中的fetchBaseQuery是RTKQ中为我们提供的工具，它对Fetch进行了包装，设置后RTKQ中将会使用Fetch做为发送请求的工具。
+
+## BaseQuery
+
+要设置通过Axios发送请求，关键就在于BaseQuery。只需要使用Axios的BaseQuery替换掉fetchBaseQuery即可。但是可惜的是RTKQ中并没有为我们提供Axios的BaseQuery，所以我们需要自定义一个BaseQuery才能达到目的。
+
+BaseQuery本身就是一个函数，定义BaseQuery直接定义一个函数即可，可以通过函数的参数来指定查询中要使用的默认参数，比如baseUrl，参数可以根据自己的实际需要指定：
+
+
+
+```js
+const myBaseQuery = ({baseUrl} = {baseUrl:""}) => {
+    
+}
+```
+
+BaseQuery需要一个函数作为返回值，这个函数将会成为最终的发送请求的工具，且函数的返回值将会作为执行结果返回。我们可以将发送请求的逻辑编写到函数中，并且根据不同的情况设置返回值。
+
+先看看返回值的格式，返回值的格式有两种，一种是请求成功返回的数据，一种是请求失败返回的数据：
+
+
+
+```js
+return { data: YourData } // 请求成功返回的数据
+return { error: YourError } // 请求失败返回的数据
+```
+
+我们先尝试定义一个简单的BaseQuery：
+
+
+
+```js
+const myBaseQuery = () => {
+  return () => {
+      if(Math.random() > .5){
+        return {
+          data:{name:"孙悟空"}
+        }
+      }else{
+        return {
+          error:{message:"出错了"}
+        }
+      }
+  }
+}
+```
+
+这个BaseQuery不会真的去加载数据，而是根据随机数返回不同的数据。随机数大于0.5时会返回成功的数据，否则返回错误的数据。接下来修改Api的代码，将fetchBaseQuery修改为，myBaseQuery：
+
+
+
+```js
+const productApi = createApi({
+    reducerPath: "productApi",
+    baseQuery: myBaseQuery(),
+    endpoints(build) {
+        return {
+            getProducts: build.query({
+                query() {
+                    return {
+                        url: "/products.json",
+                    }
+                },
+            }),
+        }
+    },
+})
+```
+
+## AxiosBaseQuery
+
+如果你能理解myBaseQuery，下边我们尝试编写一个axiosBaseQuery：
+
+
+
+```js
+const axiosBaseQuery = ({baseUrl} = {baseUrl:""}) => {
+    return ({url, method, data, params}) => {
+        return axios({
+            url: baseUrl + url,
+            method,
+            data,
+            params
+        })
+    }
+}
+```
+
+直接使用axiosBaseQuery替换掉之前的BaseQuery，即可在RTKQ中使用Axios来发送请求了，同时我们也可以根据需要在BaseQuery中对axios做一些更详细的配置。
+
+## 11.小总结
 
 - RTK Query 是 Redux Toolkit 中包含的数据获取和缓存解决方案
   - RTK Query 为你抽象了管理缓存服务器数据的过程，无需编写加载状态、存储结果和发出请求的逻辑
