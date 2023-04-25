@@ -114,7 +114,7 @@ const UserModel=mongoose.model("UserModel",UserType，"user");
 module.exports  = UserModel 
 ```
 
-![image-20220619145550360](https://tva1.sinaimg.cn/large/0074UQWJgy1h3eh7qxqhkj307k03ywex.jpg)
+![image-20220619145550360](https://img-blog.csdnimg.cn/609a88b5e2f840269695406093bf1225.png)
 
 ## 4.文档新增
 
