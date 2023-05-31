@@ -3,7 +3,6 @@ import { defineUserConfig } from 'vuepress'
 // import { defineUserConfig } from "@vuepress/cli";
 import { searchProPlugin } from 'vuepress-plugin-search-pro'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
-import { pwaPlugin } from 'vuepress-plugin-pwa2'
 import { path } from '@vuepress/utils'
 import theme from './theme'
 
@@ -38,16 +37,18 @@ export default defineUserConfig({
     // }),
     // 本地搜索，删除上方 docsearchPlugin 区块后生效
     searchProPlugin({
-      // 索引全部内容
       indexContent: true,
+      hotReload: true,
+      customFields: [
+        {
+          getter: ({ frontmatter }) => frontmatter.tag as string[],
+          formatter: `Tag: $content`,
+        },
+      ],
     }),
     // 谷歌分析 ID
     googleAnalyticsPlugin({
       id: 'G-RWKZTY2P9R',
     }),
-    // pwa
-    // pwaPlugin({
-    //   favicon: '/favicon.ico',
-    // }),
   ],
 })
