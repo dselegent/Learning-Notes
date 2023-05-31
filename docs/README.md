@@ -18,6 +18,16 @@ actions:
     type: primary
 
 features:
+  - title: 页面开发
+    icon: network
+    details: 静态站点生成器
+    link: /web/
+
+  - title: 应用
+    icon: computer
+    details: 应用推荐
+    link: /apps/
+
   - title: 专业知识
     icon: computer
     details: 计算机基础知识笔记
@@ -29,7 +39,7 @@ features:
     link: /front_end/
 
   - title: 后端导航
-    icon: page
+    icon: network
     details: 后端笔记
     link: /back_end/
 
@@ -37,6 +47,11 @@ features:
     icon: tool
     details: 编程工具记录
     link: /tool/
+
+  - title: 笔记
+    icon: note
+    details: Github 笔记源文件仓库
+    link: https://github.com/dselegent/Learning-Notes
 
 #footer: 自定义你的页脚文字
 ---
