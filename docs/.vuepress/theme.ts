@@ -23,15 +23,8 @@ export default hopeTheme({
   lastUpdated: true,
   editLink: true,
 
-  // 深色模式配置
-  darkmode: 'switch',
+  // themeColor: true,
 
-  themeColor: {
-    blue: '#2196f3',
-    red: '#f26d6d',
-    green: '#3eaf7c',
-    orange: '#fb9b5f',
-  },
   fullscreen: true,
 
   // 默认为 GitHub. 同时也可以是一个完整的 URL
@@ -50,9 +43,9 @@ export default hopeTheme({
   navbar: navbar,
   // 导航栏布局
   navbarLayout: {
-    start: ['Brand'],
+    start: ['Brand', 'Search'],
     center: ['Links'],
-    end: ['Repo', 'Outlook', 'Search'],
+    end: ['Repo', 'Outlook'],
   },
   // 是否在向下滚动时自动隐藏导航栏
   // navbarAutoHide: "always",
@@ -173,6 +166,11 @@ export default hopeTheme({
     feed: {
       rss: true,
       count: 10,
+    },
+
+    // pwa
+    pwa: {
+      favicon: '/favicon.ico',
     },
   },
 })

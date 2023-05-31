@@ -3,6 +3,7 @@ import { defineUserConfig } from 'vuepress'
 // import { defineUserConfig } from "@vuepress/cli";
 import { searchProPlugin } from 'vuepress-plugin-search-pro'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
+import { pwaPlugin } from 'vuepress-plugin-pwa2'
 import { path } from '@vuepress/utils'
 import theme from './theme'
 
@@ -19,7 +20,7 @@ export default defineUserConfig({
   head: [['meta', { name: 'referrer', content: 'no-referrer' }]],
   theme,
   // 是否开启页面预拉取，如果服务器宽带足够，可改为 true，会提升其他页面加载速度
-  shouldPrefetch: true,
+  shouldPrefetch: false,
 
   // 修改页面模板，https://github.com/vuepress-theme-hope/vuepress-theme-hope/blob/main/packages/theme/templates/index.build.html
   // 配置参考：https://vuepress.github.io/zh/reference/theme-api.html#templatebuild
@@ -44,5 +45,9 @@ export default defineUserConfig({
     googleAnalyticsPlugin({
       id: 'G-RWKZTY2P9R',
     }),
+    // pwa
+    // pwaPlugin({
+    //   favicon: '/favicon.ico',
+    // }),
   ],
 })

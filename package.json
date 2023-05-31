@@ -9,20 +9,21 @@
     "docs:clean-dev": "vuepress dev docs --clean-cache"
   },
   "dependencies": {
-    "@vuepress/client": "2.0.0-beta.60",
-    "@vuepress/plugin-docsearch": "2.0.0-beta.60",
-    "@vuepress/plugin-google-analytics": "2.0.0-beta.60",
-    "@vuepress/utils": "2.0.0-beta.60",
+    "@vuepress/client": "2.0.0-beta.62",
+    "@vuepress/plugin-docsearch": "2.0.0-beta.62",
+    "@vuepress/plugin-google-analytics": "2.0.0-beta.62",
+    "@vuepress/utils": "2.0.0-beta.62",
     "cpx2": "^4.2.0",
     "pnpm": "^7.26.0",
     "vue": "^3.2.45",
-    "vuepress": "2.0.0-beta.60",
-    "vuepress-plugin-search-pro": "2.0.0-beta.166",
-    "vuepress-theme-hope": "2.0.0-beta.166"
+    "vuepress": "2.0.0-beta.62",
+    "vuepress-plugin-search-pro": "2.0.0-beta.216",
+    "vuepress-theme-hope": "2.0.0-beta.216"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "vuepress-plugin-pwa2": "2.0.0-beta.166"
   }
 }
