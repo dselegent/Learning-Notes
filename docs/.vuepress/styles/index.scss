@@ -32,28 +32,6 @@
   --vp-home-hero-image-filter: blur(80px);
 }
 
-@media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(120px);
-  }
-
-  .vp-hero-info-wrapper::after {
-    width: 256px;
-    height: 256px;
-  }
-}
-
-@media (min-width: 960px) {
-  :root {
-    --vp-home-hero-image-filter: blur(120px);
-  }
-
-  .vp-hero-info-wrapper::after {
-    width: 320px;
-    height: 320px;
-  }
-}
-
 .vp-hero-info-wrapper {
   position: relative;
   z-index: 0;
@@ -72,5 +50,23 @@
     transition: opacity 1s ease;
     background-image: var(--vp-home-hero-image-background-image);
     filter: var(--vp-home-hero-image-filter);
+  }
+}
+
+@media (max-width: 960px) {
+  .vp-hero-info-wrapper::after {
+    top: 23%;
+    left: 35%;
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .vp-hero-info-wrapper::after {
+    top: 24%;
+    left: 24%;
+    width: 256px;
+    height: 256px;
   }
 }
