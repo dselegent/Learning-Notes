@@ -1,7 +1,8 @@
 // 代码块主题设置，而非网站主题
 // https://vuepress-theme-hope.gitee.io/v2/zh/guide/interface/code-theme.html
+@use './rainbow';
 
-$theme-colors: #2196f3, #f26d6d, #3eaf7c, #fb9b5f;
+// $theme-colors: #2196f3, #f26d6d, #3eaf7c, #fb9b5f;
 
 $code-light-theme: 'one-light';
 $code-dark-theme: 'one-dark';

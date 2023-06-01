@@ -23,9 +23,8 @@ export default hopeTheme({
   lastUpdated: true,
   editLink: true,
 
-  // themeColor: true,
-
-  fullscreen: true,
+  darkmode: 'toggle',
+  themeColor: false,
 
   // 默认为 GitHub. 同时也可以是一个完整的 URL
   repo: 'dselegent/dselegent-blog',

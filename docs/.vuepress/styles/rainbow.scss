@@ -1,0 +1,666 @@
+@keyframes rainbow {
+  0% {
+    --theme-color: #00a98e;
+    --theme-color-light: #4ad1b4;
+    --theme-color-lighter: #78fadc;
+    --theme-color-dark: #008269;
+    --theme-color-darker: #005d47;
+    --theme-color-next: #009ff7;
+  }
+  1.25% {
+    --theme-color: #00a996;
+    --theme-color-light: #4bd1bd;
+    --theme-color-lighter: #79fbe5;
+    --theme-color-dark: #008371;
+    --theme-color-darker: #005e4f;
+    --theme-color-next: #009dfa;
+  }
+  2.5% {
+    --theme-color: #00a99f;
+    --theme-color-light: #4cd1c6;
+    --theme-color-lighter: #7afbee;
+    --theme-color-dark: #00837a;
+    --theme-color-darker: #005e56;
+    --theme-color-next: #009bfc;
+  }
+  3.75% {
+    --theme-color: #00a9a7;
+    --theme-color-light: #4dd1cf;
+    --theme-color-lighter: #7bfbf8;
+    --theme-color-dark: #008382;
+    --theme-color-darker: #005e5e;
+    --theme-color-next: #0098fd;
+  }
+  5% {
+    --theme-color: #00a9b0;
+    --theme-color-light: #4ed1d7;
+    --theme-color-lighter: #7dfaff;
+    --theme-color-dark: #00838a;
+    --theme-color-darker: #005e65;
+    --theme-color-next: #0096fd;
+  }
+  6.25% {
+    --theme-color: #00a9b8;
+    --theme-color-light: #4fd1e0;
+    --theme-color-lighter: #7efaff;
+    --theme-color-dark: #008391;
+    --theme-color-darker: #005e6d;
+    --theme-color-next: #0093fd;
+  }
+  7.5% {
+    --theme-color: #00a9c0;
+    --theme-color-light: #50d0e8;
+    --theme-color-lighter: #7ffaff;
+    --theme-color-dark: #008399;
+    --theme-color-darker: #005e74;
+    --theme-color-next: #2e90fc;
+  }
+  8.75% {
+    --theme-color: #00a8c7;
+    --theme-color-light: #51d0f0;
+    --theme-color-lighter: #81f9ff;
+    --theme-color-dark: #0082a0;
+    --theme-color-darker: #005e7b;
+    --theme-color-next: #4d8dfa;
+  }
+  10% {
+    --theme-color: #00a8cf;
+    --theme-color-light: #52cff7;
+    --theme-color-lighter: #82f8ff;
+    --theme-color-dark: #0082a7;
+    --theme-color-darker: #005e81;
+    --theme-color-next: #638af8;
+  }
+  11.25% {
+    --theme-color: #00a7d5;
+    --theme-color-light: #53cfff;
+    --theme-color-lighter: #84f8ff;
+    --theme-color-dark: #0081ae;
+    --theme-color-darker: #005d87;
+    --theme-color-next: #7587f5;
+  }
+  12.5% {
+    --theme-color: #00a6dc;
+    --theme-color-light: #55ceff;
+    --theme-color-lighter: #85f7ff;
+    --theme-color-dark: #0081b4;
+    --theme-color-darker: #005d8d;
+    --theme-color-next: #8583f1;
+  }
+  13.75% {
+    --theme-color: #00a6e2;
+    --theme-color-light: #56cdff;
+    --theme-color-lighter: #87f6ff;
+    --theme-color-dark: #0080b9;
+    --theme-color-darker: #005c93;
+    --theme-color-next: #9280ed;
+  }
+  15% {
+    --theme-color: #00a4e7;
+    --theme-color-light: #57ccff;
+    --theme-color-lighter: #88f4ff;
+    --theme-color-dark: #007fbf;
+    --theme-color-darker: #005b98;
+    --theme-color-next: #9f7ce9;
+  }
+  16.25% {
+    --theme-color: #00a3ec;
+    --theme-color-light: #58caff;
+    --theme-color-lighter: #89f3ff;
+    --theme-color-dark: #007ec3;
+    --theme-color-darker: #005b9c;
+    --theme-color-next: #aa78e3;
+  }
+  17.5% {
+    --theme-color: #00a2f1;
+    --theme-color-light: #58c9ff;
+    --theme-color-lighter: #8af1ff;
+    --theme-color-dark: #007dc8;
+    --theme-color-darker: #0059a0;
+    --theme-color-next: #b574dd;
+  }
+  18.75% {
+    --theme-color: #00a0f4;
+    --theme-color-light: #59c7ff;
+    --theme-color-lighter: #8bf0ff;
+    --theme-color-dark: #007bcb;
+    --theme-color-darker: #0058a3;
+    --theme-color-next: #be71d7;
+  }
+  20% {
+    --theme-color: #009ff7;
+    --theme-color-light: #5ac5ff;
+    --theme-color-lighter: #8ceeff;
+    --theme-color-dark: #007ace;
+    --theme-color-darker: #0057a6;
+    --theme-color-next: #c76dd1;
+  }
+  21.25% {
+    --theme-color: #009dfa;
+    --theme-color-light: #5ac3ff;
+    --theme-color-lighter: #8decff;
+    --theme-color-dark: #0078d0;
+    --theme-color-darker: #0055a8;
+    --theme-color-next: #cf69c9;
+  }
+  22.5% {
+    --theme-color: #009bfc;
+    --theme-color-light: #5bc1ff;
+    --theme-color-lighter: #8de9ff;
+    --theme-color-dark: #0076d2;
+    --theme-color-darker: #0053aa;
+    --theme-color-next: #d566c2;
+  }
+  23.75% {
+    --theme-color: #0098fd;
+    --theme-color-light: #5bbfff;
+    --theme-color-lighter: #8ee7ff;
+    --theme-color-dark: #0074d3;
+    --theme-color-darker: #0051ab;
+    --theme-color-next: #dc63ba;
+  }
+  25% {
+    --theme-color: #0096fd;
+    --theme-color-light: #5bbcff;
+    --theme-color-lighter: #8ee4ff;
+    --theme-color-dark: #0071d4;
+    --theme-color-darker: #004fab;
+    --theme-color-next: #e160b3;
+  }
+  26.25% {
+    --theme-color: #0093fd;
+    --theme-color-light: #5bb9ff;
+    --theme-color-lighter: #8ee1ff;
+    --theme-color-dark: #006fd3;
+    --theme-color-darker: #004dab;
+    --theme-color-next: #e65eab;
+  }
+  27.5% {
+    --theme-color: #2e90fc;
+    --theme-color-light: #69b6ff;
+    --theme-color-lighter: #99deff;
+    --theme-color-dark: #006cd2;
+    --theme-color-darker: #004baa;
+    --theme-color-next: #e95ca2;
+  }
+  28.75% {
+    --theme-color: #4d8dfa;
+    --theme-color-light: #7eb3ff;
+    --theme-color-lighter: #abdbff;
+    --theme-color-dark: #0069d1;
+    --theme-color-darker: #0048a9;
+    --theme-color-next: #ed5a9a;
+  }
+  30% {
+    --theme-color: #638af8;
+    --theme-color-light: #8fb0ff;
+    --theme-color-lighter: #bbd7ff;
+    --theme-color-dark: #3066cf;
+    --theme-color-darker: #0045a7;
+    --theme-color-next: #ef5992;
+  }
+  31.25% {
+    --theme-color: #7587f5;
+    --theme-color-light: #9fadff;
+    --theme-color-lighter: #cad4ff;
+    --theme-color-dark: #4963cc;
+    --theme-color-darker: #0941a4;
+    --theme-color-next: #f15989;
+  }
+  32.5% {
+    --theme-color: #8583f1;
+    --theme-color-light: #aea9ff;
+    --theme-color-lighter: #d8d1ff;
+    --theme-color-dark: #5b5fc8;
+    --theme-color-darker: #2e3ea1;
+    --theme-color-next: #f25981;
+  }
+  33.75% {
+    --theme-color: #9280ed;
+    --theme-color-light: #bca6ff;
+    --theme-color-lighter: #e6cdff;
+    --theme-color-dark: #6a5cc4;
+    --theme-color-darker: #413a9d;
+    --theme-color-next: #f25a79;
+  }
+  35% {
+    --theme-color: #9f7ce9;
+    --theme-color-light: #c8a2ff;
+    --theme-color-lighter: #f2c9ff;
+    --theme-color-dark: #7758c0;
+    --theme-color-darker: #503598;
+    --theme-color-next: #f25c71;
+  }
+  36.25% {
+    --theme-color: #aa78e3;
+    --theme-color-light: #d39eff;
+    --theme-color-lighter: #fec6ff;
+    --theme-color-dark: #8354bb;
+    --theme-color-darker: #5c3193;
+    --theme-color-next: #f15e69;
+  }
+  37.5% {
+    --theme-color: #b574dd;
+    --theme-color-light: #de9bff;
+    --theme-color-lighter: #ffc2ff;
+    --theme-color-dark: #8d50b5;
+    --theme-color-darker: #662c8e;
+    --theme-color-next: #ef6061;
+  }
+  38.75% {
+    --theme-color: #be71d7;
+    --theme-color-light: #e897ff;
+    --theme-color-lighter: #ffbfff;
+    --theme-color-dark: #964baf;
+    --theme-color-darker: #6f2688;
+    --theme-color-next: #ed635a;
+  }
+  40% {
+    --theme-color: #c76dd1;
+    --theme-color-light: #f194fa;
+    --theme-color-lighter: #ffbcff;
+    --theme-color-dark: #9e47a9;
+    --theme-color-darker: #772082;
+    --theme-color-next: #eb6552;
+  }
+  41.25% {
+    --theme-color: #cf69c9;
+    --theme-color-light: #f991f2;
+    --theme-color-lighter: #ffb9ff;
+    --theme-color-dark: #a643a2;
+    --theme-color-darker: #7e197c;
+    --theme-color-next: #e8694b;
+  }
+  42.5% {
+    --theme-color: #d566c2;
+    --theme-color-light: #ff8deb;
+    --theme-color-lighter: #ffb6ff;
+    --theme-color-dark: #ac3f9b;
+    --theme-color-darker: #841075;
+    --theme-color-next: #e46c44;
+  }
+  43.75% {
+    --theme-color: #dc63ba;
+    --theme-color-light: #ff8be3;
+    --theme-color-lighter: #ffb3ff;
+    --theme-color-dark: #b23b94;
+    --theme-color-darker: #89046f;
+    --theme-color-next: #e06f3d;
+  }
+  45% {
+    --theme-color: #e160b3;
+    --theme-color-light: #ff88db;
+    --theme-color-lighter: #ffb1ff;
+    --theme-color-dark: #b7378c;
+    --theme-color-darker: #8d0068;
+    --theme-color-next: #db7336;
+  }
+  46.25% {
+    --theme-color: #e65eab;
+    --theme-color-light: #ff86d2;
+    --theme-color-lighter: #ffaffb;
+    --theme-color-dark: #bb3485;
+    --theme-color-darker: #910060;
+    --theme-color-next: #d77630;
+  }
+  47.5% {
+    --theme-color: #e95ca2;
+    --theme-color-light: #ff84ca;
+    --theme-color-lighter: #ffadf2;
+    --theme-color-dark: #be317d;
+    --theme-color-darker: #940059;
+    --theme-color-next: #d17a2a;
+  }
+  48.75% {
+    --theme-color: #ed5a9a;
+    --theme-color-light: #ff83c1;
+    --theme-color-lighter: #fface9;
+    --theme-color-dark: #c12f75;
+    --theme-color-darker: #970052;
+    --theme-color-next: #cc7d24;
+  }
+  50% {
+    --theme-color: #ef5992;
+    --theme-color-light: #ff82b8;
+    --theme-color-lighter: #ffabe0;
+    --theme-color-dark: #c32d6d;
+    --theme-color-darker: #98004b;
+    --theme-color-next: #c6811e;
+  }
+  51.25% {
+    --theme-color: #f15989;
+    --theme-color-light: #ff82af;
+    --theme-color-lighter: #ffabd7;
+    --theme-color-dark: #c52d65;
+    --theme-color-darker: #9a0043;
+    --theme-color-next: #bf8418;
+  }
+  52.5% {
+    --theme-color: #f25981;
+    --theme-color-light: #ff82a7;
+    --theme-color-lighter: #ffabce;
+    --theme-color-dark: #c52e5e;
+    --theme-color-darker: #9a003c;
+    --theme-color-next: #b98713;
+  }
+  53.75% {
+    --theme-color: #f25a79;
+    --theme-color-light: #ff839e;
+    --theme-color-lighter: #ffacc5;
+    --theme-color-dark: #c62f56;
+    --theme-color-darker: #9a0035;
+    --theme-color-next: #b28a0f;
+  }
+  55% {
+    --theme-color: #f25c71;
+    --theme-color-light: #ff8496;
+    --theme-color-lighter: #ffadbc;
+    --theme-color-dark: #c5314e;
+    --theme-color-darker: #99002e;
+    --theme-color-next: #ab8d0c;
+  }
+  56.25% {
+    --theme-color: #f15e69;
+    --theme-color-light: #ff868d;
+    --theme-color-lighter: #ffaeb4;
+    --theme-color-dark: #c43447;
+    --theme-color-darker: #980027;
+    --theme-color-next: #a3900b;
+  }
+  57.5% {
+    --theme-color: #ef6061;
+    --theme-color-light: #ff8885;
+    --theme-color-lighter: #ffb0ab;
+    --theme-color-dark: #c3373f;
+    --theme-color-darker: #970020;
+    --theme-color-next: #9c920d;
+  }
+  58.75% {
+    --theme-color: #ed635a;
+    --theme-color-light: #ff8a7d;
+    --theme-color-lighter: #ffb2a3;
+    --theme-color-dark: #c13b38;
+    --theme-color-darker: #940619;
+    --theme-color-next: #949510;
+  }
+  60% {
+    --theme-color: #eb6552;
+    --theme-color-light: #ff8d76;
+    --theme-color-lighter: #ffb59b;
+    --theme-color-dark: #be3e31;
+    --theme-color-darker: #921111;
+    --theme-color-next: #8b9715;
+  }
+  61.25% {
+    --theme-color: #e8694b;
+    --theme-color-light: #ff8f6e;
+    --theme-color-lighter: #ffb794;
+    --theme-color-dark: #bb4229;
+    --theme-color-darker: #8f1908;
+    --theme-color-next: #83991b;
+  }
+  62.5% {
+    --theme-color: #e46c44;
+    --theme-color-light: #ff9367;
+    --theme-color-lighter: #ffba8c;
+    --theme-color-dark: #b74622;
+    --theme-color-darker: #8c1f00;
+    --theme-color-next: #7a9b21;
+  }
+  63.75% {
+    --theme-color: #e06f3d;
+    --theme-color-light: #ff9661;
+    --theme-color-lighter: #ffbd86;
+    --theme-color-dark: #b44a1a;
+    --theme-color-darker: #882500;
+    --theme-color-next: #719d27;
+  }
+  65% {
+    --theme-color: #db7336;
+    --theme-color-light: #ff995a;
+    --theme-color-lighter: #ffc17f;
+    --theme-color-dark: #af4e11;
+    --theme-color-darker: #842a00;
+    --theme-color-next: #679e2e;
+  }
+  66.25% {
+    --theme-color: #d77630;
+    --theme-color-light: #ff9c54;
+    --theme-color-lighter: #ffc47a;
+    --theme-color-dark: #ab5206;
+    --theme-color-darker: #802f00;
+    --theme-color-next: #5da035;
+  }
+  67.5% {
+    --theme-color: #d17a2a;
+    --theme-color-light: #fea04f;
+    --theme-color-lighter: #ffc774;
+    --theme-color-dark: #a55600;
+    --theme-color-darker: #7b3300;
+    --theme-color-next: #51a13c;
+  }
+  68.75% {
+    --theme-color: #cc7d24;
+    --theme-color-light: #f8a34a;
+    --theme-color-lighter: #ffca70;
+    --theme-color-dark: #a05900;
+    --theme-color-darker: #773700;
+    --theme-color-next: #44a244;
+  }
+  70% {
+    --theme-color: #c6811e;
+    --theme-color-light: #f2a646;
+    --theme-color-lighter: #ffce6c;
+    --theme-color-dark: #9b5d00;
+    --theme-color-darker: #713b00;
+    --theme-color-next: #34a44b;
+  }
+  71.25% {
+    --theme-color: #bf8418;
+    --theme-color-light: #ebaa42;
+    --theme-color-lighter: #ffd168;
+    --theme-color-dark: #956000;
+    --theme-color-darker: #6c3e00;
+    --theme-color-next: #1ba553;
+  }
+  72.5% {
+    --theme-color: #b98713;
+    --theme-color-light: #e4ad3f;
+    --theme-color-lighter: #ffd466;
+    --theme-color-dark: #8e6300;
+    --theme-color-darker: #674100;
+    --theme-color-next: #00a65b;
+  }
+  73.75% {
+    --theme-color: #b28a0f;
+    --theme-color-light: #ddb03d;
+    --theme-color-lighter: #ffd764;
+    --theme-color-dark: #886600;
+    --theme-color-darker: #614400;
+    --theme-color-next: #00a663;
+  }
+  75% {
+    --theme-color: #ab8d0c;
+    --theme-color-light: #d5b33c;
+    --theme-color-lighter: #ffda63;
+    --theme-color-dark: #816900;
+    --theme-color-darker: #5b4700;
+    --theme-color-next: #00a76c;
+  }
+  76.25% {
+    --theme-color: #a3900b;
+    --theme-color-light: #cdb63c;
+    --theme-color-lighter: #f8dd63;
+    --theme-color-dark: #7a6b00;
+    --theme-color-darker: #554900;
+    --theme-color-next: #00a874;
+  }
+  77.5% {
+    --theme-color: #9c920d;
+    --theme-color-light: #c5b83d;
+    --theme-color-lighter: #f0e064;
+    --theme-color-dark: #736e00;
+    --theme-color-darker: #4e4b00;
+    --theme-color-next: #00a87d;
+  }
+  78.75% {
+    --theme-color: #949510;
+    --theme-color-light: #bdbb3e;
+    --theme-color-lighter: #e7e366;
+    --theme-color-dark: #6c7000;
+    --theme-color-darker: #474d00;
+    --theme-color-next: #00a985;
+  }
+  80% {
+    --theme-color: #8b9715;
+    --theme-color-light: #b4bd41;
+    --theme-color-lighter: #dee668;
+    --theme-color-dark: #647200;
+    --theme-color-darker: #404f00;
+    --theme-color-next: #00a98e;
+  }
+  81.25% {
+    --theme-color: #83991b;
+    --theme-color-light: #abc045;
+    --theme-color-lighter: #d4e86c;
+    --theme-color-dark: #5c7400;
+    --theme-color-darker: #385100;
+    --theme-color-next: #00a996;
+  }
+  82.5% {
+    --theme-color: #7a9b21;
+    --theme-color-light: #a2c249;
+    --theme-color-lighter: #cbea70;
+    --theme-color-dark: #537600;
+    --theme-color-darker: #2f5200;
+    --theme-color-next: #00a99f;
+  }
+  83.75% {
+    --theme-color: #719d27;
+    --theme-color-light: #98c44e;
+    --theme-color-lighter: #c1ec75;
+    --theme-color-dark: #4a7700;
+    --theme-color-darker: #255300;
+    --theme-color-next: #00a9a7;
+  }
+  85% {
+    --theme-color: #679e2e;
+    --theme-color-light: #8ec654;
+    --theme-color-lighter: #b7ee7a;
+    --theme-color-dark: #407900;
+    --theme-color-darker: #185500;
+    --theme-color-next: #00a9b0;
+  }
+  86.25% {
+    --theme-color: #5da035;
+    --theme-color-light: #84c75a;
+    --theme-color-lighter: #acf080;
+    --theme-color-dark: #357a0a;
+    --theme-color-darker: #015600;
+    --theme-color-next: #00a9b8;
+  }
+  87.5% {
+    --theme-color: #51a13c;
+    --theme-color-light: #79c961;
+    --theme-color-lighter: #a1f287;
+    --theme-color-dark: #277b16;
+    --theme-color-darker: #005700;
+    --theme-color-next: #00a9c0;
+  }
+  88.75% {
+    --theme-color: #44a244;
+    --theme-color-light: #6dca68;
+    --theme-color-lighter: #96f48e;
+    --theme-color-dark: #117c1f;
+    --theme-color-darker: #005700;
+    --theme-color-next: #00a8c7;
+  }
+  90% {
+    --theme-color: #34a44b;
+    --theme-color-light: #60cc70;
+    --theme-color-lighter: #89f595;
+    --theme-color-dark: #007d28;
+    --theme-color-darker: #005801;
+    --theme-color-next: #00a8cf;
+  }
+  91.25% {
+    --theme-color: #1ba553;
+    --theme-color-light: #51cd77;
+    --theme-color-lighter: #7cf69d;
+    --theme-color-dark: #007e30;
+    --theme-color-darker: #00590d;
+    --theme-color-next: #00a7d5;
+  }
+  92.5% {
+    --theme-color: #00a65b;
+    --theme-color-light: #48ce80;
+    --theme-color-lighter: #75f7a6;
+    --theme-color-dark: #007f38;
+    --theme-color-darker: #005917;
+    --theme-color-next: #00a6dc;
+  }
+  93.75% {
+    --theme-color: #00a663;
+    --theme-color-light: #48cf88;
+    --theme-color-lighter: #75f8ae;
+    --theme-color-dark: #008040;
+    --theme-color-darker: #005a20;
+    --theme-color-next: #00a6e2;
+  }
+  95% {
+    --theme-color: #00a76c;
+    --theme-color-light: #49cf91;
+    --theme-color-lighter: #76f9b7;
+    --theme-color-dark: #008049;
+    --theme-color-darker: #005b28;
+    --theme-color-next: #00a4e7;
+  }
+  96.25% {
+    --theme-color: #00a874;
+    --theme-color-light: #49d099;
+    --theme-color-lighter: #76f9c0;
+    --theme-color-dark: #008151;
+    --theme-color-darker: #005c30;
+    --theme-color-next: #00a3ec;
+  }
+  97.5% {
+    --theme-color: #00a87d;
+    --theme-color-light: #49d0a2;
+    --theme-color-lighter: #77fac9;
+    --theme-color-dark: #008159;
+    --theme-color-darker: #005c37;
+    --theme-color-next: #00a2f1;
+  }
+  98.75% {
+    --theme-color: #00a985;
+    --theme-color-light: #4ad1ab;
+    --theme-color-lighter: #77fad3;
+    --theme-color-dark: #008261;
+    --theme-color-darker: #005d3f;
+    --theme-color-next: #00a0f4;
+  }
+  100% {
+    --theme-color: #00a98e;
+    --theme-color-light: #4ad1b4;
+    --theme-color-lighter: #78fadc;
+    --theme-color-dark: #008269;
+    --theme-color-darker: #005d47;
+    --theme-color-next: #009ff7;
+  }
+}
+
+:root {
+  --theme-color: #00a98e;
+  --theme-color-light: #4ad1b4;
+  --theme-color-lighter: #78fadc;
+  --theme-color-dark: #008269;
+  --theme-color-darker: #005d47;
+  --theme-color-next: #009ff7;
+  animation: rainbow 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    animation: none !important;
+  }
+}
