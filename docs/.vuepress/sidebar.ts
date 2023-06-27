@@ -198,13 +198,6 @@ export default sidebar([
         collapsible: true,
         children: [
           {
-            text: 'git',
-            icon: 'git',
-            prefix: 'git/',
-            collapsible: true,
-            children: 'structure',
-          },
-          {
             text: 'electron',
             icon: 'javascript',
             prefix: 'electron/',
@@ -272,6 +265,13 @@ export default sidebar([
     link: '',
     collapsible: true,
     children: [
+      {
+        text: 'git',
+        icon: 'git',
+        prefix: 'git/',
+        collapsible: true,
+        children: 'structure',
+      },
       {
         text: '前端代码规范化',
         icon: '',

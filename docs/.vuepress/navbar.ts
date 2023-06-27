@@ -128,11 +128,6 @@ export default navbar([
         prefix: 'other/',
         children: [
           {
-            text: 'git',
-            icon: 'git',
-            link: 'git/01.html',
-          },
-          {
             text: 'electron',
             icon: 'javascript',
             link: 'electron/01.html',
@@ -179,6 +174,11 @@ export default navbar([
     icon: 'tool',
     prefix: '/tool/',
     children: [
+      {
+        text: 'git',
+        icon: 'git',
+        link: 'git/01.html',
+      },
       {
         text: '前端代码规范化',
         prefix: 'lint/',
