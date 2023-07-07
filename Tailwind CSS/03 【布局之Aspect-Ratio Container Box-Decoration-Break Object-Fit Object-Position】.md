@@ -1,8 +1,8 @@
-# 布局之Aspect-Ratio Container Box-Decoration-Break Object-Fit Object-Position】
+# 03 【布局之Aspect-Ratio Container Box-Decoration-Break Object-Fit Object-Position】
 
-# 1.布局-纵横比（Aspect Ratio）
+## 1.布局-纵横比（Aspect Ratio）
 
-## 1.1 快速参考
+### 1.1 快速参考
 
 用于控制元素纵横比的实用程序。
 
@@ -12,9 +12,9 @@
 | aspect-square | aspect-ratio: 1 / 1;  |
 | aspect-video  | aspect-ratio: 16 / 9; |
 
-## 1.2 基本用法
+### 1.2 基本用法
 
-### 1.2.1设置纵横比
+#### 设置纵横比
 
 使用实用程序设置元素的所需纵横比。`aspect-{ratio}`
 
@@ -34,13 +34,13 @@
 
 **可以发现宽高比是16:9**
 
-### 1.2.2 浏览器支持
+#### 浏览器支持
 
 这些实用程序使用本机 CSS 属性，直到版本 15 才在 Safari 中支持该属性。在Safari 15普及之前，Tailwind的[宽高比](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)插件是一个不错的选择。`aspect-{ratio}``aspect-ratio`
 
-## 1.3 有条件地应用
+### 1.3 有条件地应用
 
-### 1.3.1 悬停、焦点和其他状态
+#### 悬停、焦点和其他状态
 
 Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效用类。例如，使用 仅在悬停时应用该实用程序。`hover:aspect-square``aspect-square`
 
@@ -59,7 +59,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 **移入后宽高比变成1:1**
 
-### 1.3.2 断点和媒体查询
+#### 断点和媒体查询
 
 您还可以使用变体修饰符来定位媒体查询，如响应式断点、深色模式、首选减少运动等。例如，用于仅在中等屏幕尺寸及以上位置应用该实用工具。`md:aspect-square``aspect-square`
 
@@ -81,9 +81,9 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 若要了解详细信息，请查看有关[响应式设计](https://tailwind.wyz.xyz/docs/responsive-design)、[深色模式](https://tailwind.wyz.xyz/docs/dark-mode)[和其他媒体查询修饰符](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states#media-queries)的文档。
 
-## 1.4 使用自定义值
+### 1.4 使用自定义值
 
-### 1.4.1 自定义主题
+#### 自定义主题
 
 默认情况下，Tailwind 提供最少的一组实用程序。您可以通过编辑或在文件中自定义这些值。`aspect-ratio``theme.aspectRatio``theme.extend.aspectRatio``tailwind.config.js`
 
@@ -103,7 +103,7 @@ module.exports = {
 
 有关自定义默认主题的详细信息，请参阅[主题自定义](https://tailwind.wyz.xyz/docs/theme#customizing-the-default-theme)文档。
 
-### 1.4.2 任意值
+#### 任意值
 
 如果需要使用一次性值，而该值在主题中没有意义，请使用方括号使用任意值动态生成属性。`aspect-ratio`
 
@@ -120,9 +120,9 @@ module.exports = {
 
 **这时宽高比变成了我们设置的4:3**
 
-# 2.布局-容器（Container）
+## 2.布局-容器（Container）
 
-## 2.1 快速参考
+### 2.1 快速参考
 
 `容器`根据当前断点固定元素宽度的组件。
 
@@ -139,7 +139,7 @@ module.exports = {
 
 > 举个例子：如果现在屏幕宽度是800px（768px-1024px），这时设置了container元素的宽度为768px
 
-## 2.2  使用方法
+### 2.2  使用方法
 
 `container` 类设置一个元素的 `max-width` 来匹配当前断点的 `min-width`。如果您想为一组固定的屏幕尺寸设计，而不是试图适应一个完全流动的视窗，这很有用。
 
@@ -163,7 +163,7 @@ module.exports = {
 
 如果您想让您的容器默认居中或包含默认的水平内边距，请看下面的 [自定义选项](https://www.tailwindcss.cn/docs/container#-2)。
 
-## 2.3 响应式变体
+### 2.3 响应式变体
 
 该类还包括响应式变体，例如默认情况下，允许您使某些内容仅在某个断点及以上处表现得像容器：`container``md:container`
 
@@ -176,13 +176,13 @@ module.exports = {
 
 > 意思就是在md屏幕以上才会触发后面的内容
 
-## 2.4 定制
+### 2.4 定制
 
-### 2.4.1 默认居中
+#### 默认居中
 
 默认情况下，要将容器居中，请在配置文件的部分中设置选项：`center``true``theme.container`
 
-tailwind.config.js
+`tailwind.config.js`
 
 ```js
 module.exports = {
@@ -197,11 +197,11 @@ module.exports = {
 
 > 这时设置container类的元素不用写mx-auto也会水平居中了
 
-### 2.4.2 默认添加水平填充
+#### 默认添加水平填充
 
 要默认添加水平填充，请使用配置文件部分中的选项指定所需的填充量：`padding``theme.container`
 
-tailwind.config.js
+`tailwind.config.js`
 
 ```js
 module.exports = {
@@ -215,7 +215,7 @@ module.exports = {
 
 如果要为每个断点指定不同的填充量，请使用对象提供值和任何特定于断点的覆盖：`default`
 
-tailwind.config.js
+`tailwind.config.js`
 
 ```js
 module.exports = {
@@ -240,9 +240,9 @@ module.exports = {
 
 ![image-20220817124518180](https://i0.hdslb.com/bfs/album/dedf508b39c9adf75df0b3e497da3f7815ad6b28.png)
 
-# 3.布局-中断行为样式（Box Decoration Break）
+## 3.布局-中断行为样式（Box Decoration Break）
 
-## 3.1 快速参考
+### 3.1 快速参考
 
 - box -- 盒，可以理解为元素盒模型
 - decoration -- 装饰，理解为元素样式
@@ -261,7 +261,7 @@ module.exports = {
 }
 ```
 
-## 3.2 基本用法
+### 3.2 基本用法
 
 使用 和 实用程序可以控制背景、边框、边框图像、框阴影、剪辑页、边距和填充等属性是否应呈现为元素是一个连续片段或不同的块。`box-decoration-slice``box-decoration-clone`
 
@@ -289,9 +289,9 @@ module.exports = {
 
 下面是使用了`box-decoration-clone`后，可以发现尽管换行，我们的渐变色效果依然显示完整。
 
-## 3.3 有条件地应用
+### 3.3 有条件地应用
 
-### 3.3.1 悬停、焦点和其他状态
+#### 悬停、焦点和其他状态
 
 Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效用类。例如，使用 仅在悬停时应用该实用程序。`hover:box-decoration-slice``box-decoration-slice`
 
@@ -303,7 +303,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 有关所有可用状态修饰符的完整列表，请查看 [Hover、Focus 和 Other State](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states) 文档。
 
-### 3.3.2 断点和媒体查询
+#### 断点和媒体查询
 
 您还可以使用变体修饰符来定位媒体查询，如响应式断点、深色模式、首选减少运动等。例如，用于仅在中等屏幕尺寸及以上位置应用该实用工具。`md:box-decoration-slice``box-decoration-slice`
 
@@ -315,9 +315,9 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 若要了解详细信息，请查看有关[响应式设计](https://tailwind.wyz.xyz/docs/responsive-design)、[深色模式](https://tailwind.wyz.xyz/docs/dark-mode)[和其他媒体查询修饰符](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states#media-queries)的文档。
 
-# 4.对象拟合(object-fit)
+## 4.对象拟合(object-fit)
 
-## 4.1 快速参考
+### 4.1 快速参考
 
 `object fit` 类用于调整指定图片或视频大小以适应容器框。用于控制可替换元素的内容如何调整大小的功能类。
 
@@ -348,7 +348,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 > 如果容器不足以完全显示出图片，那么默认会显示中间，下一节对象位置有解释
 
-## 4.2 基本用法
+### 4.2 基本用法
 
 ```html
 <!DOCTYPE html>
@@ -428,9 +428,9 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 ![image-20220817202319287](https://i0.hdslb.com/bfs/album/2acf709ad822e5d6d8f83b7f5b68753d20dd0cae.png)
 
-## 4.3 有条件地应用
+### 4.3 有条件地应用
 
-### 4.3.1 悬停、焦点和其他状态
+#### 悬停、焦点和其他状态
 
 Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效用类。例如，使用 仅在悬停时应用该实用程序。`hover:object-scale-down``object-scale-down`
 
@@ -440,7 +440,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 有关所有可用状态修饰符的完整列表，请查看 [Hover、Focus 和 Other State](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states) 文档。
 
-### 4.3.2 断点和媒体查询
+#### 断点和媒体查询
 
 您还可以使用变体修饰符来定位媒体查询，如响应式断点、深色模式、首选减少运动等。例如，用于仅在中等屏幕尺寸及以上位置应用该实用工具。`md:object-scale-down``object-scale-down`
 
@@ -450,9 +450,9 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 若要了解详细信息，请查看有关[响应式设计](https://tailwind.wyz.xyz/docs/responsive-design)、[深色模式](https://tailwind.wyz.xyz/docs/dark-mode)[和其他媒体查询修饰符](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states#media-queries)的文档。
 
-# 5.对象位置(object-position)
+## 5.对象位置(object-position)
 
-## 5.1 快速参考
+### 5.1 快速参考
 
 object-position要比object-fit单纯的多，就是控制替换内容位置的。默认值是50% 50%，也就是居中效果，所以，无论上一节object-fit值为那般，图片都是水平垂直居中的。因此，下次要实现尺寸大小不固定图片的垂直居中效果，可以试试object-fit.
 
@@ -480,7 +480,7 @@ object-position要比object-fit单纯的多，就是控制替换内容位置的�
 - `object-bottom` 底部定位
 - `object-right-bottom` 右下角定位
 
-## 5.2 基本用法
+### 5.2 基本用法
 
 ```html
 <!DOCTYPE html>
@@ -544,9 +544,9 @@ object-position要比object-fit单纯的多，就是控制替换内容位置的�
 
 这里采用九宫格的方式，应该是比较好理解的。
 
-## 5.3 有条件地应用
+### 5.3 有条件地应用
 
-### 5.3.1 悬停、焦点和其他状态
+#### 悬停、焦点和其他状态
 
 Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效用类。例如，使用 仅在悬停时应用该实用程序。`hover:object-top``object-top`
 
@@ -556,7 +556,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 有关所有可用状态修饰符的完整列表，请查看 [Hover、Focus 和 Other State](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states) 文档。
 
-### 5.3.2 断点和媒体查询
+#### 断点和媒体查询
 
 您还可以使用变体修饰符来定位媒体查询，如响应式断点、深色模式、首选减少运动等。例如，用于仅在中等屏幕尺寸及以上位置应用该实用工具。`md:object-top``object-top`
 

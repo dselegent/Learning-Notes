@@ -1,8 +1,10 @@
-# 1.布局-Overscroll Behavior
+# 04 【布局之Overscroll Behavior  定位偏移量】
+
+## 1.布局-Overscroll Behavior
 
 `overscroll behavior` 用于控制浏览器到达滚动区域边界时的行为的功能类。这个属性可以用来防止在有多个滚动区域的页面中出现不必要的滚动。
 
-## 1.1 快速参考
+### 1.1 快速参考
 
 | Class                | Properties                      |
 | -------------------- | ------------------------------- |
@@ -16,9 +18,9 @@
 | overscroll-x-contain | overscroll-behavior-x: contain; |
 | overscroll-x-none    | overscroll-behavior-x: none;    |
 
-## 1.2 基本用法
+### 1.2 基本用法
 
-### 1.2.1 阻止父元素的过度滚动
+#### 阻止父元素的过度滚动
 
 `overscroll-auto`
 说明：它用于将滚动行为设置为默认。即使到达元素的边界，整个页面也会连同元素一起滚动。它是默认值。
@@ -59,15 +61,15 @@
 1. 左边的`div元素`设置了`overscroll-contain`,即使滚动到底，只要在这个元素滚动就不会影响父元素的滚动条。
 2. 右边的`div元素`设置`overscroll-contain`，滚动到底后，在这个元素里面滚动，父元素的滚动条也会跟着滚动
 
-### 1.2.2 阻止过度滚动的反弹
+#### 阻止过度滚动的反弹
 
 > 暂时未发现这个属性的作用
 >
 > 以后发现了会补充
 
-## 1.3 有条件的应用
+### 1.3 有条件的应用
 
-### 1.3.1 悬停、焦点和其他状态
+#### 悬停、焦点和其他状态
 
 Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效用类。例如，使用 仅在悬停时应用该实用程序。`hover:overscroll-contain``overscroll-contain`
 
@@ -79,7 +81,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 有关所有可用状态修饰符的完整列表，请查看 [Hover、Focus 和 Other State](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states) 文档。
 
-### 1.3.2 断点和媒体查询
+#### 断点和媒体查询
 
 您还可以使用变体修饰符来定位媒体查询，如响应式断点、深色模式、首选减少运动等。例如，用于仅在中等屏幕尺寸及以上位置应用该实用工具。`md:overscroll-contain``overscroll-contain`
 
@@ -91,15 +93,15 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 若要了解详细信息，请查看有关[响应式设计](https://tailwind.wyz.xyz/docs/responsive-design)、[深色模式](https://tailwind.wyz.xyz/docs/dark-mode)[和其他媒体查询修饰符](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states#media-queries)的文档。
 
-# 2.布局-Top/Right/Bottom/Left
+## 2.布局-Top/Right/Bottom/Left
 
-## 2.1 快速参考
+### 2.1 快速参考
 
 属性很多，请点击链接进入官网查看[Top / Right / Bottom / Left - Tailwind CSS (wyz.xyz)](https://tailwind.wyz.xyz/docs/top-right-bottom-left)
 
-## 2.2 基本用法
+### 2.2 基本用法
 
-### 2.2.1 放置定位元素
+#### 放置定位元素
 
 使用 `{top|right|bottom|left|inset}-0` 功能类，将绝对定位的元素锚定在最近定位的父元素的任何边缘上。
 
@@ -191,7 +193,7 @@ sm屏幕显示
 
 ![image-20220829105426286](https://i0.hdslb.com/bfs/album/89b93906b7a1c08d6c3f2eebb630e1c9d2ce8a8c.png)
 
-### 2.2.2 使用负值
+#### 使用负值
 
 若要使用负上/右/下/左值，请在类名前面加上短划线前缀，以将其转换为负值。
 
@@ -216,9 +218,9 @@ sm屏幕显示
 
 ![image-20220829111229699](https://i0.hdslb.com/bfs/album/21e05e0543c7ad262be6ac63c4b058dc535b93e8.png)
 
-## 2.3 有条件的应用
+### 2.3 有条件的应用
 
-### 2.3.1 悬停、焦点和其他状态
+#### 悬停、焦点和其他状态
 
 Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效用类。例如，使用 仅在悬停时应用该实用程序。`hover:top-6``top-6`
 
@@ -230,7 +232,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 有关所有可用状态修饰符的完整列表，请查看 [Hover、Focus 和 Other State](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states) 文档。
 
-### 2.3.2 断点和媒体查询
+#### 断点和媒体查询
 
 您还可以使用变体修饰符来定位媒体查询，如响应式断点、深色模式、首选减少运动等。例如，用于仅在中等屏幕尺寸及以上位置应用该实用工具。`md:top-6``top-6`
 
@@ -242,7 +244,7 @@ Tailwind 允许您使用变体修饰符在不同状态下有条件地应用效�
 
 若要了解详细信息，请查看有关[响应式设计](https://tailwind.wyz.xyz/docs/responsive-design)、[深色模式](https://tailwind.wyz.xyz/docs/dark-mode)[和其他媒体查询修饰符](https://tailwind.wyz.xyz/docs/hover-focus-and-other-states#media-queries)的文档。
 
-## 2.4 自定义主题
+### 2.4 自定义主题
 
 默认情况下，Tailwind 为[默认间距比例](https://tailwind.wyz.xyz/docs/customizing-spacing#default-spacing-scale)的组合以及一些其他分数值的组合提供上/右/下/左/插图实用程序。`auto``full`
 
@@ -274,7 +276,7 @@ module.exports = {
 
 可以观察到`-left-4`就是`-0.8rem = -12.8px`
 
-tailwind.config.js
+`tailwind.config.js`
 
 ```js
 module.exports = {

@@ -1,8 +1,8 @@
-# 1.TailWind CSS 安装使用
+# 01 【TailWind CSS 安装使用】
 
 > **简介：**Tailwind CSS 是一个功能类优先的 CSS 框架，它集成了诸如 flex, pt-4, text-center 和 rotate-90 这样的的类，它们能直接在脚本标记语言中组合起来，构建出任何设计。
 
-## 1.1 使用 CDN 快速体验 Tailwind CSS
+## 1.使用 CDN 快速体验 Tailwind CSS
 
 > 使用 Play CDN 直接在浏览器中试用 Tailwind，无需任何构建步骤。Play CDN 仅用于开发目的，不是生产的最佳选择。
 
@@ -26,7 +26,7 @@
 </html>
 ```
 
-## 1.2 使用 npm 安装 Tailwind CSS
+## 2.使用 npm 安装 Tailwind CSS
 
 **第一步：安装 Tailwind CSS**
 

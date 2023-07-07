@@ -1,4 +1,4 @@
-# 1.Tailwind CSS 初体验
+# 02 【TailWind CSS 初体验】
 
 经过上一篇 `Tailwind CSS` 的学习，现在已经安装好了，万事俱备，只欠东风。这篇文章不往后学习，先来找找**成就感!**，体验一把 `Tailwind CSS` 的案例。
 
