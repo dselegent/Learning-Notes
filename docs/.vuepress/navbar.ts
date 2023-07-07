@@ -200,6 +200,40 @@ export default navbar([
           },
         ],
       },
+      {
+        text: '软件推荐与配置',
+        prefix: 'efficiency/',
+        children: [
+          {
+            text: '多平台软件',
+            link: 'software/cross-platform.html',
+          },
+          {
+            text: 'windows',
+            link: 'software/windows.html',
+          },
+          {
+            text: 'browser',
+            link: 'software/browser.html',
+          },
+          {
+            text: 'vscode',
+            link: 'software/vscode.html',
+          },
+          {
+            text: 'webstorm',
+            link: 'software/webstorm.html',
+          },
+          {
+            text: '在线工具',
+            link: 'online-tools.html',
+          },
+          {
+            text: '书签脚本',
+            link: 'bookmark-scripts.html',
+          },
+        ],
+      },
     ],
   },
   { text: '笔记', icon: 'note', link: 'https://github.com/dselegent/Learning-Notes' },
