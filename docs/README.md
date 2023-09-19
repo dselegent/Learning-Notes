@@ -3,7 +3,7 @@
 home: true
 # layout: BlogHome
 icon: home
-heroImage: /ikun.jpeg
+heroImage: /dslogo.png
 heroText: dselegent-blog
 tagline: 目前域名已更换为 blog.dselegent.icu，之前的 blog.dselegent.cf 域名已设置重定向到此域名，请小伙伴们更新一下链接
 bgImage: http://tc.seoipo.com/home-bg-1.jpg
