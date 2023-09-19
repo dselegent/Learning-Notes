@@ -1,6 +1,6 @@
-# 动静分离和URLRewrite  
+# 05 【动静分离和URLRewrite】
 
-# 1.动静分离介绍
+## 1.动静分离介绍
 
 为了提高网站的响应速度，减轻程序服务器（Tomcat，Jboss等）的负载，对于静态资源，如图片、js、css等文件，可以在反向代理服务器中进行缓存，这样浏览器在请求一个静态资源时，代理服务器就可以直接处理，而不用将请求转发给后端服务器。对于用户请求的动态文件，如servlet、jsp，则转发给Tomcat，Jboss服务器处理，这就是动静分离。即动态文件与静态文件的分离。
 
@@ -8,7 +8,7 @@
 
 动静分离可通过location对请求url进行匹配，将网站静态资源（HTML，JavaScript，CSS，img等文件）与后台应用分开部署，提高用户访问静态代码的速度，降低对后台应用访问。通常将静态资源放到nginx中，动态资源转发到tomcat服务器中。
 
-# 2.Nginx动静分离配置
+## 2.Nginx动静分离配置
 
 动静分离是让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作，这就是网站静态化处理的核心思路; 
 
@@ -16,7 +16,7 @@
 
 ![image-20220824153311942](https://i0.hdslb.com/bfs/album/8b18138dc7651795656fb9678a4c39b76de3bf7e.png)
 
-其中路径引入的方式应该是根路径这种引入
+其中路径引入的方式需要以根路径的方式引入
 
 ```html
 <!DOCTYPE html>
@@ -30,13 +30,13 @@
     <script src="/js/index.js"></script>
   </head>
   <body>
-    <img src="/img/dsds.jpg" alt="" />
+    <img src="/img/ds.jpg" />
     <p>我是ds</p>
   </body>
 </html>
 ```
 
-访问：http://www.192.168.8.102是可以正常看到页面的
+访问：http://192.168.8.102是可以正常看到页面的
 
 ![image-20220824153541909](https://i0.hdslb.com/bfs/album/ceed5dd68b85950afa563ee33e270700994510aa.png)
 
@@ -44,51 +44,28 @@
 
 先删除102服务器的静态资源，然后把这些静态资源文件夹移到101的nginx的html目录中
 
-修改101服务器的nginx.conf配置文件
+修改101服务器的`nginx.conf`配置文件
 
 ````bash
-#user  nobody;
-worker_processes  1;
-
-
-
-events {
-    worker_connections  1024;
-}
-
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-
-    sendfile        on;
-    keepalive_timeout  65;
-
-
-    server {
-        listen       80;
+   server {
+        listen 80;
         server_name  localhost;
-
         location / {
             proxy_pass http://192.168.8.101:8080;
         }
-        
         # 所有静态请求都由nginx处理，存放目录为nginx中的html
-  		location ~ .(gif|jpg|jpeg|png|bmp|swf|css|js)$ {
-            root   html;
+  					      location ~ .(gif|jpg|jpeg|png|bmp|swf|css|js)$ {
+            root html;
         }
-
     }
-}
 ````
 
 `location ~ .(gif|jpg|jpeg|png|bmp|swf|css|js)${root html;} `这行的意思是匹配到这些后缀名的文件，就把资源引入的地址指向html目录中，将html文件夹作为这些资源引入的根目录。
 
-例1：`/css/index.css`的这个`/`就是相对于html目录中来说的。
+- 例1：`/css/index.css`的这个`/`就是相对于html目录中来说的。
+- 例2：当我们后缀为gif的时候，Nginx默认会从html中获取到当前请求的动态图文件返回，当然这里的静态文件跟Nginx是同一台服务器，我们也可以在另外一台服务器，然后通过反向代理和负载均衡配置过去就好了，只要搞清楚了最基本的流程，很多配置就很简单了
 
-例2：当我们后缀为gif的时候，Nginx默认会从html中获取到当前请求的动态图文件返回，当然这里的静态文件跟Nginx是同一台服务器，我们也可以在另外一台服务器，然后通过反向代理和负载均衡配置过去就好了，只要搞清楚了最基本的流程，很多配置就很简单了
-
-# 3.location匹配顺序
+## 3.location匹配顺序
 
 **常见的Nginx正则表达式**
 
@@ -222,7 +199,7 @@ location /api/ {
 }
 ```
 
-# 4.URLRewrite  
+## 4.URLRewrite  
 
 优点：掩藏真实的url以及url中可能暴露的参数，以及隐藏web使用的编程语言，提高安全性便于搜索引擎收录
 
@@ -275,7 +252,7 @@ rewrite ^/[0-9]+.html$ /index.html?testParam=$1 break;
 
 ![image-20220824161403358](https://i0.hdslb.com/bfs/album/8818cd614c9b4158998d2868391b2aa3cc73e631.png)
 
-# 5.负载均衡+URLRewrite
+## 5.负载均衡+URLRewrite
 
 ![image-20220824161655068](https://i0.hdslb.com/bfs/album/ab02a910c8c53544dd664c28c4fbf5ba5d26c460.png)
 

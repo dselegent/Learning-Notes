@@ -1,12 +1,12 @@
-# Nginx的安装和启动
+# 01 【Nginx的安装和启动】
 
-# 1.Nginx的介绍
+## 1.Nginx的介绍
 
 Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了 IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的 Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004 年10月4日。 
 
 其将源代码以类BSD许可证的形式发布，因它的稳定性、丰富的功能集、简单的配 置文件和低系统资源的消耗而闻名。2011年6月1日，nginx 1.0.4发布。 Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3） 代理服务器，在BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实 上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站 用户有：百度、京东、新浪、网易、腾讯、淘宝等。
 
-# 2.版本区别  
+## 2.版本区别  
 
  常用版本分为四大阵营 
 
@@ -20,7 +20,7 @@ Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时�
 
 
 
-# 3.Centos安装
+## 3.Centos安装
 
 链接: https://pan.baidu.com/s/15KT0845iAEiEz6-NTYUNiA?pwd=qn7d 提取码: qn7d 
 
@@ -63,7 +63,7 @@ Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时�
 
 3. 然后使用`ifconfig`或者`ip addr`来查看是否修改成功
 
-# 4.Nginx开源版安装
+## 4.Nginx开源版安装
 
 将安装包`nginx-1.21.6.tar.gz`放到linux操作系统用户根目录下，使用tar zxvf安装，命令：`tar zxvf nginx-1.21.6.tar.gz`  。
 
@@ -104,7 +104,7 @@ make install
 
 ![image-20220823105922400](https://i0.hdslb.com/bfs/album/f35e5c909f51bb8de5ee12e837f6dd9236510cdf.png)
 
-# 5.启动Nginx
+## 5.启动Nginx
 
 **放行Nginx，端口号：80**
 
@@ -143,7 +143,7 @@ make install
  **然后进入安装好的目录 `/usr/local/nginx/sbin  `**
 
 ```bash
-./nginx					    # 启动
+./nginx					    ## 启动
 ./nginx -s stop			 	#快速停止
 ./nginx -s quit 			#优雅关闭，在退出前完成已经接受的连接请求
 ./nginx -s reload 			#重新加载配置
@@ -155,7 +155,7 @@ make install
 
 ![image-20220823110253824](https://i0.hdslb.com/bfs/album/51b9498b820979d41768cd430e6738d4a0bbdfab.png)
 
-# 6.安装成系统服务，开机自启
+## 6.安装成系统服务，开机自启
 
 在如下位置创建服务脚本nginx.service
 

@@ -1,6 +1,6 @@
-# Nginx的目录介绍
+# 02 【Nginx的目录介绍】
 
-# 1.Nginx目录结构
+## 1.Nginx目录结构
 
 ![image-20220823111154881](https://i0.hdslb.com/bfs/album/57cc40457d8c213875d6583111e2109257b28772.png)
 
@@ -62,13 +62,13 @@
 - sbin存放的是可执行文件，可以用 ./nginx启动nginx：
   ![image-20220823111610620](https://i0.hdslb.com/bfs/album/f1cd96779b4385b914546be89e536760af268bb7.png)
 
-# 2.Nginx基本运行原理
+## 2.Nginx基本运行原理
 
 ![image-20220823111631721](https://i0.hdslb.com/bfs/album/f671dc8a00f96433f9fe6f5cd114bdffb308dd0a.png)
 
 Nginx的进程是使用经典的「Master-Worker」模型,Nginx在启动后，会有一个master进程和多个worker进程。master进程主要用来管理worker进程，包含：接收来自外界的信号，向各worker进程发送信号，监控worker进程的运行状态，当worker进程退出后(异常情况下)，会自动重新启动新的worker进程。worker进程主要处理基本的网络事件，多个worker进程之间是对等的，他们同等竞争来自客户端的请求，各进程互相之间是独立的。一个请求，只可能在一个worker进程中处理，一个worker进程，不可能处理其它进程的请求。worker进程的个数是可以设置的，一般会设置与机器cpu核数一致，这里面的原因与nginx的进程模型以及事件处理模型是分不开的。
 
-# 3.Nginx的基本配置文件
+## 3.Nginx的基本配置文件
 
 Nginx的默认配置文件是nginx.conf
 
