@@ -985,8 +985,6 @@ export const { useGetStudentsQuery,useAddNewStudentMutation } = sudentApiSlice
 
 先来看看一个简单的案例：
 
-
-
 ```js
 import React from "react"
 import ReactDOM from "react-dom/client"
@@ -1049,13 +1047,11 @@ root.render(
 
 上例中`productApi`用来调用product数据，定义api时的baseQuery属性用来指定我们要使用的发送请求的工具，其中的fetchBaseQuery是RTKQ中为我们提供的工具，它对Fetch进行了包装，设置后RTKQ中将会使用Fetch做为发送请求的工具。
 
-## BaseQuery
+### 10.1 BaseQuery
 
 要设置通过Axios发送请求，关键就在于BaseQuery。只需要使用Axios的BaseQuery替换掉fetchBaseQuery即可。但是可惜的是RTKQ中并没有为我们提供Axios的BaseQuery，所以我们需要自定义一个BaseQuery才能达到目的。
 
 BaseQuery本身就是一个函数，定义BaseQuery直接定义一个函数即可，可以通过函数的参数来指定查询中要使用的默认参数，比如baseUrl，参数可以根据自己的实际需要指定：
-
-
 
 ```js
 const myBaseQuery = ({baseUrl} = {baseUrl:""}) => {
@@ -1067,16 +1063,12 @@ BaseQuery需要一个函数作为返回值，这个函数将会成为最终的�
 
 先看看返回值的格式，返回值的格式有两种，一种是请求成功返回的数据，一种是请求失败返回的数据：
 
-
-
 ```js
 return { data: YourData } // 请求成功返回的数据
 return { error: YourError } // 请求失败返回的数据
 ```
 
 我们先尝试定义一个简单的BaseQuery：
-
-
 
 ```js
 const myBaseQuery = () => {
@@ -1096,8 +1088,6 @@ const myBaseQuery = () => {
 
 这个BaseQuery不会真的去加载数据，而是根据随机数返回不同的数据。随机数大于0.5时会返回成功的数据，否则返回错误的数据。接下来修改Api的代码，将fetchBaseQuery修改为，myBaseQuery：
 
-
-
 ```js
 const productApi = createApi({
     reducerPath: "productApi",
@@ -1116,11 +1106,9 @@ const productApi = createApi({
 })
 ```
 
-## AxiosBaseQuery
+### 10.2 AxiosBaseQuery
 
 如果你能理解myBaseQuery，下边我们尝试编写一个axiosBaseQuery：
-
-
 
 ```js
 const axiosBaseQuery = ({baseUrl} = {baseUrl:""}) => {
